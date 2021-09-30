@@ -23,7 +23,7 @@ public class GamePrinter {
 
 	private String indentedRoadBorder;
 
-	private String indentedLlanesSeparator;
+	private String indentedLanesSeparator;
 
 	private String margin;
 
@@ -42,7 +42,7 @@ public class GamePrinter {
 		String laneDelimiter = StringUtils.repeat(LANE_DELIMITER_PATTERN, CELL_SIZE);
 		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, numCols - 1) + laneDelimiter + SPACE;
 
-		this.indentedLlanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
+		this.indentedLanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
 
 	}
 
@@ -63,7 +63,7 @@ public class GamePrinter {
 		// Game Status
 		str.append(game.getGameStatus());
 
-		// Paint game
+		// Print game
 
 		str.append(indentedRoadBorder);
 
@@ -75,7 +75,7 @@ public class GamePrinter {
 				str.append(StringUtils.centre(board[y][x], CELL_SIZE)).append(verticalDelimiter);
 			}
 			if (y < numRows - 1) {
-				str.append(this.indentedLlanesSeparator);
+				str.append(this.indentedLanesSeparator);
 			}
 		}
 		str.append(this.indentedRoadBorder);
