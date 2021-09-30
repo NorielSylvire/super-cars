@@ -45,5 +45,9 @@ public class Game {
 	public int getCoins() {
 		return this.coins;
 	}
+	
+	public Level getLevel() {
+		return this.level;
+	}
 
 }

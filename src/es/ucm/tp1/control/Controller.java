@@ -33,7 +33,7 @@ public class Controller {
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
-		this.gameprinter = new GamePrinter(this.game, 30, 3);
+		this.gameprinter = new GamePrinter(this.game, game.getLevel().getLength(), game.getLevel().getWidth());
 	}
 
 	public void printGame() {

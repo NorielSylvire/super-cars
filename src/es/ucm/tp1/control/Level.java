@@ -47,6 +47,21 @@ public enum Level {
 	}
 	
 	public String getName() {
-		return "EASY";
+		String name = "HARD";
+		if (this.length == 10) {
+			name = "TEST";
+		}
+		if (this.length == 30) {
+			name = "EASY";
+		}
+		return name;
+	}
+	
+	public int getLength() {
+		return this.length;
+	}
+	
+	public int getWidth() {
+		return this.width;
 	}
 }

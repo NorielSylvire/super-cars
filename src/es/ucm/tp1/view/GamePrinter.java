@@ -27,7 +27,7 @@ public class GamePrinter {
 
 	private String margin;
 
-	private String[][] board;
+	private String[][] board = new String[5][100];
 	
 	public GamePrinter(Game game, int cols, int rows) {
 		this.game = game;
@@ -47,11 +47,16 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				board[i][j] = "";
+			}
+		}
 	}
 
 	@Override
 	public String toString() {
-		//encodeGame(game);
+		encodeGame(game);
 		
 		StringBuilder str = new StringBuilder();
 
@@ -67,8 +72,7 @@ public class GamePrinter {
 		for (int y = 0; y < numRows; y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < numCols; x++) {
-				/*str.append(StringUtils.centre(board[y][x], CELL_SIZE))
-						.append(verticalDelimiter);*/
+				str.append(StringUtils.centre(board[y][x], CELL_SIZE)).append(verticalDelimiter);
 			}
 			if (y < numRows - 1) {
 				str.append(this.indentedLlanesSeparator);
