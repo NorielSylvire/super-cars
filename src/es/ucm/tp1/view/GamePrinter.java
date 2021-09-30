@@ -51,7 +51,7 @@ public class GamePrinter {
 
 	@Override
 	public String toString() {
-		encodeGame(game);
+		//encodeGame(game);
 		
 		StringBuilder str = new StringBuilder();
 
@@ -67,8 +67,8 @@ public class GamePrinter {
 		for (int y = 0; y < numRows; y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < numCols; x++) {
-				str.append(StringUtils.centre(board[y][x], CELL_SIZE))
-						.append(verticalDelimiter);
+				/*str.append(StringUtils.centre(board[y][x], CELL_SIZE))
+						.append(verticalDelimiter);*/
 			}
 			if (y < numRows - 1) {
 				str.append(this.indentedLlanesSeparator);
