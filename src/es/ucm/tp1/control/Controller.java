@@ -3,6 +3,7 @@ package es.ucm.tp1.control;
 import java.util.Scanner;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.view.*;
 
 public class Controller {
 
@@ -25,16 +26,18 @@ public class Controller {
 	/* @formatter:off */
 
 	private Game game;
+	private GamePrinter gameprinter;
 
 	private Scanner scanner;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
+		this.gameprinter = new GamePrinter(this.game, 30, 3);
 	}
 
 	public void printGame() {
-		System.out.println(game);
+		System.out.println(gameprinter.toString());
 	}
 
 	public void run() {

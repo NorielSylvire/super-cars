@@ -18,9 +18,19 @@ public class Game {
 		
 	}
 	
-	public String getGameStatus() {
+	public StringBuilder getGameStatus() {
+		StringBuilder gameStatus = new StringBuilder();
 		
-		return "Hola";
+		gameStatus.append("Level: ");
+		gameStatus.append(level.getName());
+		
+		gameStatus.append("\nSeed: ");
+		gameStatus.append(seed);
+		
+		gameStatus.append("\nCoins: ");
+		gameStatus.append(coins);
+		
+		return gameStatus;
 		
 	}
 	

@@ -45,4 +45,8 @@ public enum Level {
 		}
 		return buffer.toString();
 	}
+	
+	public String getName() {
+		return "EASY";
+	}
 }

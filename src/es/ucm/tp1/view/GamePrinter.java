@@ -47,7 +47,6 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
-		// TODO fill your code
 	}
 
 	@Override
