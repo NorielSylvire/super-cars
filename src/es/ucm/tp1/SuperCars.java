@@ -6,7 +6,7 @@ import es.ucm.tp1.control.Controller;
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 
-/* Holi panoli*/
+/* Holi panoli; Panoli mi abueli*/
 
 public class SuperCars {
 
