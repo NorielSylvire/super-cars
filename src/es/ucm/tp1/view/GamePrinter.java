@@ -36,11 +36,11 @@ public class GamePrinter {
 
 		this.margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 
-		String roadBorder = ROAD_BORDER_PATTERN + StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * numCols);
+		String roadBorder = ROAD_BORDER_PATTERN + StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * game.getLevel().getVisibility());
 		this.indentedRoadBorder = String.format("%n%s%s%n", margin, roadBorder);
 
 		String laneDelimiter = StringUtils.repeat(LANE_DELIMITER_PATTERN, CELL_SIZE);
-		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, numCols - 1) + laneDelimiter + SPACE;
+		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, game.getLevel().getVisibility() - 1) + laneDelimiter + SPACE;
 
 		this.indentedLanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
 
@@ -71,7 +71,7 @@ public class GamePrinter {
 
 		for (int y = 0; y < numRows; y++) {
 			str.append(this.margin).append(verticalDelimiter);
-			for (int x = 0; x < numCols; x++) {
+			for (int x = 0; x < game.getLevel().getVisibility(); x++) {
 				str.append(StringUtils.centre(board[y][x], CELL_SIZE)).append(verticalDelimiter);
 			}
 			if (y < numRows - 1) {

@@ -64,4 +64,8 @@ public enum Level {
 	public int getWidth() {
 		return this.width;
 	}
+	
+	public int getVisibility() {
+		return this.visibility;
+	}
 }
