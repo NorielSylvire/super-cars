@@ -56,7 +56,7 @@ public class Controller {
 				System.out.print(HELP);
 				break;
 			case "i":
-				System.out.print("Coins = " + game.getCoins() + "\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\n");
+				System.out.print("\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\nCoins: O\n");
 				break;
 			case "q":
 				System.out.print("GONE UP\n");
