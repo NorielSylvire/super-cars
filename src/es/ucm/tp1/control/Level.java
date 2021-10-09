@@ -68,4 +68,12 @@ public enum Level {
 	public int getVisibility() {
 		return this.visibility;
 	}
+	
+	public double getObstacleFrequency() {
+		return this.obstacleFrequency;
+	}
+	
+	public double getCoinFrequency() {
+		return this.coinFrequency;
+	}
 }

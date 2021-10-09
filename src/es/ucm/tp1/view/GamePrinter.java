@@ -54,7 +54,14 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
-		
+		int[] pos = game.getPlayer().getPos();
+		board[pos[1]][pos[0]] = "@";
+		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
+			board[game.getObstacleList().getObstacles()[i].getPosition()[1]][game.getObstacleList().getObstacles()[i].getPosition()[0]] = "TONTO";
+		}
+		for (int j = 0; j < game.getCoinList().getNumCoins(); j++) {
+			board[game.getCoinList().getCoins()[j].getPosition()[1]][game.getCoinList().getCoins()[j].getPosition()[0]] = "YEET";
+		}
 	}
 
 	@Override

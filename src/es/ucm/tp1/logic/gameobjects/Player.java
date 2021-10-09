@@ -1,32 +1,36 @@
 package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.utils.Utils;
 
-public class Player {
+public class Player extends GameObject{
 	private int posX;
 	private int posY;
 	
 	
 	private int monedas;
 	
-	public void PlayerUp(Game partida, Player player) {
-		
-	
-		player.posY--;
-		
-		return;
-	}
-	public void PlayerDown(Game partida, Player player) {
-	
-		player.posY++;
-		
-		return;
+	public Player(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
 	}
 	
-	public void Upadte(Game partida,Player player) {
+	public void playerUp() {
+		this.posY--;
+		this.posY = Utils.clamp(posY, 0, 2);;
+	}
+	public void playerDown() {
+		this.posY++;
+		this.posY = Utils.clamp(posY, 0, 2);;
+	}
 	
-		player.posX++;
-		
+	public void update() {
+		this.posX++;
+	}
+	
+	public int[] getPos() {
+		int[] pos = {posX, posY};
+		return pos;
 	}
 	
 }

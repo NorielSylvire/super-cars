@@ -1,12 +1,10 @@
 package es.ucm.tp1.logic.gameobjects;
 
-import es.ucm.tp1.logic.Game;
-
-public class Obstacle {
+public class Coin {
 	private int posX;
 	private int posY;
-	
-	public Obstacle(int x, int y) {
+
+	public Coin(int x, int y) {
 		this.posX = x;
 		this.posY = y;
 	}

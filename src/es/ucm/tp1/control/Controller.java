@@ -5,6 +5,8 @@ import java.util.Scanner;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.*;
 import es.ucm.tp1.logic.gameobjects.*;
+import es.ucm.tp1.logic.lists.*;
+import java.util.Random;
 
 public class Controller {
 
@@ -61,10 +63,12 @@ public class Controller {
 				System.out.print("\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\nCoins: O\n");
 				break;
 			case "q":
-				System.out.print("GONE UP\n");
+				game.getPlayer().playerUp();
+				game.getPlayer().update();
 				break;
 			case "a":
-				System.out.print("GONE SOMEWHERE\n");
+				game.getPlayer().playerDown();
+				game.getPlayer().update();
 				break;
 			case "e":
 				System.out.print("GAME OVER: Player has exited the game.\n");
@@ -78,6 +82,7 @@ public class Controller {
 				break;
 			case "n":
 			case "":
+				game.getPlayer().update();
 				break;
 			default:
 				System.out.print(UNKNOWN_COMMAND_MSG);
@@ -113,17 +118,53 @@ public class Controller {
 	}
 	
 	private void initialiseGame() {
-		String[][] newBoard = gameprinter.getBoard();
-		newBoard[0][1] = "@";
-		gameprinter.setBoard(newBoard);
-		
-		game.getGameObjectList().add(new Player(), 0, 1);
+		for (int x = game.getLevel().getVisibility() / 2; x < game.getLevel().getLength(); x++) {
+			tryToAddObstacle(new Obstacle(x, getRandomLane()), game.getLevel().getObstacleFrequency());
+			tryToAddCoin(new Coin(x, getRandomLane()), game.getLevel().getCoinFrequency());
+			}
 	}
 	
-	/*for (int x = getVisibility() / 2; x < roadLength; x++) {
-		tryToAddObstacle(new Obstacle(game, x, getRandomLane()), level.obstacleFrequency());
-		tryToAddCoin(new Coin(game, x, getRandomLane()), level.coinFrequency());
-		}*/
-
+	private void tryToAddObstacle(Obstacle o, double obsFrequency) {
+		Random rnd = new Random();
+		if (rnd.nextDouble() >= obsFrequency && checkPosition(o.getPosition())) {
+			Obstacle[] obs = game.getObstacleList().getObstacles();
+			obs[game.getObstacleList().getNumObstacles()] = o;
+			game.getObstacleList().setNumObstacles(game.getObstacleList().getNumObstacles() + 1);
+		}
+	}
+	
+	private void tryToAddCoin(Coin c, double cFrequency) {
+		Random rnd = new Random();
+		if (rnd.nextDouble() >= cFrequency && checkPosition(c.getPosition())) {
+			Coin[] cns = game.getCoinList().getCoins();
+			cns[game.getCoinList().getNumCoins()] = c;
+			game.getCoinList().setNumCoins(game.getCoinList().getNumCoins() + 1);
+		}
+	}
+	
+	private boolean checkPosition(int[] pos) {
+		boolean ret = true;
+		if (game.getPlayer().getPos() == pos) ret = false;
+		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
+			if (pos == game.getObstacleList().getObstacles()[i].getPosition()) {
+				ret = false;
+				break;
+			}
+		}
+		for (int i = 0; i < game.getCoinList().getNumCoins(); i++) {
+			if (pos == game.getCoinList().getCoins()[i].getPosition()) {
+				ret = false;
+				break;
+			}
+		}
+		return ret;
+	}
+	
+	private int getRandomLane() {
+		Random rnd = new Random();
+		int ret = rnd.nextInt() % 3;
+		if (ret < 0) ret = - ret;
+		return ret;
+	}
 
 }

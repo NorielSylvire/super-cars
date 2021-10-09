@@ -1,7 +1,10 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.logic.gameobjects.Player;
+import es.ucm.tp1.logic.lists.CoinList;
 import es.ucm.tp1.logic.lists.GameObjectList;
+import es.ucm.tp1.logic.lists.ObstacleList;
 
 public class Game {
 	private Long seed;
@@ -9,11 +12,17 @@ public class Game {
 	private int coins;
 	private boolean finished;
 	private GameObjectList gameObjectList;
+	private Player player;
+	private ObstacleList obstacleList;
+	private CoinList coinList;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
 		this.level = level;
 		this.coins = 0;
+		this.player = new Player(0, 1);
+		this.obstacleList = new ObstacleList();
+		this.coinList = new CoinList();
 	}
 	
 	public void toggleTest() {
@@ -58,6 +67,30 @@ public class Game {
 	
 	public void setGameObjectList(GameObjectList newGameObjectList) {
 		this.gameObjectList = newGameObjectList;
+	}
+	
+	public Player getPlayer() {
+		return this.player;
+	}
+	
+	public void setPlayer(Player p) {
+		this.player = p;
+	}
+	
+	public ObstacleList getObstacleList() {
+		return this.obstacleList;
+	}
+	
+	public void setObstacleList(ObstacleList o) {
+		this.obstacleList = o;
+	}
+	
+	public CoinList getCoinList() {
+		return this.coinList;
+	}
+	
+	public void setCoinList(CoinList c) {
+		this.coinList = c;
 	}
 
 }
