@@ -1,12 +1,14 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.logic.lists.GameObjectList;
 
 public class Game {
 	private Long seed;
 	private Level level;
 	private int coins;
 	private boolean finished;
+	private GameObjectList gameObjectList;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
@@ -48,6 +50,14 @@ public class Game {
 	
 	public Level getLevel() {
 		return this.level;
+	}
+	
+	public GameObjectList getGameObjectList() {
+		return gameObjectList;
+	}
+	
+	public void setGameObjectList(GameObjectList newGameObjectList) {
+		this.gameObjectList = newGameObjectList;
 	}
 
 }
