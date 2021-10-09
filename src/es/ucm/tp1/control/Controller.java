@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.*;
+import es.ucm.tp1.logic.gameobjects.*;
 
 public class Controller {
 
@@ -41,9 +42,7 @@ public class Controller {
 	}
 
 	public void run() {
-		String[][] newBoard = gameprinter.getBoard();
-		newBoard[0][1] = "@";
-		gameprinter.setBoard(newBoard);
+		initialiseGame();
 		while (!game.isFinished()) {
 			printGame();
 			System.out.println(PROMPT);
@@ -111,6 +110,14 @@ public class Controller {
 		}
 		
 		return parsedCommand;
+	}
+	
+	private void initialiseGame() {
+		String[][] newBoard = gameprinter.getBoard();
+		newBoard[0][1] = "@";
+		gameprinter.setBoard(newBoard);
+		
+		game.getGameObjectList().add(new Player(), 0, 1);
 	}
 	
 	/*for (int x = getVisibility() / 2; x < roadLength; x++) {
