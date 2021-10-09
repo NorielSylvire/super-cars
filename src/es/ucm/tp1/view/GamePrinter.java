@@ -33,6 +33,13 @@ public class GamePrinter {
 		this.game = game;
 		this.numRows = rows;
 		this.numCols = cols;
+		
+
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				board[i][j] = "";
+			}
+		}
 
 		this.margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 
@@ -47,11 +54,6 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numCols; j++) {
-				board[i][j] = "";
-			}
-		}
 	}
 
 	@Override

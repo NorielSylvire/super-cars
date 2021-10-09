@@ -41,6 +41,9 @@ public class Controller {
 	}
 
 	public void run() {
+		String[][] newBoard = gameprinter.getBoard();
+		newBoard[0][1] = "@";
+		gameprinter.setBoard(newBoard);
 		while (!game.isFinished()) {
 			printGame();
 			System.out.println(PROMPT);
