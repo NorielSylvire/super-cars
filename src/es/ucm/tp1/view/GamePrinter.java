@@ -82,4 +82,12 @@ public class GamePrinter {
 
 		return str.toString();
 	}
+	
+	public String[][] getBoard() {
+		return board;
+	}
+	
+	public void setBoard(String[][] newBoard) {
+		this.board = newBoard;
+	}
 }
