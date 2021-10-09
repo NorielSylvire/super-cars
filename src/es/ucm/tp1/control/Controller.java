@@ -109,5 +109,11 @@ public class Controller {
 		
 		return parsedCommand;
 	}
+	
+	for (int x = getVisibility() / 2; x < roadLength; x++) {
+		tryToAddObstacle(new Obstacle(game, x, getRandomLane()), level.obstacleFrequency());
+		tryToAddCoin(new Coin(game, x, getRandomLane()), level.coinFrequency());
+		}
+
 
 }
