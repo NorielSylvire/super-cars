@@ -29,18 +29,18 @@ public class Controller {
 	/* @formatter:off */
 
 	private Game game;
-	private GamePrinter gameprinter;
+	private GamePrinter gamePrinter;
 
 	private Scanner scanner;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
-		this.gameprinter = new GamePrinter(this.game, game.getLevel().getLength(), game.getLevel().getWidth());
+		this.gamePrinter = new GamePrinter(this.game, game.getLevel().getLength(), game.getLevel().getWidth());
 	}
 
 	public void printGame() {
-		System.out.println(gameprinter.toString());
+		System.out.println(gamePrinter.toString());
 	}
 
 	public void run() {
@@ -50,7 +50,15 @@ public class Controller {
 			System.out.println(PROMPT);
 			String COMMAND = scanner.nextLine();
 			runCommand(COMMAND);
+			if(game.getPlayer().getPos()[0] == (game.getLevel().getLength()-game.getLevel().getVisibility()+2)) {
+				game.setFinished(true);
+			}
+			if(game.getPlayer().getDead()) {
+				game.setFinished(true);
+			}
 		}
+		printGame();
+		System.out.print("Game Over!");
 	}
 	
 	private void runCommand(String COMMAND) {
@@ -63,12 +71,14 @@ public class Controller {
 				System.out.print("\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\nCoins: O\n");
 				break;
 			case "q":
+				gamePrinter.clean(game.getPlayer().getPos());
 				game.getPlayer().playerUp();
-				game.getPlayer().update();
+				game.getPlayer().update(gamePrinter, game);
 				break;
 			case "a":
+				gamePrinter.clean(game.getPlayer().getPos());
 				game.getPlayer().playerDown();
-				game.getPlayer().update();
+				game.getPlayer().update(gamePrinter, game);
 				break;
 			case "e":
 				System.out.print("GAME OVER: Player has exited the game.\n");
@@ -82,7 +92,8 @@ public class Controller {
 				break;
 			case "n":
 			case "":
-				game.getPlayer().update();
+				gamePrinter.clean(game.getPlayer().getPos());
+				game.getPlayer().update(gamePrinter, game);
 				break;
 			default:
 				System.out.print(UNKNOWN_COMMAND_MSG);
@@ -118,7 +129,7 @@ public class Controller {
 	}
 	
 	private void initialiseGame() {
-		for (int x = game.getLevel().getVisibility() / 2; x < game.getLevel().getLength(); x++) {
+		for (int x = game.getLevel().getVisibility() / 2; x < game.getLevel().getLength()-game.getLevel().getVisibility(); x++) {
 			tryToAddObstacle(new Obstacle(x, getRandomLane()), game.getLevel().getObstacleFrequency());
 			tryToAddCoin(new Coin(x, getRandomLane()), game.getLevel().getCoinFrequency());
 			}

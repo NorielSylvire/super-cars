@@ -41,12 +41,19 @@ public class Game {
 		gameStatus.append("\nCoins: ");
 		gameStatus.append(coins);
 		
+		gameStatus.append("\nTotal obstacles: ");
+		gameStatus.append(obstacleList.getNumObstacles());
+		
 		return gameStatus;
 		
 	}
 	
 	public boolean isFinished() {
 		return this.finished;
+	}
+	
+	public void setFinished(boolean end) {
+		this.finished = end;
 	}
 	
 	public void setCoins(int coins) {
