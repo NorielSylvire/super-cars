@@ -32,6 +32,7 @@ public class Controller {
 	private Random rnd = new Random();
 	private Game game;
 	private GamePrinter gamePrinter;
+	
 
 	private Scanner scanner;
 
@@ -43,6 +44,7 @@ public class Controller {
 
 	public void printGame() {
 		System.out.println(gamePrinter.toString());
+		
 	}
 
 	public void run() {
@@ -152,7 +154,9 @@ public class Controller {
 			tryToAddCoin(new Coin(x, getRandomLane()), game.getLevel().getCoinFrequency());
 			}
 		
-	}
+		game.setCycles(0);
+		game.setStart(System.currentTimeMillis());
+		}
 	
 	private void tryToAddObstacle(Obstacle o, double obsFrequency) {
 	

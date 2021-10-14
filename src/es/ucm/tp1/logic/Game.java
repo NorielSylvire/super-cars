@@ -8,6 +8,7 @@ import es.ucm.tp1.logic.lists.ObstacleList;
 
 public class Game {
 	private Long seed;
+	private int cycles;
 	private Level level;
 	private int coins;
 	private boolean finished;
@@ -15,6 +16,8 @@ public class Game {
 	private Player player;
 	private ObstacleList obstacleList;
 	private CoinList coinList;
+	private long start;
+	private long finish;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
@@ -44,6 +47,17 @@ public class Game {
 		gameStatus.append("\nTotal obstacles: ");
 		gameStatus.append(obstacleList.getNumObstacles());
 		
+		gameStatus.append("\nTotal coins: ");
+		gameStatus.append(coinList.getNumCoins());
+		
+		gameStatus.append("\nCycles: ");
+		gameStatus.append(cycles);
+		
+		gameStatus.append("\nTime Elapsed: ");
+		finish = System.currentTimeMillis();
+		gameStatus.append(finish - start);
+		gameStatus.append(" ms");
+		
 		return gameStatus;
 		
 	}
@@ -64,8 +78,24 @@ public class Game {
 		return this.coins;
 	}
 	
+	public void setStart(long start) {
+		this.start = start;
+	}
+	
+	public long getStart() {
+		return this.start;
+	}
+	
 	public long getSeed() {
 		return this.seed;
+	}
+	
+	public int getCycles() {
+		return this.cycles;
+	}
+	
+	public void setCycles(int cycles) {
+		this.cycles = cycles;
 	}
 	
 	public Level getLevel() {

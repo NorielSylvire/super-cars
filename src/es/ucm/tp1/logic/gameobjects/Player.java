@@ -32,6 +32,8 @@ public class Player extends GameObject{
 			game.setCoins(game.getCoins()+1);
 		}
 		this.posX++;
+		
+		game.setCycles(game.getCycles()+1);
 	}
 	
 	public int[] getPos() {
