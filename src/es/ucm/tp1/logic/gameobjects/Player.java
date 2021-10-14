@@ -39,6 +39,7 @@ public class Player extends GameObject{
 		return pos;
 	}
 	
+	
 	public boolean getDead() {
 		return this.dead;
 	}

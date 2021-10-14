@@ -64,6 +64,10 @@ public class Game {
 		return this.coins;
 	}
 	
+	public long getSeed() {
+		return this.seed;
+	}
+	
 	public Level getLevel() {
 		return this.level;
 	}

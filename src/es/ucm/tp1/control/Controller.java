@@ -9,7 +9,8 @@ import es.ucm.tp1.logic.lists.*;
 import java.util.Random;
 
 public class Controller {
-
+	
+	
 	private static final String PROMPT = "Command > ";
 
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command\n";
@@ -27,7 +28,8 @@ public class Controller {
 		"\n[t]est: enables test mode"
 		);
 	/* @formatter:off */
-
+	
+	private Random rnd = new Random();
 	private Game game;
 	private GamePrinter gamePrinter;
 
@@ -45,6 +47,7 @@ public class Controller {
 
 	public void run() {
 		initialiseGame();
+		rnd.setSeed(game.getSeed());
 		while (!game.isFinished()) {
 			printGame();
 			System.out.println(PROMPT);
@@ -86,6 +89,7 @@ public class Controller {
 				break;
 			case "r":
 				System.out.print("RESETTED\n");
+				initialiseGame();
 				break;
 			case "t":
 				System.out.print("I HATE TESTS\n");
@@ -129,14 +133,29 @@ public class Controller {
 	}
 	
 	private void initialiseGame() {
+		
+		String[][] s = new String[5][100];
+		for(int i= 0; i< 100; i++ ) {
+			for(int j=0; j<5; j++) {
+				s[j][i] = "";
+			}
+		}	
+		
+		game.setCoins(0);
+		game.getObstacleList().setNumObstacles(0);
+		game.setPlayer(new Player (0,1));
+		game.getCoinList().setNumCoins(0);
+		
+		gamePrinter.setBoard(s);
 		for (int x = game.getLevel().getVisibility() / 2; x < game.getLevel().getLength()-game.getLevel().getVisibility(); x++) {
 			tryToAddObstacle(new Obstacle(x, getRandomLane()), game.getLevel().getObstacleFrequency());
 			tryToAddCoin(new Coin(x, getRandomLane()), game.getLevel().getCoinFrequency());
 			}
+		
 	}
 	
 	private void tryToAddObstacle(Obstacle o, double obsFrequency) {
-		Random rnd = new Random();
+	
 		if (rnd.nextDouble() >= obsFrequency && checkPosition(o.getPosition())) {
 			Obstacle[] obs = game.getObstacleList().getObstacles();
 			obs[game.getObstacleList().getNumObstacles()] = o;
@@ -145,7 +164,7 @@ public class Controller {
 	}
 	
 	private void tryToAddCoin(Coin c, double cFrequency) {
-		Random rnd = new Random();
+		
 		if (rnd.nextDouble() >= cFrequency && checkPosition(c.getPosition())) {
 			Coin[] cns = game.getCoinList().getCoins();
 			cns[game.getCoinList().getNumCoins()] = c;
