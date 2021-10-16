@@ -31,7 +31,7 @@ public class Game {
 	}
 	
 	public void toggleTest() {
-		
+		this.test = !this.test;
 	}
 	
 	public StringBuilder getGameStatus() {
@@ -54,11 +54,13 @@ public class Game {
 		
 		gameStatus.append("\nCycles: ");
 		gameStatus.append(cycles);
-		
-		gameStatus.append("\nTime Elapsed: ");
-		finish = System.currentTimeMillis();
-		gameStatus.append(finish - start);
-		gameStatus.append(" ms");
+
+		if (!this.test) {
+			gameStatus.append("\nTime Elapsed: ");
+			finish = System.currentTimeMillis();
+			gameStatus.append(finish - start);
+			gameStatus.append(" ms");
+		}
 		
 		return gameStatus;
 		

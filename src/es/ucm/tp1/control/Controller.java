@@ -51,6 +51,8 @@ public class Controller {
 		initialiseGame();
 		rnd.setSeed(game.getSeed());
 		while (!game.isFinished()) {
+			System.out.print("\033[H\033[2J");
+			System.out.flush(); //TODO
 			printGame();
 			System.out.println(PROMPT);
 			String COMMAND = scanner.nextLine();
@@ -90,17 +92,12 @@ public class Controller {
 				System.exit(0);
 				break;
 			case "r":
-				System.out.print("RESETTED\n");
 				initialiseGame();
 				break;
 			case "t":
-				System.out.print("TEST MODE\n");
-				if(game.getTest() == false) {
-					game.setTest(true);
-				}
-				if(game.getTest() == true) {
-					game.setTest(false);
-				}
+				game.toggleTest();
+				if(game.getTest()) game.setCoins(0);
+				if(!game.getTest()) game.setStart(System.currentTimeMillis());
 				break;
 			case "n":
 			case "":

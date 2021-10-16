@@ -28,13 +28,8 @@ public class Player extends GameObject{
 		if(gamePrinter.getBoard()[posY][posX+1] == "░░░░░") {
 			this.dead = true;
 		}
-		if(gamePrinter.getBoard()[posY][posX+1] == "O") {
-			if(game.getTest()== false) {
+		if(gamePrinter.getBoard()[posY][posX+1] == "O" && !game.getTest()) {
 			game.setCoins(game.getCoins()+1);
-			}
-			else {
-				
-			}
 		}
 		this.posX++;
 		
