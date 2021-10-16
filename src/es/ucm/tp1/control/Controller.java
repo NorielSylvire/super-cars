@@ -94,7 +94,13 @@ public class Controller {
 				initialiseGame();
 				break;
 			case "t":
-				System.out.print("I HATE TESTS\n");
+				System.out.print("TEST MODE\n");
+				if(game.getTest() == false) {
+					game.setTest(true);
+				}
+				if(game.getTest() == true) {
+					game.setTest(false);
+				}
 				break;
 			case "n":
 			case "":

@@ -18,6 +18,7 @@ public class Game {
 	private CoinList coinList;
 	private long start;
 	private long finish;
+	private boolean test;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
@@ -26,6 +27,7 @@ public class Game {
 		this.player = new Player(0, 1);
 		this.obstacleList = new ObstacleList();
 		this.coinList = new CoinList();
+		this.test = false;
 	}
 	
 	public void toggleTest() {
@@ -76,6 +78,14 @@ public class Game {
 	
 	public int getCoins() {
 		return this.coins;
+	}
+	
+	public boolean getTest() {
+		return this.test;
+	}
+	
+	public void setTest(boolean test) {
+		this.test = test;
 	}
 	
 	public void setStart(long start) {

@@ -29,7 +29,12 @@ public class Player extends GameObject{
 			this.dead = true;
 		}
 		if(gamePrinter.getBoard()[posY][posX+1] == "O") {
+			if(game.getTest()== false) {
 			game.setCoins(game.getCoins()+1);
+			}
+			else {
+				
+			}
 		}
 		this.posX++;
 		
