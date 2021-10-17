@@ -32,6 +32,7 @@ public class Controller {
 	private Random rnd = new Random();
 	private Game game;
 	private GamePrinter gamePrinter;
+	private boolean firstCycle = true;
 	
 
 	private Scanner scanner;
@@ -43,29 +44,27 @@ public class Controller {
 	}
 
 	public void printGame() {
+		if(firstCycle) firstCycle=!firstCycle;
+		else clearConsole();
 		System.out.println(gamePrinter.toString());
 		
 	}
 
 	public void run() {
 		initialiseGame();
-		rnd.setSeed(game.getSeed());
 		while (!game.isFinished()) {
-			System.out.print("\033[H\033[2J");
-			System.out.flush(); //TODO
 			printGame();
 			System.out.println(PROMPT);
 			String COMMAND = scanner.nextLine();
 			runCommand(COMMAND);
-			if(game.getPlayer().getPos()[0] == (game.getLevel().getLength()-game.getLevel().getVisibility()+2)) {
-				game.setFinished(true);
-			}
-			if(game.getPlayer().getDead()) {
+			if(game.getPlayer().getPos()[0] == (game.getLevel().getLength()-game.getLevel().getVisibility()+2) || game.getPlayer().getDead()) {
 				game.setFinished(true);
 			}
 		}
 		printGame();
 		System.out.print("Game Over!");
+		if(game.getPlayer().getDead()) System.out.print(" Player has crashed!");
+		else System.out.print(" Player wins!");
 	}
 	
 	private void runCommand(String COMMAND) {
@@ -138,7 +137,10 @@ public class Controller {
 	}
 	
 	private void initialiseGame() {
+		if(game.getLevel().getName().equalsIgnoreCase("test")) game.setTest(true);
 		
+		rnd = new Random();
+		rnd.setSeed(game.getSeed());
 		String[][] s = new String[5][100];
 		for(int i= 0; i< 100; i++ ) {
 			for(int j=0; j<5; j++) {
@@ -162,7 +164,6 @@ public class Controller {
 		}
 	
 	private void tryToAddObstacle(Obstacle o, double obsFrequency) {
-	
 		if (rnd.nextDouble() >= obsFrequency && checkPosition(o.getPosition())) {
 			Obstacle[] obs = game.getObstacleList().getObstacles();
 			obs[game.getObstacleList().getNumObstacles()] = o;
@@ -171,7 +172,6 @@ public class Controller {
 	}
 	
 	private void tryToAddCoin(Coin c, double cFrequency) {
-		
 		if (rnd.nextDouble() >= cFrequency && checkPosition(c.getPosition())) {
 			Coin[] cns = game.getCoinList().getCoins();
 			cns[game.getCoinList().getNumCoins()] = c;
@@ -198,10 +198,13 @@ public class Controller {
 	}
 	
 	private int getRandomLane() {
-		Random rnd = new Random();
 		int ret = rnd.nextInt() % 3;
 		if (ret < 0) ret = - ret;
 		return ret;
+	}
+	
+	public final static void clearConsole() {
+		for (int i = 0; i < 50; ++i) System.out.println();
 	}
 
 }
