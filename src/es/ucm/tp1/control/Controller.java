@@ -51,19 +51,30 @@ public class Controller {
 	}
 
 	public void run() {
-		initialiseGame();
+		game.initialiseGame();
+		
 		while (!game.isFinished()) {
 			printGame();
+			
 			System.out.println(PROMPT);
+			
 			String COMMAND = scanner.nextLine();
+			
 			runCommand(COMMAND);
-			if(game.getPlayer().getPos()[0] == (game.getLevel().getLength()-game.getLevel().getVisibility()+2) || game.getPlayer().getDead()) {
-				game.setFinished(true);
+			
+			if(game.isPlayerOut()) {
+				
+				game.finishGame();
+				
 			}
+			
 		}
+		
+		
 		printGame();
 		System.out.print("Game Over!");
-		if(game.getPlayer().getDead()) System.out.print(" Player has crashed!");
+		//TODO
+		if(game.isDead()) System.out.print(" Player has crashed!");
 		else System.out.print(" Player wins!");
 	}
 	
@@ -77,31 +88,24 @@ public class Controller {
 				System.out.print("\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\nCoins: O\n");
 				break;
 			case "q":
-				gamePrinter.clean(game.getPlayer().getPos());
-				game.getPlayer().playerUp();
-				game.getPlayer().update(gamePrinter, game);
+				game.movePlayer(true);
 				break;
 			case "a":
-				gamePrinter.clean(game.getPlayer().getPos());
-				game.getPlayer().playerDown();
-				game.getPlayer().update(gamePrinter, game);
+				game.movePlayer(false);
 				break;
 			case "e":
 				System.out.print("GAME OVER: Player has exited the game.\n");
 				System.exit(0);
 				break;
 			case "r":
-				initialiseGame();
+				game.initialiseGame();
 				break;
 			case "t":
 				game.toggleTest();
-				if(game.getTest()) game.setCoins(0);
-				if(!game.getTest()) game.setStart(System.currentTimeMillis());
 				break;
 			case "n":
 			case "":
-				gamePrinter.clean(game.getPlayer().getPos());
-				game.getPlayer().update(gamePrinter, game);
+				game.update();
 				break;
 			default:
 				System.out.print(UNKNOWN_COMMAND_MSG);
@@ -132,75 +136,9 @@ public class Controller {
 		} else {
 			parsedCommand = "k";
 		}
-		
+
 		return parsedCommand;
-	}
-	
-	private void initialiseGame() {
-		if(game.getLevel().getName().equalsIgnoreCase("test")) game.setTest(true);
 		
-		rnd = new Random();
-		rnd.setSeed(game.getSeed());
-		String[][] s = new String[5][100];
-		for(int i= 0; i< 100; i++ ) {
-			for(int j=0; j<5; j++) {
-				s[j][i] = "";
-			}
-		}	
-		
-		game.setCoins(0);
-		game.getObstacleList().setNumObstacles(0);
-		game.setPlayer(new Player (0,1));
-		game.getCoinList().setNumCoins(0);
-		
-		gamePrinter.setBoard(s);
-		for (int x = game.getLevel().getVisibility() / 2; x < game.getLevel().getLength()-game.getLevel().getVisibility(); x++) {
-			tryToAddObstacle(new Obstacle(x, getRandomLane()), game.getLevel().getObstacleFrequency());
-			tryToAddCoin(new Coin(x, getRandomLane()), game.getLevel().getCoinFrequency());
-			}
-		
-		game.setCycles(0);
-		game.setStart(System.currentTimeMillis());
-		}
-	
-	private void tryToAddObstacle(Obstacle o, double obsFrequency) {
-		if (rnd.nextDouble() >= obsFrequency && checkPosition(o.getPosition())) {
-			Obstacle[] obs = game.getObstacleList().getObstacles();
-			obs[game.getObstacleList().getNumObstacles()] = o;
-			game.getObstacleList().setNumObstacles(game.getObstacleList().getNumObstacles() + 1);
-		}
-	}
-	
-	private void tryToAddCoin(Coin c, double cFrequency) {
-		if (rnd.nextDouble() >= cFrequency && checkPosition(c.getPosition())) {
-			Coin[] cns = game.getCoinList().getCoins();
-			cns[game.getCoinList().getNumCoins()] = c;
-			game.getCoinList().setNumCoins(game.getCoinList().getNumCoins() + 1);
-		}
-	}
-	
-	private boolean checkPosition(int[] pos) {
-		boolean ret = true;
-		if (game.getPlayer().getPos() == pos) ret = false;
-		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
-			if (pos == game.getObstacleList().getObstacles()[i].getPosition()) {
-				ret = false;
-				break;
-			}
-		}
-		for (int i = 0; i < game.getCoinList().getNumCoins(); i++) {
-			if (pos == game.getCoinList().getCoins()[i].getPosition()) {
-				ret = false;
-				break;
-			}
-		}
-		return ret;
-	}
-	
-	private int getRandomLane() {
-		int ret = rnd.nextInt() % 3;
-		if (ret < 0) ret = - ret;
-		return ret;
 	}
 	
 	public final static void clearConsole() {

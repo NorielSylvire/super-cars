@@ -1,5 +1,6 @@
 package es.ucm.tp1.logic.gameobjects;
 
+import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.utils.Utils;
 import es.ucm.tp1.view.GamePrinter;
@@ -9,9 +10,9 @@ public class Player extends GameObject{
 	private int posY;
 	private boolean dead;
 	
-	public Player(int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+	public Player() {
+		this.posX = 0;
+		this.posY = 1;
 		this.dead = false;
 	}
 	
@@ -29,21 +30,17 @@ public class Player extends GameObject{
 			this.dead = true;
 		}
 		if(gamePrinter.getBoard()[posY][posX+1] == "O" && !game.getTest()) {
-			game.setCoins(game.getCoins()+1);
+			game.addCoins();
 		}
 		this.posX++;
 		
-		game.setCycles(game.getCycles()+1);
+		gamePrinter.clean(this.posX, this.posY);
+		
+		game.nextCycle();
 	}
 	
-	public int[] getPos() {
-		int[] pos = {posX, posY};
-		return pos;
-	}
-	
-	
-	public boolean getDead() {
-		return this.dead;
+	public boolean isPlayerOut(Level level) {
+		return (posX == level.getLength()-level.getVisibility()+2 || dead);
 	}
 	
 }

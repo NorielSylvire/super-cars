@@ -7,23 +7,12 @@ public class ObstacleList {
 	private int numObstacles;
 	
 	public ObstacleList() {
-		obstacles = new Obstacle[100];
+		this.obstacles = new Obstacle[100];
 		this.numObstacles = 0;
 	}
 	
-	public Obstacle[] getObstacles() {
-		return obstacles;
-	}
-	
-	public void setObstacles(Obstacle[] o) {
-		this.obstacles = o;
-	}
-	
-	public int getNumObstacles() {
-		return numObstacles;
-	}
-	
-	public void setNumObstacles(int num) {
-		this.numObstacles = num;
+	public void addObstacle(int x, int y) {
+		obstacles[numObstacles] = new Obstacle(x, y);
+		numObstacles++;
 	}
 }

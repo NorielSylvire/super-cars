@@ -46,7 +46,7 @@ public enum Level {
 		return buffer.toString();
 	}
 	
-	public String getName() {
+	public String name() {
 		String name = "HARD";
 		if (this.length == 10) {
 			name = "TEST";

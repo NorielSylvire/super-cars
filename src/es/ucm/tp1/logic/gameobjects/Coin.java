@@ -13,4 +13,5 @@ public class Coin {
 		int[] pos = {posX, posY};
 		return pos;
 	}
+	
 }

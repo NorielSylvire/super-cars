@@ -81,6 +81,10 @@ public class GamePrinter {
 	public void clean(int[] pos) {
 		board[pos[1]][pos[0]] = "";
 	}
+	
+	public void clean(int x, int y) {
+		board[x][y] = "";
+	}
 
 	@Override
 	public String toString() {

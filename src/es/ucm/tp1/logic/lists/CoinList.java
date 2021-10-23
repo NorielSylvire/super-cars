@@ -12,20 +12,9 @@ public class CoinList{//No voy a usar extends GameObjectList porque supongo que 
 		this.numCoins = 0;
 	}
 	
-	public Coin[] getCoins() {
-		return this.coins;
-	}
-	
-	public void setCoins(Coin[] c) {
-		this.coins = c;
-	}
-	
-	public int getNumCoins() {
-		return this.numCoins;
-	}
-	
-	public void setNumCoins(int num) {
-		this.numCoins = num;
+	public void addCoin(int x, int y) {
+		coins[numCoins] = new Coin(x, y);
+		numCoins++;
 	}
 
 }
