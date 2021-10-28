@@ -14,20 +14,6 @@ public class Controller {
 	private static final String PROMPT = "Command > ";
 
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command\n";
-
-	/* @formatter:off */
-	private static final String HELP = (
-		"Available commands:" +
-		"\n[h]elp: show this help" +
-		"\n[i]nfo: prints gameobjet info" +
-		"\n[n]one | []: update" +
-		"\n[q]: go up" +
-		"\n[a]: go down" +
-		"\n[e]xit: exit game" +
-		"\n[r]eset: reset game" +
-		"\n[t]est: enables test mode"
-		);
-	/* @formatter:off */
 	
 	private Random rnd = new Random();
 	private Game game;
@@ -51,26 +37,25 @@ public class Controller {
 	}
 
 	public void run() {
+		boolean refreshDisplay = true;
 		game.initialiseGame();
-		
-		while (!game.isFinished()) {
+		while (!game.isFinished()){
+			if (refreshDisplay ) {
 			printGame();
-			
-			System.out.println(PROMPT);
-			
-			String COMMAND = scanner.nextLine();
-			
-			runCommand(COMMAND);
-			
-			if(game.isPlayerOut()) {
-				
-				game.finishGame();
-				
 			}
-			
+			refreshDisplay = false;
+			System.out.println(PROMPT);
+			String s = scanner.nextLine();
+			String[] parameters = s.toLowerCase().trim().split(" ");
+			System.out.println("[DEBUG] Executing: " + s);
+			Command command = Command.getCommand(parameters);
+			if (command != null) {
+			refreshDisplay = command.execute(game);
+			} else {
+			System.out.println("[ERROR]: "+ UNKNOWN_COMMAND_MSG);
+			}
+
 		}
-		
-		
 		printGame();
 		System.out.print("Game Over!");
 		//TODO
@@ -85,7 +70,7 @@ public class Controller {
 				System.out.print(HELP);
 				break;
 			case "i":
-				System.out.print("\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -\nRoad delimiter: =\nFinish Line: |\nCoins: O\n");
+				
 				break;
 			case "q":
 				game.movePlayer(true);
@@ -94,11 +79,8 @@ public class Controller {
 				game.movePlayer(false);
 				break;
 			case "e":
-				System.out.print("GAME OVER: Player has exited the game.\n");
-				System.exit(0);
 				break;
 			case "r":
-				game.initialiseGame();
 				break;
 			case "t":
 				game.toggleTest();
