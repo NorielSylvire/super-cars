@@ -1,17 +1,24 @@
 package es.ucm.tp1.logic.gameobjects;
 
-public class Coin {
-	private int posX;
-	private int posY;
+import es.ucm.tp1.logic.Game;
 
-	public Coin(int x, int y) {
-		this.posX = x;
-		this.posY = y;
+public class Coin extends GameObject{
+	
+	public abstract void onEnter() {
+		
 	}
 	
-	public int[] getPosition() {
-		int[] pos = {posX, posY};
-		return pos;
+	public abstract void update() {
+		
 	}
+	
+	public abstract void onDelete() {
+		
+	}
+	
+	public abstract boolean isAlive() {
+		
+	}
+	
 	
 }
