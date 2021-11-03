@@ -46,19 +46,7 @@ public enum Level {
 			levelCount++;
 		}
 		return buffer.toString();
-	}
-	
-	public String name() {
-		String name = "HARD";
-		if (this.length == 10) {
-			name = "TEST";
-		}
-		if (this.length == 30) {
-			name = "EASY";
-		}
-		return name;
-	}
-	
+	}	
 	
 	public int getLength() {
 		return this.length;

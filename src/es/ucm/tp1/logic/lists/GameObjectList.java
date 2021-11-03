@@ -20,8 +20,4 @@ public class GameObjectList {
 		numObjects++;
 	}
 	
-	public int getNumObjects() {
-		return this.numObjects;
-	}
-	
 }

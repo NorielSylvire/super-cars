@@ -6,7 +6,7 @@ public class NoneCommand extends Command {
 	private static final String NAME = "none";
 	private static final String DETAILS = "[n]one";
 	private static final String SHORTCUT = "n";
-	private static final String HELP = "";
+	private static final String HELP = "Does nothing. Advances the game without moving up or down. The player still moves forward.";
 	
 	public NoneCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

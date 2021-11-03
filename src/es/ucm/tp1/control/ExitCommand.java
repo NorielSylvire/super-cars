@@ -3,10 +3,10 @@ package es.ucm.tp1.control;
 import es.ucm.tp1.logic.Game;
 
 public class ExitCommand extends Command {
-	private static final String NAME = "help";
-	private static final String DETAILS = "[h]elp";
-	private static final String SHORTCUT = "h";
-	private static final String HELP = "";
+	private static final String NAME = "exit";
+	private static final String DETAILS = "[e]xit";
+	private static final String SHORTCUT = "e";
+	private static final String HELP = "Closes the game.";
 
 	public ExitCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

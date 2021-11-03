@@ -16,7 +16,8 @@ public abstract class Command {
 		new ExitCommand(),
 		new ResetCommand(),
 		new MoveUpCommand(),
-		new MoveDownCommand()
+		new MoveDownCommand(),
+		new NoneCommand()
 	};
 	protected Game game;
 
@@ -29,7 +30,7 @@ public abstract class Command {
 
 	
 	public static Command getCommand(String[] commandWords) {
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < 7; i++) {
 			if (AVAILABLE_COMMANDS[i].parse(commandWords) != null) return AVAILABLE_COMMANDS[i].parse(commandWords);
 		}
 		return null;

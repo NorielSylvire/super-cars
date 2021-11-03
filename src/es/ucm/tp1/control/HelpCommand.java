@@ -6,7 +6,7 @@ public class HelpCommand extends Command {
 	private static final String NAME = "help";
 	private static final String DETAILS = "[h]elp";
 	private static final String SHORTCUT = "h";
-	private static final String HELP = "";
+	private static final String HELP = "Gives you information on the different available commands.";
 	/* @formatter:off */
 	private static final String HELP_MESSAGE = (
 		"Available commands:" +

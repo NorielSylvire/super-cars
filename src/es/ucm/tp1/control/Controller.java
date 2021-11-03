@@ -26,7 +26,7 @@ public class Controller {
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
-		this.gamePrinter = new GamePrinter(this.game, game.getLevel().getLength(), game.getLevel().getWidth());
+		this.gamePrinter = new GamePrinter(this.game, game.getRoadLength(), game.getRoadWidth());
 	}
 
 	public void printGame() {
@@ -61,66 +61,6 @@ public class Controller {
 		//TODO
 		if(game.isDead()) System.out.print(" Player has crashed!");
 		else System.out.print(" Player wins!");
-	}
-	
-	private void runCommand(String COMMAND) {
-		
-		switch(parseCommand(COMMAND)) {
-			case "h":
-				System.out.print(HELP);
-				break;
-			case "i":
-				
-				break;
-			case "q":
-				game.movePlayer(true);
-				break;
-			case "a":
-				game.movePlayer(false);
-				break;
-			case "e":
-				break;
-			case "r":
-				break;
-			case "t":
-				game.toggleTest();
-				break;
-			case "n":
-			case "":
-				game.update();
-				break;
-			default:
-				System.out.print(UNKNOWN_COMMAND_MSG);
-			
-		}
-		
-	}
-	
-	private String parseCommand(String COMMAND) {
-		String parsedCommand;
-		
-		if (COMMAND.length() == 1) {
-			parsedCommand = COMMAND.toLowerCase();
-		} else if(COMMAND.equalsIgnoreCase("help")) {
-			parsedCommand = "h";
-		} else if(COMMAND.equalsIgnoreCase("info")) {
-			parsedCommand = "i";
-		} else if(COMMAND.equalsIgnoreCase("exit")) {
-			parsedCommand = "e";
-		} else if(COMMAND.equalsIgnoreCase("reset")) {
-			parsedCommand = "r";
-		} else if(COMMAND.equalsIgnoreCase("test")) {
-			parsedCommand = "t";
-		} else if(COMMAND.equalsIgnoreCase("none")) {
-			parsedCommand = "n";
-		} else if(COMMAND.length() == 0) {
-			parsedCommand = "n";
-		} else {
-			parsedCommand = "k";
-		}
-
-		return parsedCommand;
-		
 	}
 	
 	public final static void clearConsole() {
