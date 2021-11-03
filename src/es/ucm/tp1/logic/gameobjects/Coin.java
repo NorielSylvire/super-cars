@@ -9,6 +9,8 @@ import es.ucm.tp1.logic.Game;
 
 public class Coin extends GameObject{
 	
+	private int numCoins;
+	
 	public Coin (Game game, int x, int y) {
 		super(game, x, y);
 	}
@@ -30,5 +32,7 @@ public class Coin extends GameObject{
 		return true;
 	}
 	
-	
+	public static void reset() {
+		this.numCoins = 0;
+	}
 }

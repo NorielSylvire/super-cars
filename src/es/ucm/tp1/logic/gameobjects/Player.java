@@ -55,4 +55,14 @@ public class Player extends GameObject{
 		return alive;
 	}
 	
+	public boolean doCollision() {
+		Collider other = game.getObjectInPosition(x, y);
+		if (other != null) {
+		return other.receiveCollision (this);
+		}
+		return false;
+	}
+
+
+	
 }

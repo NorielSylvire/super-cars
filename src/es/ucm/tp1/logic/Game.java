@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.Coin;
+import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
 import es.ucm.tp1.logic.gameobjects.Player;
 import es.ucm.tp1.logic.lists.CoinList;
@@ -109,9 +110,9 @@ public class Game {
 	
 
 	
-	private void tryToAddObstacle(int x, int y, double obsFrequency) {
-		if (rnd.nextDouble() <= obsFrequency && checkPosition(x, y)) {
-			obstacleList.addObstacle(x, y);
+	public void tryToAddObject(GameObject gameobject,  double frequency) {
+		if (rnd.nextDouble() <= frequency) {
+			//gameobjectlist ADD//
 		}
 	}
 	
@@ -155,7 +156,7 @@ public class Game {
 	}
 	
 	//BUMP Can we do level.getWidth()
-	private int getRandomLane() {
+	public int getRandomLane() {
 		int ret = rnd.nextInt() % level.getWidth();
 		if (ret < 0) ret = - ret;
 		return ret;
@@ -263,5 +264,14 @@ public class Game {
 	public void setCoinList(CoinList c) {
 		this.coinList = c;
 	}
-
+	
+	public int getVisibility() {
+		//preguntar al profe
+		return level.getVisibility();
+	}
+	
+	public int getRoadLength() {
+		return level.getLength();
+	}
+	
 }

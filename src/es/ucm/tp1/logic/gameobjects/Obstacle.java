@@ -3,6 +3,8 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 
 public class Obstacle extends GameObject {
+	private int numObstacle;
+	
 	public Obstacle (Game game, int x, int y) {
 		super(game, x, y);
 	}
@@ -22,5 +24,7 @@ public class Obstacle extends GameObject {
 	public boolean isAlive() {
 		return true;
 	}
-	
+	public static void reset() {
+		this.numObstacle = 0;
+	}
 }
