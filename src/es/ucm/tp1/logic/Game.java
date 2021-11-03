@@ -1,6 +1,7 @@
 package es.ucm.tp1.logic;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.Coin;
@@ -137,6 +138,22 @@ public class Game {
 		}
 		return ret;
 	}
+	
+	public void changeLevel() {
+		
+			String leveleado;
+			Double semillita;
+			
+			System.out.print("Escoge dificultad");
+			Scanner s;
+			s = new Scanner(System.in);
+			leveleado = s.nextLine();
+			level = level.valueOfIgnoreCase(leveleado);
+			
+			System.out.print("Escoge la semilla");
+			semillita = s.nextDouble();
+	}
+	
 	//BUMP Can we do level.getWidth()
 	private int getRandomLane() {
 		int ret = rnd.nextInt() % level.getWidth();

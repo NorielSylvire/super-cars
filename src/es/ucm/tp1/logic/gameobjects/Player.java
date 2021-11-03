@@ -6,14 +6,10 @@ import es.ucm.tp1.utils.Utils;
 import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
-	private int posX;
-	private int posY;
-	private boolean dead;
+	private boolean alive;
 	
-	public Player() {
-		this.posX = 0;
-		this.posY = 1;
-		this.dead = false;
+	public Player (Game game, int x, int y) {
+		super(game, x, y);
 	}
 	
 	public void playerUp() {
@@ -25,22 +21,38 @@ public class Player extends GameObject{
 		this.posY = Utils.clamp(posY, 0, 2);;
 	}
 	
-	public void update(GamePrinter gamePrinter, Game game) {
-		if(gamePrinter.getBoard()[posY][posX+1] == "░░░░░") {
+	public void update() {
+		if(gamePrinter.getBoard()[y][x+1] == "░░░░░") {
 			this.dead = true;
 		}
-		if(gamePrinter.getBoard()[posY][posX+1] == "O" && !game.getTest()) {
+		if(gamePrinter.getBoard()[y][x+1] == "O" && !game.getTest()) {
 			game.addCoins();
 		}
-		this.posX++;
+		this.x++;
 		
-		gamePrinter.clean(this.posX, this.posY);
+		gamePrinter.clean(this.x, this.y);
 		
 		game.nextCycle();
 	}
 	
 	public boolean isPlayerOut(Level level) {
 		return (posX == level.getLength()-level.getVisibility()+2 || dead);
+	}
+
+	
+	
+	public  void onEnter() {
+		this.x = 0;
+		this.y = 1;
+		this.alive = true;
+	}
+	
+	public  void onDelete() {
+		this.alive = false;	
+	}
+	
+	public boolean isAlive() {
+		return alive;
 	}
 	
 }

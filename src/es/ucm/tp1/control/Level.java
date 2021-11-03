@@ -1,5 +1,7 @@
 package es.ucm.tp1.control;
 
+import java.util.Scanner;
+
 public enum Level {
 
 	TEST(10, 3, 8, 0.5, 0), EASY(30, 3, 8, 0.5, 0.5), HARD(100, 5, 6, 0.7, 0.3);
@@ -56,6 +58,7 @@ public enum Level {
 		}
 		return name;
 	}
+	
 	
 	public int getLength() {
 		return this.length;

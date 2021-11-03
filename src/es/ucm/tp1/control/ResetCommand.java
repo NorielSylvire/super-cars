@@ -14,6 +14,8 @@ public class ResetCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
+		game.changeLevel();
+		
 		game.initialiseGame();
 		return false;
 	}
