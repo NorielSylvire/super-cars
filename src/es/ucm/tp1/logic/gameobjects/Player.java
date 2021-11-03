@@ -13,15 +13,13 @@ public class Player extends GameObject{
 	}
 	
 	public void playerUp() {
-		this.posY--;
-		this.posY = Utils.clamp(posY, 0, 2);;
+		this.y = Utils.clamp(y-1, 0, 2);;
 	}
 	public void playerDown() {
-		this.posY++;
-		this.posY = Utils.clamp(posY, 0, 2);;
+		this.y = Utils.clamp(y+1, 0, 2);;
 	}
-	
-	public void update() {
+	//PARA LUEGO//
+	public void update(GamePrinter gamePrinter) {
 		if(gamePrinter.getBoard()[y][x+1] == "░░░░░") {
 			this.dead = true;
 		}
@@ -36,7 +34,7 @@ public class Player extends GameObject{
 	}
 	
 	public boolean isPlayerOut(Level level) {
-		return (posX == level.getLength()-level.getVisibility()+2 || dead);
+		return (x == level.getLength()-level.getVisibility()+2 || !isAlive());
 	}
 
 	
