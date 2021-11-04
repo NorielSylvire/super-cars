@@ -20,7 +20,7 @@ public class Player extends GameObject{
 		this.y = Utils.clamp(y+1, 0, 2);;
 	}
 	
-	//PARA LUEGO//
+	
 	public void update() {
 		this.x++;
 		game.nextCycle();

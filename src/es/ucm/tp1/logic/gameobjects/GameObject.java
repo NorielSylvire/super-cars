@@ -1,5 +1,4 @@
 package es.ucm.tp1.logic.gameobjects;
-
 import es.ucm.tp1.logic.Game;
 
 public abstract class GameObject implements Collider {

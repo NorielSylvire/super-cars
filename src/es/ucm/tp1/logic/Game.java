@@ -144,7 +144,6 @@ public class Game {
 	}
 	
 	public int getVisibility() {
-		//preguntar al profe
 		return level.getVisibility();
 	}
 	
@@ -156,8 +155,8 @@ public class Game {
 		return level.getWidth();
 	}
 	
-	public void getObjectInPosition(int x, int y) {
-		
+	public void  getObjectInPosition(int x, int y) {
+		container.getObjectInList(x, y);
 	}
 	
 }

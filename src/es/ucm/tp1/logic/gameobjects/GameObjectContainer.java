@@ -11,5 +11,9 @@ public class GameObjectContainer {
 	public GameObjectContainer() {
 		gameobjects = new ArrayList<>();
 	}
+	
+	public void getObjectInList(int x, int y) {
+		gameobjects.toArray([x][y]);
+	}
 
 }
