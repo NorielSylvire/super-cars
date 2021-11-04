@@ -8,6 +8,7 @@ import es.ucm.tp1.logic.gameobjects.Coin;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
 import es.ucm.tp1.logic.gameobjects.Player;
+import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.logic.lists.CoinList;
 import es.ucm.tp1.logic.lists.GameObjectList;
 import es.ucm.tp1.logic.lists.ObstacleList;
@@ -26,6 +27,7 @@ public class Game {
 	private boolean test;
 	private Random rnd;
 	private GamePrinter gamePrinter;
+	private GameObjectContainer container;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
@@ -152,6 +154,10 @@ public class Game {
 	
 	public int getRoadWidth() {
 		return level.getWidth();
+	}
+	
+	public void getObjectInPosition(int x, int y) {
+		
 	}
 	
 }
