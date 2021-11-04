@@ -37,6 +37,9 @@ public abstract class GameObject implements Collider {
 	public abstract boolean isAlive();
 	
 	public String toString() {
+		if(isAlive()) {
+			return getSymbol();
+		}
 		return "";
 	}
 }

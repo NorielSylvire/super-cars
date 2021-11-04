@@ -101,6 +101,7 @@ public class Game {
 	public void tryToAddObject(GameObject gameobject,  double frequency) {
 		if (rnd.nextDouble() <= frequency) {
 			//gameobjectlist ADD//
+			//gameobject en el if//
 		}
 	}
 	
