@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.Coin;
+import es.ucm.tp1.logic.gameobjects.Collider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
 import es.ucm.tp1.logic.gameobjects.Player;
@@ -156,8 +157,8 @@ public class Game {
 		return level.getWidth();
 	}
 	
-	public void  getObjectInPosition(int x, int y) {
-		container.getObjectInList(x, y);
+	public Collider  getObjectInPosition(int x, int y) {
+		 return container.getObjectInList(x, y);
 	}
 	
 }

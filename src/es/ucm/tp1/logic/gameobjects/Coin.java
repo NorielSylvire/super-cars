@@ -6,6 +6,8 @@ public class Coin extends GameObject{
 	
 	private static int numCoins;
 	
+	//Collisiones para mas tarde//
+	
 	public Coin (Game game, int x, int y) {
 		super(game, x, y);
 	}

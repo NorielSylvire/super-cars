@@ -10,7 +10,7 @@ public class Obstacle extends GameObject {
 	}
 	
 	public void onEnter() {
-		
+		numObstacles++;
 	}
 	
 	public void update() {
@@ -18,7 +18,7 @@ public class Obstacle extends GameObject {
 	}
 	
 	public void onDelete() {
-		
+		numObstacles--;
 	}
 	
 	public boolean isAlive() {

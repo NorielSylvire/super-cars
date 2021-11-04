@@ -12,12 +12,12 @@ public class Player extends GameObject{
 	public Player (Game game, int x, int y) {
 		super(game, x, y);
 	}
-	
+	//Ponerlo mas bonito//
 	public void playerUp() {
-		this.y = Utils.clamp(y-1, 0, 2);;
+		this.y = Utils.clamp(y-1, 0, 2);
 	}
 	public void playerDown() {
-		this.y = Utils.clamp(y+1, 0, 2);;
+		this.y = Utils.clamp(y+1, 0, 2);
 	}
 	
 	
