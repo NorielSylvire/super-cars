@@ -13,7 +13,7 @@ public class GameObjectContainer {
 	}
 	
 	public void getObjectInList(int x, int y) {
-		gameobjects.toArray([x][y]);
+		gameobjects.
 	}
 
 }

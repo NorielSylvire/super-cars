@@ -64,9 +64,9 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
-		board[0][game.getLevel().getLength()-game.getLevel().getVisibility()+2] = "|";
-		board[1][game.getLevel().getLength()-game.getLevel().getVisibility()+2] = "|";
-		board[2][game.getLevel().getLength()-game.getLevel().getVisibility()+2] = "|";
+		board[0][game.getLevel().getLength()-game.getVisibility()+2] = "|";
+		board[1][game.getLevel().getLength()-game.getVisibility()+2] = "|";
+		board[2][game.getLevel().getLength()-game.getVisibility()+2] = "|";
 		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
 			board[game.getObstacleList().getObstacles()[i].getPosition()[1]][game.getObstacleList().getObstacles()[i].getPosition()[0]] = "░░░░░";
 		}
@@ -103,12 +103,12 @@ public class GamePrinter {
 
 		for (int y = 0; y < numRows; y++) {
 			str.append(this.margin).append(verticalDelimiter);
-			for (int x = 0; x < game.getLevel().getVisibility(); x++) {
-				if (game.getPlayer().getPos()[0] < game.getLevel().getLength() - game.getLevel().getVisibility()) {
+			for (int x = 0; x < game.getVisibility(); x++) {
+				if (game.getPlayer().getPos()[0] < game.getRoadLength() - game.getVisibility()) {
 					str.append(StringUtils.centre(board[y][x+game.getPlayer().getPos()[0]], CELL_SIZE)).append(verticalDelimiter);
 				}
 				else {
-					str.append(StringUtils.centre(board[y][x+game.getLevel().getLength() - game.getLevel().getVisibility()], CELL_SIZE)).append(verticalDelimiter);
+					str.append(StringUtils.centre(board[y][x+game.getRoadLength() - game.getVisibility()], CELL_SIZE)).append(verticalDelimiter);
 				}
 			}
 			if (y < numRows - 1) {
