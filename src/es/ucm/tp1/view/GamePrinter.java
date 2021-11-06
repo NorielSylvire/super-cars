@@ -1,132 +1,152 @@
 package es.ucm.tp1.view;
 
 import es.ucm.tp1.utils.StringUtils;
+import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 
 public class GamePrinter {
 
-	private static final String SPACE = " ";
+private static final String SPACE = " ";
 
-	private static final String ROAD_BORDER_PATTERN = "═";
+private static final String ROAD_BORDER_PATTERN = "═";
 
-	private static final String LANE_DELIMITER_PATTERN = "—";
+private static final String LANE_DELIMITER_PATTERN = "—";
 
-	private static final int CELL_SIZE = 7;
+private static final int CELL_SIZE = 7;
 
-	private static final int MARGIN_SIZE = 2;
-	
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
+private static final int MARGIN_SIZE = 2;
 
-	private Game game;
 
-	private int numRows;
 
-	private int numCols;
+private Game game;
 
-	private String indentedRoadBorder;
+private int numRows;
 
-	private String indentedLanesSeparator;
+private int numCols;
 
-	private String margin;
+private String indentedRoadBorder;
 
-	private String[][] board = new String[5][100];
-	
-	public GamePrinter(Game game, int cols, int rows) {
-		this.game = game;
-		this.numRows = rows;
-		this.numCols = cols;
-		
+private String indentedLanesSeparator;
 
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numCols; j++) {
-				board[i][j] = "";
-			}
-		}
+private String margin;
 
-		this.margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
+private String[][] board = new String[5][100];
 
-		String roadBorder = ROAD_BORDER_PATTERN + StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * game.getLevel().getVisibility());
-		this.indentedRoadBorder = String.format("%n%s%s%n", margin, roadBorder);
+public GamePrinter(Game game) {
+this.game = game;
 
-		String laneDelimiter = StringUtils.repeat(LANE_DELIMITER_PATTERN, CELL_SIZE);
-		String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, game.getLevel().getVisibility() - 1) + laneDelimiter + SPACE;
+margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 
-		this.indentedLanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
+String roadBorder = ROAD_BORDER_PATTERN
++ StringUtils.repeat(ROAD_BORDER_PATTERN, (CELL_SIZE + 1) * game.getVisibility());
+indentedRoadBorder = String.format("%n%s%s%n", margin, roadBorder);
 
-	}
+String laneDelimiter = StringUtils.repeat(LANE_DELIMITER_PATTERN, CELL_SIZE);
+String lanesSeparator = SPACE + StringUtils.repeat(laneDelimiter + SPACE, game.getVisibility() - 1)
++ laneDelimiter + SPACE;
 
-	private void encodeGame(Game game) {
-		board[0][game.getRoadLength()-game.getVisibility()+2] = "|";
-		board[1][game.getRoadLength()-game.getVisibility()+2] = "|";
-		board[2][game.getRoadLength()-game.getVisibility()+2] = "|";
-		//Esto se haria solo con el GameObjectList??
-		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
-			board[game.getObstacleList().getObstacles()[i].getPosition()[1]][game.getObstacleList().getObstacles()[i].getPosition()[0]] = "░░░░░";
-		}
-		for (int j = 0; j < game.getCoinList().getNumCoins(); j++) {
-			board[game.getCoinList().getCoins()[j].getPosition()[1]][game.getCoinList().getCoins()[j].getPosition()[0]] = "O";
-		}
-		//¿Que hiciste con esta funcion?//
-		int[] pos = game.getPlayer().getPos();
-		if(!game.getPlayer().getDead()) board[pos[1]][pos[0]] = ">";
-		else board[pos[1]][pos[0]] = "░░@░░";
-	}
-	
-	public void clean(int[] pos) {
-		board[pos[1]][pos[0]] = "";
-	}
-	
-	public void clean(int x, int y) {
-		board[x][y] = "";
-	}
+indentedLanesSeparator = String.format("%n%s%s%n", margin, lanesSeparator);
 
-	@Override
-	public String toString() {
-		encodeGame(game);
-		
-		StringBuilder str = new StringBuilder();
+}
 
-		// Game Status
-		str.append(game.getGameStatus());
 
-		// Print game
+protected String getInfo() {
+StringBuilder buffer = new StringBuilder();
+/* @formatter:off */
+buffer
+.append(DISTANCE_MSG).append(game.distanceToGoal()).append(StringUtils.LINE_SEPARATOR)
+.append(COINS_MSG).append(game.playerCoins()).append(StringUtils.LINE_SEPARATOR)
+.append(CYCLE_MSG).append(game.getCycle()).append(StringUtils.LINE_SEPARATOR)
+.append(TOTAL_OBSTACLES_MSG).append(Obstacle.getObstaclesCount()).append(StringUtils.LINE_SEPARATOR)
+.append(TOTAL_COINS_MSG).append(Coin.getCoinsCount());
+/* @formatter:on */
+if (game.getLevel().hasAdvancedObjects()) {
+if (SuperCoin.hasSuperCoin()) {
+buffer.append(SUPERCOIN_PRESENT);
+}
+}
 
-		str.append(indentedRoadBorder);
+if (!game.isTestMode()) {
+/* @formatter:off */
+buffer
+.append(StringUtils.LINE_SEPARATOR)
+.append(ELAPSED_TIME_MSG).append(formatTime(game.elapsedTime()));
+/* @formatter:on */
+}
 
-		String verticalDelimiter = SPACE;
+return buffer.toString();
+}
+@Override
+public String toString() {
+StringBuilder str = new StringBuilder();
 
-		for (int y = 0; y < numRows; y++) {
-			str.append(this.margin).append(verticalDelimiter);
-			for (int x = 0; x < game.getVisibility(); x++) {
-				if (game.getPlayer().getPos()[0] < game.getRoadLength() - game.getVisibility()) {
-					str.append(StringUtils.centre(board[y][x+game.getPlayer().getPos()[0]], CELL_SIZE)).append(verticalDelimiter);
-				}
-				else {
-					str.append(StringUtils.centre(board[y][x+game.getRoadLength() - game.getVisibility()], CELL_SIZE)).append(verticalDelimiter);
-				}
-			}
-			if (y < numRows - 1) {
-				str.append(this.indentedLanesSeparator);
-			}
-		}
-		str.append(this.indentedRoadBorder);
+// Game Status
 
-		return str.toString();
-	}
-	
-	public String[][] getBoard() {
-		return board;
-	}
-	
-	public void setBoard(String[][] newBoard) {
-		this.board = newBoard;
-	}
+str.append(getInfo());
+
+// Paint game
+
+str.append(indentedRoadBorder);
+
+String verticalDelimiter = SPACE;
+
+for (int y = 0; y < game.getRoadWidth(); y++) {
+str.append(this.margin).append(verticalDelimiter);
+for (int x = 0; x < game.getVisibility(); x++) {
+str.append(StringUtils.centre(game.getObjectInPosition(x, y).toString(), CELL_SIZE)).append(verticalDelimiter);
+}
+if (y < game.getRoadWidth() - 1) {
+str.append(this.indentedLanesSeparator);
+}
+}
+str.append(this.indentedRoadBorder);
+
+return str.toString();
+}
+public String endMessage() {
+
+StringBuilder buffer = new StringBuilder(GAME_OVER_MSG);
+
+if (game.isUserExit()) {
+return buffer.append(DO_EXIT_MSG).toString();
+}
+
+if (game.hasArrived()) {
+buffer.append(WIN_MSG);
+if (!game.isTestMode()) {
+if (game.isNewRecord()) {
+buffer.append(NEW_RECORD_MSG).append(formatTime(game.elapsedTime()));
+} else {
+buffer.append(RECORD_MSG).append(formatTime(game.getRecord()));
+}
+}
+} else {
+buffer.append(CRASH_MSG);
+}
+
+return buffer.toString();
+}
+public static String description(Level level) {
+StringBuilder buffer = new StringBuilder("[Car] the racing car");
+/* @formatter:off */
+buffer
+.append(StringUtils.LINE_SEPARATOR).append(Coin.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(Obstacle.INFO);
+/* @formatter:on */
+// Para la parte 2//
+
+if (level.hasAdvancedObjects()) {
+/* @formatter:off */
+buffer
+.append(StringUtils.LINE_SEPARATOR).append(Grenade.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(Wall.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(Turbo.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(SuperCoin.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(Truck.INFO)
+.append(StringUtils.LINE_SEPARATOR).append(Pedestrian.INFO);
+/* @formatter:on */
+}
+
+return buffer.toString();
+}
 }

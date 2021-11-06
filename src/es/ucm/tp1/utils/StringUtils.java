@@ -5,6 +5,10 @@ package es.ucm.tp1.utils;
  * @author Ivan Martinez-Ortiz
  */
 public class StringUtils {
+	
+	public static final String LINE_SEPARATOR = System.lineSeparator();
+
+	public static final String TWO_LINE_SEPARATORS = repeat(LINE_SEPARATOR, 2);
 
 	public static String repeat(char c, int length) {
 		StringBuilder buffer = new StringBuilder();

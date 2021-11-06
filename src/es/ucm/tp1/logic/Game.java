@@ -154,9 +154,10 @@ public class Game {
 	public int getRoadWidth() {
 		return level.getWidth();
 	}
+
 	
-	public Collider  getObjectInPosition(int x, int y) {
-		 return container.getObjectInList(x, y);
-	}
-	
+	public GameObject getObjectInPosition(int x, int y) {
+		return container.getObjectInList(x, y);
+		}
+
 }
