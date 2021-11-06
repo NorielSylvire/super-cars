@@ -11,7 +11,6 @@ import es.ucm.tp1.logic.gameobjects.Obstacle;
 import es.ucm.tp1.logic.gameobjects.Player;
 import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.logic.lists.CoinList;
-import es.ucm.tp1.logic.lists.GameObjectList;
 import es.ucm.tp1.logic.lists.ObstacleList;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -21,7 +20,6 @@ public class Game {
 	private Level level;
 	private int coins;
 	private boolean finished;
-	private GameObjectList gameObjectList;
 	private Player player;
 	private long start;
 	private long finish;

@@ -64,15 +64,17 @@ public class GamePrinter {
 	}
 
 	private void encodeGame(Game game) {
-		board[0][game.getLevel().getLength()-game.getVisibility()+2] = "|";
-		board[1][game.getLevel().getLength()-game.getVisibility()+2] = "|";
-		board[2][game.getLevel().getLength()-game.getVisibility()+2] = "|";
+		board[0][game.getRoadLength()-game.getVisibility()+2] = "|";
+		board[1][game.getRoadLength()-game.getVisibility()+2] = "|";
+		board[2][game.getRoadLength()-game.getVisibility()+2] = "|";
+		//Esto se haria solo con el GameObjectList??
 		for (int i = 0; i < game.getObstacleList().getNumObstacles(); i++) {
 			board[game.getObstacleList().getObstacles()[i].getPosition()[1]][game.getObstacleList().getObstacles()[i].getPosition()[0]] = "░░░░░";
 		}
 		for (int j = 0; j < game.getCoinList().getNumCoins(); j++) {
 			board[game.getCoinList().getCoins()[j].getPosition()[1]][game.getCoinList().getCoins()[j].getPosition()[0]] = "O";
 		}
+		//¿Que hiciste con esta funcion?//
 		int[] pos = game.getPlayer().getPos();
 		if(!game.getPlayer().getDead()) board[pos[1]][pos[0]] = ">";
 		else board[pos[1]][pos[0]] = "░░@░░";
