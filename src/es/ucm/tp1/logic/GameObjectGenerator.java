@@ -8,20 +8,16 @@ import java.util.Random;
 public class GameObjectGenerator {
 	private static Random rnd;
 	
-	public static void generateGameObjects(Game game, Level level) {
-		Player player = new Player(game, 0, 1);
-		game.addGameObject(player);
-		System.out.print("HOLA");
-		
+	public static void generateGameObjects(Game game, Level level) {		
 		rnd = new Random();
 		rnd.setSeed(game.seed());
 		
 		for(int x = game.getVisibility() / 2; x < game.getRoadLength() - game.getVisibility(); x++) {
-		tryToAddObject(new Obstacle(game, x, getRandomLane(level)), level.getObstacleFrequency(), game);
-		tryToAddObject(new Coin(game, x, getRandomLane(level)), level.getCoinFrequency(), game);
+			tryToAddObject(new Obstacle(game, x, getRandomLane(level)), level.getObstacleFrequency(), game);
+			tryToAddObject(new Coin(game, x, getRandomLane(level)), level.getCoinFrequency(), game);
 		}
 	}
-	public static void reset(Level level ) {
+	public static void reset() {
 		Obstacle.reset();
 		Coin.reset();
 	}

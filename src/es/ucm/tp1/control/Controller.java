@@ -2,7 +2,6 @@ package es.ucm.tp1.control;
 
 import java.util.Scanner;
 
-import es.ucm.tp1.control.Command;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -10,18 +9,15 @@ public class Controller {
 
 	private static final String PROMPT = "Command > ";
 	private static final String DEBUG_MSG = "[DEBUG] Executing: %s%n";
+	
 	private Game game;
-
 	private Scanner scanner;
-
 	private GamePrinter printer;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
-
 		this.printer = new GamePrinter(game);
-
 	}
 
 	public void printGame() {

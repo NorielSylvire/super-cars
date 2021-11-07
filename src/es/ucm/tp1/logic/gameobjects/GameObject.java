@@ -11,6 +11,7 @@ public abstract class GameObject implements Collider {
 		this.x = x;
 		this.y = y;
 		this.game = game;
+		onEnter();
 	}
 	
 	protected String getSymbol() {

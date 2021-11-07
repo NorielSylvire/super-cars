@@ -67,10 +67,6 @@ public enum Level {
 	public double getCoinFrequency() {
 		return this.coinFrequency;
 	}
-	
-	public int finishLine() {
-		return length - visibility + 2;
-	}
 
 	public boolean isTestMode() {
 		boolean isTest = false;

@@ -9,8 +9,6 @@ public class InfoCommand extends Command {
 	private static final String SHORTCUT = "i";
 	/* @formatter:off */
 	private static final String HELP = "Gives you some extra information about the game.";
-	private final String INFO_MESSAGE = "\nPlayer:\n  - Alive: >\n  - Crashed: @\nObstacle: ░\nLane separator: -" + 
-			"\nRoad delimiter: =\nFinish Line: |\nCoins: O\n";
 
 
 	public InfoCommand() {
@@ -19,7 +17,7 @@ public class InfoCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		System.out.print(INFO_MESSAGE);
+		game.printInfo();
 		return true;
 	}
 

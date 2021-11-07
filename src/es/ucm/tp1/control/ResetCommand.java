@@ -1,6 +1,9 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.GameObjectGenerator;
+import es.ucm.tp1.logic.gameobjects.Coin;
+import es.ucm.tp1.logic.gameobjects.Obstacle;
 
 public class ResetCommand extends Command {
 	private static final String NAME = "reset";
@@ -15,9 +18,9 @@ public class ResetCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		game.changeLevel();
-		
+		GameObjectGenerator.reset();
 		game.initialiseGame();
-		return false;
+		return true;
 	}
 
 }

@@ -11,11 +11,17 @@ public class MoveDownCommand extends Command {
 	public MoveDownCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
-
+	@Override
+	protected Command parse(String[] commandWords) {
+		if ("movedown".equalsIgnoreCase(commandWords[0])) {
+			commandWords[0] = "NOCOM";
+		}
+		return super.parse(commandWords);
+	}
 	@Override
 	public boolean execute(Game game) {
 		game.movePlayer(false);
-		return false;
+		return true;
 	}
 
 }

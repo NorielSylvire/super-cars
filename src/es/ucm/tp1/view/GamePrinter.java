@@ -22,24 +22,21 @@ public class GamePrinter {
 	public static final String CRASH_MSG =  "The player has crashed!";
 	public static final String NEW_RECORD_MSG =  "You made a new record! Time: ";
 	public static final String RECORD_MSG = "You didn't break the record. Highscore: ";
-	public static final String WIN_MSG = "You have won the game! Horray!";
+	public static final String WIN_MSG = "You have won the game! Hoorray! ";
 	public static final String DISTANCE_MSG = "Distance is: ";
 	public static final String COINS_MSG = "Coins: ";
 	public static final String CYCLE_MSG = "Cycle: ";
 	public static final String TOTAL_OBSTACLES_MSG = "Total Obstacles: ";
 	public static final String TOTAL_COINS_MSG = "Total Coins: ";
-	public static final String ELAPSED_TIME_MSG = "Has passed: ";
-	public static final String GAME_OVER_MSG = "GAME OVER BOOOH";
+	public static final String ELAPSED_TIME_MSG = "Elapsed time: ";
+	public static final String GAME_OVER_MSG = "GAME OVER ";
 
 
 
 	private Game game;
-	private int numRows;
-	private int numCols;
 	private String indentedRoadBorder;
 	private String indentedLanesSeparator;
 	private String margin;
-	private String[][] board = new String[5][100];
 
 	public GamePrinter(Game game) {
 		this.game = game;
@@ -95,7 +92,11 @@ public class GamePrinter {
 		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < game.getVisibility(); x++) {
-			str.append(StringUtils.centre(game.getObjectInPosition(x, y).toString(), CELL_SIZE)).append(verticalDelimiter);
+				if (game.getPlayerY() == y && x == 0) {
+					str.append(StringUtils.centre(game.getPlayerSymbol(), CELL_SIZE)).append(verticalDelimiter);
+				}
+				else if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) str.append(StringUtils.centre(game.getObjectInPosition(x + game.getPlayerX(), y).toString(), CELL_SIZE)).append(verticalDelimiter);
+				else str.append(StringUtils.centre("", CELL_SIZE)).append(verticalDelimiter);
 			}
 			if (y < game.getRoadWidth() - 1) {
 				str.append(this.indentedLanesSeparator);
@@ -150,16 +151,16 @@ public class GamePrinter {
 				}
 			}
 		}
-		buffer.append(seconds).append(" s");
-		if (minutes != 0) {
-			buffer.append(minutes).append(" min");
+		if (days != 0) {
+			buffer.append(days).append(" days ");
 			if(hours != 0) {
-				buffer.append(hours).append(" hours");
-				if (days != 0) {
-					buffer.append(days).append(" days");
+				buffer.append(hours).append(" hours ");
+				if (minutes != 0) {
+					buffer.append(minutes).append(" min ");
 				}
 			}
 		}
+		buffer.append(seconds).append(" s");
 		
 		return buffer.toString();
 	}

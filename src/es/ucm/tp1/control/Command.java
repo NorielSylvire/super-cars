@@ -8,8 +8,8 @@ public abstract class Command {
 	private final String shortcut;
 	private final String details ;
 	private final String help;
-	private static final String UNKNOWN_COMMAND_MSG = "Unknown command.";
-	private static final String INCORRECT_NUMBER_OF_ARGS_MSG = " Incorrect number of parameters.";
+	protected static final String UNKNOWN_COMMAND_MSG = "Unknown command.";
+	protected static final String INCORRECT_NUMBER_OF_ARGS_MSG = " Incorrect number of parameters.";
 	protected static final Command[] AVAILABLE_COMMANDS = {
 		new HelpCommand(),
 		new InfoCommand(),
@@ -17,7 +17,7 @@ public abstract class Command {
 		new ResetCommand(),
 		new MoveUpCommand(),
 		new MoveDownCommand(),
-		new NoneCommand()
+		new UpdateCommand()
 	};
 	protected Game game;
 
@@ -33,6 +33,7 @@ public abstract class Command {
 		for(int i = 0; i < 7; i++) {
 			if (AVAILABLE_COMMANDS[i].parse(commandWords) != null) return AVAILABLE_COMMANDS[i].parse(commandWords);
 		}
+		System.out.println(UNKNOWN_COMMAND_MSG);
 		return null;
 	}
 	

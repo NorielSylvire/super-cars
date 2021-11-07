@@ -20,7 +20,6 @@ public class Game {
 	private boolean finished;
 	private Player player;
 	private long start;
-	private long finish;
 	private long record;
 	private boolean isExit;
 	private GamePrinter gamePrinter;
@@ -36,24 +35,24 @@ public class Game {
 	}
 	
 	public void initialiseGame() {
-		coins = 0;
-		cycles = 0;
+		this.coins = 0;
+		this.cycles = 0;
+		this.player = new Player(this, 0, getRoadWidth()/2);
+		this.container = new GameObjectContainer();
 		GameObjectGenerator.generateGameObjects(this, level);
-		start = System.currentTimeMillis();
+		this.start = System.currentTimeMillis();
 	}
 	
 	public void changeLevel() {
-			String inputString;
-			
-			System.out.print("Choose a difficulty: ");
-			Scanner s;
-			s = new Scanner(System.in);
-			inputString = s.nextLine();
-			level = level.valueOfIgnoreCase(inputString);
-			System.out.print("\nChoose a seed: ");
-			seed = s.nextLong();
-			System.out.println();
-			s.close();
+		String inputString;
+		System.out.print("Choose a difficulty: ");
+		Scanner s;
+		s = new Scanner(System.in);
+		inputString = s.nextLine();
+		level = level.valueOfIgnoreCase(inputString);
+		System.out.print("Choose a seed: ");
+		seed = s.nextLong();
+		System.out.println();
 	}
 	
 	public void addCoins() {
@@ -74,6 +73,18 @@ public class Game {
 		player.update();
 	}
 	
+	public int getPlayerY() {
+		return player.getY();
+	}
+	
+	public int getPlayerX() {
+		return player.getX();
+	}
+	
+	public String getPlayerSymbol() {
+		return player.toString();
+	}
+	
 	public int getVisibility() {
 		return level.getVisibility();
 	}
@@ -90,8 +101,8 @@ public class Game {
 		return container.getObjectInList(x, y);
 	}
 	
-	public void addGameObject(GameObject go) {
-		container.addObject(go);
+	public void addGameObject(GameObject gameObject) {
+		container.addObject(gameObject);
 	}
 	
 	public long seed() {
@@ -102,7 +113,7 @@ public class Game {
 		return this.record;
 	}
 	public long elapsedTime() {
-		return finish-start;
+		return System.currentTimeMillis()-start;
 	}
 	public boolean isNewRecord(long timeElapsed) {
 		boolean isRecord = false;
@@ -128,7 +139,7 @@ public class Game {
 		return !player.isAlive();
 	}
 	public int distanceToGoal() {
-		return player.distanceToGoal(level);
+		return level.getLength() - player.getX();
 	}
 	public int playerCoins() {
 		return coins;
@@ -138,5 +149,9 @@ public class Game {
 	}
 	public boolean isFinished() {
 		return (isUserExit() || hasArrived() || hasCrashed());
+	}
+
+	public void printInfo() {
+		System.out.println(GamePrinter.description(level));
 	}
 }
