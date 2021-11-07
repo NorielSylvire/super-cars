@@ -48,8 +48,14 @@ public class Coin extends GameObject{
 	public boolean doCollision() {
 		return false;
 	}
+
+	private void addCoins(Game game) {
+		game.addCoins();
+	}
 	
 	public boolean receiveCollision(Player player) {
-		return false;
+		addCoins(game);
+		onDelete();
+		return true;
 	}
 }

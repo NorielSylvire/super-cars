@@ -12,7 +12,7 @@ public class Obstacle extends GameObject {
 	
 	public void onEnter() {
 		numObstacles++;
-		this.symbol = "░";
+		this.symbol = "░░░░░";
 	}
 	
 	public static int getObstaclesCount(){
@@ -48,7 +48,8 @@ public class Obstacle extends GameObject {
 	}
 	
 	public boolean receiveCollision(Player player) {
-		return false;
+		player.onDelete();
+		return true;
 	}
 	
 }

@@ -116,7 +116,7 @@ public class GamePrinter {
 		if (game.hasArrived()) {
 			buffer.append(WIN_MSG);
 			if (!game.isTestMode()) {
-				if (game.isNewRecord()) {
+				if (game.isNewRecord(game.elapsedTime())) {
 					buffer.append(NEW_RECORD_MSG).append(formatTime(game.elapsedTime()));
 				} 
 				else {

@@ -49,9 +49,7 @@ public class SuperCars {
 					System.out.println("Level: " + level.name());
 					System.out.println(SEED_INFO_MSG + seed);
 
-					Game game = new Game(seed, level); 
-					if( Level.TEST.equals(level))
-						game.toggleTest();
+					Game game = new Game(seed, level);
 					
 					Controller controller = new Controller(game, new Scanner(System.in));
 					controller.run();

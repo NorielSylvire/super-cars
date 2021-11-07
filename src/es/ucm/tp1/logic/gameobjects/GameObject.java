@@ -8,9 +8,9 @@ public abstract class GameObject implements Collider {
 	protected boolean alive;
 	
 	public GameObject(Game game, int x, int y) {
-		this. x = x;
-		this. y = y;
-		this. game = game;
+		this.x = x;
+		this.y = y;
+		this.game = game;
 	}
 	
 	protected String getSymbol() {

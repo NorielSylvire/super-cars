@@ -7,8 +7,8 @@ import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
 	
-	public Player (Game game, int x, int y) {
-		super(game, x, y);
+	public Player (Game game2, int x2, int y2) {
+		super(game2, x2, y2);
 	}
 	//Ponerlo mas bonito//
 	public void playerUp() {
@@ -31,10 +31,12 @@ public class Player extends GameObject{
 	public void onEnter() {
 		this.x = 0;
 		this.y = 1;
+		this.symbol = ">";
 		this.alive = true;
 	}
 	
 	public void onDelete() {
+		this.symbol = "@";
 		this.alive = false;	
 	}
 	
@@ -45,7 +47,7 @@ public class Player extends GameObject{
 	public boolean doCollision() {
 		Collider other = game.getObjectInPosition(x, y);
 		if (other != null) {
-		return other.receiveCollision (this);
+		return other.receiveCollision(this);
 		}
 		return false;
 	}

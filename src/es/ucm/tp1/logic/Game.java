@@ -1,8 +1,6 @@
 package es.ucm.tp1.logic;
 
-import java.util.Random;
 import java.util.Scanner;
-
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.Coin;
 import es.ucm.tp1.logic.gameobjects.Collider;
@@ -25,7 +23,6 @@ public class Game {
 	private long finish;
 	private long record;
 	private boolean isExit;
-	private Random rnd;
 	private GamePrinter gamePrinter;
 	private GameObjectContainer container;
 	
@@ -33,66 +30,16 @@ public class Game {
 		this.seed = seed;
 		this.level = level;
 		this.coins = 0;
-		//this.player = new Player();
 		this.isExit = false;
 		this.record = 0;
 		this.gamePrinter = new GamePrinter(this);
 	}
 	
-	public StringBuilder getGameStatus() {
-		StringBuilder gameStatus = new StringBuilder();
-		
-		gameStatus.append("Level: ");
-		gameStatus.append(level.name());
-		
-		gameStatus.append("\nSeed: ");
-		gameStatus.append(seed);
-		
-		gameStatus.append("\nCoins: ");
-		gameStatus.append(coins);
-		
-		//BUMP
-		gameStatus.append("\nTotal obstacles: ");
-		//gameStatus.append(obstacleList.getNumObstacles());
-		
-		gameStatus.append("\nTotal coins: ");
-		//gameStatus.append(coinList.getNumCoins());
-		
-		gameStatus.append("\nCycles: ");
-		gameStatus.append(cycles);
-
-		gameStatus.append("\nTime Elapsed: ");
-		finish = System.currentTimeMillis();
-		gameStatus.append(finish - start);
-		gameStatus.append(" ms");
-		
-		return gameStatus;
-		
-	}
-	
 	public void initialiseGame() {
 		coins = 0;
-		rnd = new Random();
-		rnd.setSeed(seed);
-		String[][] s = new String[5][100];
-		for(int i= 0; i< 100; i++ ) {
-			for(int j=0; j<5; j++) {
-				s[j][i] = "";
-			}
-		}
-		GameObjectGenerator.generateGameObjects(this, level);
-		gamePrinter.setBoard(s);
 		cycles = 0;
+		GameObjectGenerator.generateGameObjects(this, level);
 		start = System.currentTimeMillis();
-	}
-	
-
-	
-	public void tryToAddObject(GameObject gameobject,  double frequency) {
-		if (rnd.nextDouble() <= frequency) {
-			//gameobjectlist ADD//
-			//gameobject en el if//
-		}
 	}
 	
 	public void changeLevel() {
@@ -107,13 +54,6 @@ public class Game {
 			seed = s.nextLong();
 			System.out.println();
 			s.close();
-	}
-	
-	//BUMP Can we do level.getWidth()
-	public int getRandomLane() {
-		int ret = rnd.nextInt() % level.getWidth();
-		if (ret < 0) ret = - ret;
-		return ret;
 	}
 	
 	public void addCoins() {
@@ -148,6 +88,14 @@ public class Game {
 	
 	public GameObject getObjectInPosition(int x, int y) {
 		return container.getObjectInList(x, y);
+	}
+	
+	public void addGameObject(GameObject go) {
+		container.addObject(go);
+	}
+	
+	public long seed() {
+		return this.seed;
 	}
 	
 	public long getRecord() {
