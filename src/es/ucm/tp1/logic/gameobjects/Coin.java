@@ -5,13 +5,16 @@ import es.ucm.tp1.logic.Game;
 public class Coin extends GameObject{
 	
 	private static int numCoins;
-	
-	//Collisiones para mas tarde//
+	public static final String INFO = "[C]oins, objects to collect";
+
 	
 	public Coin (Game game, int x, int y) {
 		super(game, x, y);
 	}
 	
+	public static int getCoinsCount() {
+		return numCoins;
+	}
 	
 	public void onEnter() {
 		increaseNumCoins();

@@ -35,7 +35,7 @@ public class Game {
 		//this.player = new Player();
 		this.test = false;
 		//BUMP
-		this.gamePrinter = new GamePrinter(this, level.getLength(), level.getWidth());
+		this.gamePrinter = new GamePrinter(this);
 	}
 	
 	public void toggleTest() {
@@ -159,5 +159,37 @@ public class Game {
 	public GameObject getObjectInPosition(int x, int y) {
 		return container.getObjectInList(x, y);
 		}
-
+	
+	//NUEVAS FUNCIONES 
+	
+	
+	public void getRecord() {
+	}
+	
+	public void elapsedTime() {
+	}
+	public boolean isNewRecord() {
+		return true;
+	}
+	public boolean isTestMode(){
+		return true;
+	}
+	public boolean hasArrived() {
+		return true;
+	}
+	public boolean isUserExit() {
+		return true;
+	}
+	public int distanceToGoal() {
+		return 9;
+	}
+	public int playerCoins() {
+		return coins;
+	}
+	public int getCycle() {
+		return cycles;
+	}
+	public boolean isFinished() {
+		return true;
+	}
 }

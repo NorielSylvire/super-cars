@@ -4,6 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class Obstacle extends GameObject {
 	private static int numObstacles;
+	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
 	
 	public Obstacle (Game game, int x, int y) {
 		super(game, x, y);
@@ -11,6 +12,10 @@ public class Obstacle extends GameObject {
 	
 	public void onEnter() {
 		numObstacles++;
+	}
+	
+	public static int getObstaclesCount(){
+		return numObstacles;
 	}
 	
 	public void update() {
