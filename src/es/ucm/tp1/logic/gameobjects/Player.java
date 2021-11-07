@@ -7,8 +7,6 @@ import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
 	
-	private boolean alive;
-	
 	public Player (Game game, int x, int y) {
 		super(game, x, y);
 	}
@@ -25,9 +23,9 @@ public class Player extends GameObject{
 		this.x++;
 		game.nextCycle();
 	}
-	
-	public boolean isPlayerOut(Level level) {
-		return (x == level.getLength()-level.getVisibility()+2 || !isAlive());
+
+	public boolean hasArrived(Level level) {
+		return x == level.finishLine();
 	}
 	
 	public void onEnter() {
@@ -41,7 +39,7 @@ public class Player extends GameObject{
 	}
 	
 	public boolean isAlive() {
-		return alive;
+		return this.alive;
 	}
 	
 	public boolean doCollision() {
@@ -54,6 +52,9 @@ public class Player extends GameObject{
 
 	public boolean receiveCollision(Player player) {
 		return false;
+	}
+	public int distanceToGoal(Level level) {
+		return level.finishLine() - x;
 	}
 	
 }

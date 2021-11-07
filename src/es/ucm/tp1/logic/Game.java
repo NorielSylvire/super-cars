@@ -23,7 +23,8 @@ public class Game {
 	private Player player;
 	private long start;
 	private long finish;
-	private boolean test;
+	private long record;
+	private boolean isExit;
 	private Random rnd;
 	private GamePrinter gamePrinter;
 	private GameObjectContainer container;
@@ -33,16 +34,9 @@ public class Game {
 		this.level = level;
 		this.coins = 0;
 		//this.player = new Player();
-		this.test = false;
-		//BUMP
+		this.isExit = false;
+		this.record = 0;
 		this.gamePrinter = new GamePrinter(this);
-	}
-	
-	public void toggleTest() {
-		this.test = !this.test;
-		
-		if(test) coins = 0;
-		else start = System.currentTimeMillis();
 	}
 	
 	public StringBuilder getGameStatus() {
@@ -67,19 +61,16 @@ public class Game {
 		gameStatus.append("\nCycles: ");
 		gameStatus.append(cycles);
 
-		if (!this.test) {
-			gameStatus.append("\nTime Elapsed: ");
-			finish = System.currentTimeMillis();
-			gameStatus.append(finish - start);
-			gameStatus.append(" ms");
-		}
+		gameStatus.append("\nTime Elapsed: ");
+		finish = System.currentTimeMillis();
+		gameStatus.append(finish - start);
+		gameStatus.append(" ms");
 		
 		return gameStatus;
 		
 	}
 	
 	public void initialiseGame() {
-		if(level.name().equalsIgnoreCase("test")) test=true;
 		coins = 0;
 		rnd = new Random();
 		rnd.setSeed(seed);
@@ -154,34 +145,42 @@ public class Game {
 	public int getRoadWidth() {
 		return level.getWidth();
 	}
-
 	
 	public GameObject getObjectInPosition(int x, int y) {
 		return container.getObjectInList(x, y);
+	}
+	
+	public long getRecord() {
+		return this.record;
+	}
+	public long elapsedTime() {
+		return finish-start;
+	}
+	public boolean isNewRecord(long timeElapsed) {
+		boolean isRecord = false;
+		if(timeElapsed < this.record) {
+			this.record = timeElapsed;
+			isRecord = true;
 		}
-	
-	//NUEVAS FUNCIONES 
-	
-	
-	public void getRecord() {
-	}
-	
-	public void elapsedTime() {
-	}
-	public boolean isNewRecord() {
-		return true;
+		return isRecord;
 	}
 	public boolean isTestMode(){
-		return true;
+		return level.isTestMode();
 	}
 	public boolean hasArrived() {
-		return true;
+		return player.hasArrived(level);
 	}
 	public boolean isUserExit() {
-		return true;
+		return isExit;
+	}
+	public void toggleExit() {
+		this.isExit = !this.isExit;
+	}
+	public boolean hasCrashed() {
+		return !player.isAlive();
 	}
 	public int distanceToGoal() {
-		return 9;
+		return player.distanceToGoal(level);
 	}
 	public int playerCoins() {
 		return coins;
@@ -190,6 +189,6 @@ public class Game {
 		return cycles;
 	}
 	public boolean isFinished() {
-		return true;
+		return (isUserExit() || hasArrived() || hasCrashed());
 	}
 }

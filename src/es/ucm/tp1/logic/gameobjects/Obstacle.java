@@ -12,6 +12,7 @@ public class Obstacle extends GameObject {
 	
 	public void onEnter() {
 		numObstacles++;
+		this.symbol = "░";
 	}
 	
 	public static int getObstaclesCount(){

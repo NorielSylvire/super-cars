@@ -17,17 +17,20 @@ public class Coin extends GameObject{
 	}
 	
 	public void onEnter() {
+		this.alive = true;
 		increaseNumCoins();
+		this.symbol = "O";
 	}
 	
 	public void update() {}
 	
 	public void onDelete() {
 		decreaseNumCoins();
+		this.alive = false;
 	}
 	
 	public boolean isAlive() {
-		return true;
+		return this.alive;
 	}
 	
 	public static void increaseNumCoins() {
