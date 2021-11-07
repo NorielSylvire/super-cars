@@ -95,7 +95,12 @@ public class GamePrinter {
 				if (game.getPlayerY() == y && x == 0) {
 					str.append(StringUtils.centre(game.getPlayerSymbol(), CELL_SIZE)).append(verticalDelimiter);
 				}
-				else if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) str.append(StringUtils.centre(game.getObjectInPosition(x + game.getPlayerX(), y).toString(), CELL_SIZE)).append(verticalDelimiter);
+				else if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
+					str.append(StringUtils.centre(game.getObjectInPosition(x + game.getPlayerX(), y).toString(), CELL_SIZE)).append(verticalDelimiter);
+				}
+				else if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
+						str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
+				}
 				else str.append(StringUtils.centre("", CELL_SIZE)).append(verticalDelimiter);
 			}
 			if (y < game.getRoadWidth() - 1) {

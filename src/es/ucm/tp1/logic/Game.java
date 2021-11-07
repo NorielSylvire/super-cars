@@ -2,14 +2,8 @@ package es.ucm.tp1.logic;
 
 import java.util.Scanner;
 import es.ucm.tp1.control.Level;
-import es.ucm.tp1.logic.gameobjects.Coin;
-import es.ucm.tp1.logic.gameobjects.Collider;
-import es.ucm.tp1.logic.gameobjects.GameObject;
-import es.ucm.tp1.logic.gameobjects.Obstacle;
-import es.ucm.tp1.logic.gameobjects.Player;
+import es.ucm.tp1.logic.gameobjects.*;
 import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
-import es.ucm.tp1.logic.lists.CoinList;
-import es.ucm.tp1.logic.lists.ObstacleList;
 import es.ucm.tp1.view.GamePrinter;
 
 public class Game {

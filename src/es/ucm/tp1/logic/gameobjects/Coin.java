@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class Coin extends GameObject{
 	
-	private static int numCoins;
+	private static int numCoins = 0;
 	public static final String INFO = "[C]oins, objects to collect";
 
 	

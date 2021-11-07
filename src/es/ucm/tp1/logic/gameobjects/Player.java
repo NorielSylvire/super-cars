@@ -9,6 +9,7 @@ public class Player extends GameObject{
 	
 	public Player (Game game, int x, int y) {
 		super(game, x, y);
+		onEnter();
 	}
 	//Ponerlo mas bonito//
 	public void playerUp() {

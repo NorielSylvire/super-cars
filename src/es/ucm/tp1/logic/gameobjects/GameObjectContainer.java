@@ -13,6 +13,7 @@ public class GameObjectContainer {
 	}
 	
 	public void addObject(GameObject go) {
+		go.onEnter();
 		gameobjects.add(go);
 	}
 	
