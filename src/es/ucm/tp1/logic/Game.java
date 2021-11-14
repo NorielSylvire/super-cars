@@ -53,11 +53,16 @@ public class Game {
 		this.coins++;
 	}
 	
+	public void removeDead() {
+		container.removeDead();
+	}
+	
 	public void nextCycle() {
 		this.cycles++;
 	}
 	
 	public void update() {
+		nextCycle();
 		this.player.update();
 	}
 	

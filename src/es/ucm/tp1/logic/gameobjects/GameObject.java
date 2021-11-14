@@ -6,11 +6,13 @@ public abstract class GameObject implements Collider {
 	protected Game game;
 	protected String symbol;
 	protected boolean alive;
+	protected int health;
 	
 	public GameObject(Game game, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.game = game;
+		this.health = 1;
 	}
 	
 	protected String getSymbol() {
@@ -35,7 +37,10 @@ public abstract class GameObject implements Collider {
 	
 	public abstract void onDelete();
 	
-	public abstract boolean isAlive();
+	public boolean isAlive() {
+		if(health == 0) this.alive = false;
+		return this.alive;
+	}
 	
 	public String toString() {
 		if(isAlive()) {

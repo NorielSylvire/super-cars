@@ -22,6 +22,7 @@ public class UpdateCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		game.update();
+		game.removeDead();
 		return true;
 	}
 	

@@ -22,7 +22,6 @@ public class Player extends GameObject{
 	
 	public void update() {
 		this.x++;
-		game.nextCycle();
 		doCollision();
 	}
 
