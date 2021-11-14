@@ -5,7 +5,6 @@ import es.ucm.tp1.logic.Game;
 public class Wall extends GameObject {
 	private static int numWalls;
 	public static final String INFO = "[W]all, if the car crush with him the Game ENDS";
-	private static int life = 3;
 	
 	public Wall (Game game, int x, int y) {
 		super(game, x, y);
@@ -13,19 +12,18 @@ public class Wall extends GameObject {
 	
 	public void onEnter() {
 		numWalls++;
-		this.symbol = "█";
+		this.health = 3;
 	}
 	public void showLife() {
-		if(life == 3) {
+		if(health == 3) {
 			this.symbol = "█";
 		}
-		if(life == 2) {
+		if(health == 2) {
 			this.symbol = "▒";
 		}
-		if(life == 1) {
+		if(health == 1) {
 			this.symbol = "░";
 		}
-		
 	}
 	public static int getObstaclesCount(){
 		return numWalls;

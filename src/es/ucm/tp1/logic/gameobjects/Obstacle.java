@@ -12,11 +12,18 @@ public class Obstacle extends GameObject {
 	
 	public void onEnter() {
 		numObstacles++;
-		this.symbol = "░░░░░";
+		this.symbol = "░";
+		this.health = 1;
 	}
 	
 	public static int getObstaclesCount(){
 		return numObstacles;
+	}
+	
+	public void showLife() {
+		if(isAlive()) {
+			this.symbol = "░";
+		}
 	}
 	
 	public void update() {

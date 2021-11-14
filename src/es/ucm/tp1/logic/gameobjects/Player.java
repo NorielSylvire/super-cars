@@ -19,6 +19,10 @@ public class Player extends GameObject{
 		this.y = Utils.clamp(y+1, 0, 2);
 	}
 	
+	public void showLife() {
+		if(isAlive()) this.symbol = ">";
+		else this.symbol = "@";
+	}
 	
 	public void update() {
 		this.x++;
@@ -30,17 +34,11 @@ public class Player extends GameObject{
 	}
 	
 	public void onEnter() {
-		this.symbol = ">";
 		this.alive = true;
 	}
 	
 	public void onDelete() {
-		this.symbol = "@";
 		this.alive = false;	
-	}
-	
-	public boolean isAlive() {
-		return this.alive;
 	}
 	
 	public boolean doCollision() {

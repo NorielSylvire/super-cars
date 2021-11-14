@@ -37,6 +37,8 @@ public abstract class GameObject implements Collider {
 	
 	public abstract void onDelete();
 	
+	public abstract void showLife();
+	
 	public boolean isAlive() {
 		if(health == 0) this.alive = false;
 		return this.alive;
