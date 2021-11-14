@@ -56,4 +56,8 @@ public class Player extends GameObject{
 	public String toString() {
 		return getSymbol();
 	}
+	
+	public void shoot() {
+		
+	}
 }

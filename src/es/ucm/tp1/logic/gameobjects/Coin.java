@@ -22,6 +22,11 @@ public class Coin extends GameObject{
 		this.symbol = "O";
 	}
 	
+	public void showLife() {
+		if(isAlive()) this.symbol = "O";
+		else this.symbol = "";
+	}
+	
 	public void update() {}
 	
 	public void onDelete() {

@@ -6,7 +6,7 @@ public class MoveDownCommand extends Command {
 	private static final String NAME = "movedown";
 	private static final String DETAILS = "[a]";
 	private static final String SHORTCUT = "a";
-	private static final String HELP = "Games the player move down if possible.";
+	private static final String HELP = "Makes the player move down if possible.";
 
 	public MoveDownCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);

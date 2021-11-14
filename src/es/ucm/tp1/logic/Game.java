@@ -157,4 +157,8 @@ public class Game {
 	public void addSuperCoins() {
 		this.coins += 100;
 	}
+
+	public void shoot() {
+		player.shoot();
+	}
 }
