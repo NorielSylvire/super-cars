@@ -17,7 +17,7 @@ public abstract class Command {
 		new ResetCommand(),
 		new MoveUpCommand(),
 		new MoveDownCommand(),
-		new UpdateCommand()
+		new UpdateCommand(),
 	};
 	protected Game game;
 
