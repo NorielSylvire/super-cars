@@ -7,16 +7,24 @@ import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
 	
+	private boolean immune;
+	
 	public Player (Game game, int x, int y) {
 		super(game, x, y);
 		onEnter();
 	}
-	//Ponerlo mas bonito//
+	
 	public void playerUp() {
 		this.y = Utils.clamp(y-1, 0, 2);
 	}
+	
 	public void playerDown() {
 		this.y = Utils.clamp(y+1, 0, 2);
+	}
+
+	public void turboAdvance() {
+		this.x += 3;
+		this.immune = true;
 	}
 	
 	public void showLife() {
@@ -26,7 +34,8 @@ public class Player extends GameObject{
 	
 	public void update() {
 		this.x++;
-		doCollision();
+		if(!this.immune) doCollision();
+		else this.immune = false;
 	}
 
 	public boolean hasArrived(Level level) {
@@ -34,6 +43,7 @@ public class Player extends GameObject{
 	}
 	
 	public void onEnter() {
+		this.immune = true;
 	}
 	
 	public void onDelete() {

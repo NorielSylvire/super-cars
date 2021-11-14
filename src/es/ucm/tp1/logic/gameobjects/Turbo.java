@@ -12,7 +12,6 @@ public class Turbo extends GameObject {
 	
 	public void onEnter() {
 		showLife();
-		this.symbol = ">>>";
 	}
 	
 	public static int getObstaclesCount(){
@@ -32,7 +31,7 @@ public class Turbo extends GameObject {
 	}
 	
 	public void onDelete() {
-		numObstacles--;
+		showLife();
 	}
 	
 	public boolean isAlive() {
@@ -44,6 +43,7 @@ public class Turbo extends GameObject {
 	}
 	
 	public boolean receiveCollision(Player player) {
+		player.turboAdvance();
 		player.onDelete();
 		return true;
 	}

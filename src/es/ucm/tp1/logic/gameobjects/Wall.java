@@ -25,6 +25,7 @@ public class Wall extends GameObject {
 		if(health == 1) {
 			this.symbol = "░";
 		}
+		else this.symbol = "";
 	}
 	public static int getObstaclesCount(){
 		return numWalls;
@@ -37,6 +38,7 @@ public class Wall extends GameObject {
 	public void onDelete() {
 		numWalls--;
 		showLife();
+		game.addCoins(5);
 	}
 	
 	public boolean isAlive() {

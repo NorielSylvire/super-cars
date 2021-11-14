@@ -39,7 +39,7 @@ public class SuperCoin extends GameObject{
 	}
 	
 	public boolean receiveCollision(Player player) {
-		game.addSuperCoins();
+		game.addCoins(1000);
 		onDelete();
 		return true;
 	}

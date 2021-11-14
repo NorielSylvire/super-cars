@@ -50,8 +50,8 @@ public class Game {
 		System.out.println();
 	}
 	
-	public void addCoins() {
-		this.coins++;
+	public void addCoins(int num) {
+		this.coins+= num;
 	}
 	
 	public void removeDead() {
@@ -154,13 +154,10 @@ public class Game {
 	public void printInfo() {
 		System.out.println(GamePrinter.description(level));
 	}
-	
-	public void addSuperCoins() {
-		this.coins += 1000;
-	}
 
 	public void shoot() {
 		player.shoot();
+		coins--;
 	}
 
 	public void toggleSCoinIsPresent() {
