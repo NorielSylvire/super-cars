@@ -148,4 +148,8 @@ public class Game {
 	public void printInfo() {
 		System.out.println(GamePrinter.description(level));
 	}
+	
+	public void addSuperCoins() {
+		this.coins += 100;
+	}
 }
