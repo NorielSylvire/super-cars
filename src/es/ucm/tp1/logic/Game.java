@@ -105,6 +105,10 @@ public class Game {
 		container.addObject(gameObject);
 	}
 	
+	public void removeAllObjects() {
+		container.reset();
+	}
+	
 	public long seed() {
 		return this.seed;
 	}

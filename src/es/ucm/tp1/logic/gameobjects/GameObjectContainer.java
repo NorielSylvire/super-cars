@@ -38,5 +38,8 @@ public class GameObjectContainer {
 		}
 	}
 	
+	public void reset() {
+		gameobjects.removeAll(gameobjects);
+	}
 	
 }
