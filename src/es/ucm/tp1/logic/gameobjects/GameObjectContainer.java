@@ -29,6 +29,14 @@ public class GameObjectContainer {
 		}
 		return null;
 	}
+
+	public void removeDead() {
+		for(int i= 0; i<gameobjects.size();i++) {
+			if(!gameobjects.get(i).isAlive()) {
+				gameobjects.remove(i);
+			}
+		}
+	}
 	
 	
 }

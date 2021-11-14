@@ -3,8 +3,8 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 
 public class Wall extends GameObject {
-	private static int numObstacles;
-	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
+	private static int numWalls;
+	public static final String INFO = "[W]all, if the car crush with him the Game ENDS";
 	private static int life = 3;
 	
 	public Wall (Game game, int x, int y) {
@@ -12,7 +12,7 @@ public class Wall extends GameObject {
 	}
 	
 	public void onEnter() {
-		numObstacles++;
+		numWalls++;
 		this.symbol = "█";
 	}
 	public void showLife() {
@@ -28,7 +28,7 @@ public class Wall extends GameObject {
 		
 	}
 	public static int getObstaclesCount(){
-		return numObstacles;
+		return numWalls;
 	}
 	
 	public void update() {
@@ -36,23 +36,15 @@ public class Wall extends GameObject {
 	}
 	
 	public void onDelete() {
-		numObstacles--;
+		numWalls--;
 	}
 	
 	public boolean isAlive() {
 		return true;
 	}
 	
-	public static void increaseNumObstacles() {
-		numObstacles++;
-	}
-	
-	public static void decreaseNumObstacles() {
-		numObstacles--;
-	}
-	
 	public static void reset() {
-		numObstacles = 0;
+		numWalls = 0;
 	}
 	
 	public boolean doCollision() {
