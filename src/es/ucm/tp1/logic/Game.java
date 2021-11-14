@@ -11,7 +11,7 @@ public class Game {
 	private int cycles;
 	private Level level;
 	private int coins;
-	private boolean finished;
+	private boolean superCoinIsPresent;
 	private Player player;
 	private long start;
 	private long record;
@@ -26,6 +26,7 @@ public class Game {
 		this.isExit = false;
 		this.record = 0;
 		this.gamePrinter = new GamePrinter(this);
+		this.superCoinIsPresent = false;
 	}
 	
 	public void initialiseGame() {
@@ -155,10 +156,18 @@ public class Game {
 	}
 	
 	public void addSuperCoins() {
-		this.coins += 100;
+		this.coins += 1000;
 	}
 
 	public void shoot() {
 		player.shoot();
+	}
+
+	public void toggleSCoinIsPresent() {
+		this.superCoinIsPresent = !this.superCoinIsPresent;
+	}
+	
+	public boolean isSuperCoinPresent() {
+		return superCoinIsPresent;
 	}
 }

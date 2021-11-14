@@ -34,7 +34,6 @@ public class Player extends GameObject{
 	}
 	
 	public void onEnter() {
-		this.alive = true;
 	}
 	
 	public void onDelete() {
@@ -58,6 +57,19 @@ public class Player extends GameObject{
 	}
 	
 	public void shoot() {
-		
+		Collider other;
+		for (int i = 0; i < game.getVisibility(); i++) {
+			other = game.getObjectInPosition(x+i, y);
+			if (other != null) {
+				if(other.receiveShoot()) {
+					break;
+				}
+			}
+		}
+	}
+	
+	@Override
+	public boolean receiveShoot() {
+		return false;
 	}
 }

@@ -5,6 +5,7 @@ import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.Coin;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
+import es.ucm.tp1.logic.gameobjects.SuperCoin;
 
 public class GamePrinter {
 
@@ -30,6 +31,7 @@ public class GamePrinter {
 	public static final String TOTAL_COINS_MSG = "Total Coins: ";
 	public static final String ELAPSED_TIME_MSG = "Elapsed time: ";
 	public static final String GAME_OVER_MSG = "GAME OVER ";
+	public static final String SUPERCOIN_IS_PRESENT_MSG = "Super coin is present.";
 
 
 
@@ -63,7 +65,11 @@ public class GamePrinter {
 		.append(COINS_MSG).append(game.playerCoins()).append(StringUtils.LINE_SEPARATOR)
 		.append(CYCLE_MSG).append(game.getCycle()).append(StringUtils.LINE_SEPARATOR)
 		.append(TOTAL_OBSTACLES_MSG).append(Obstacle.getObstaclesCount()).append(StringUtils.LINE_SEPARATOR)
-		.append(TOTAL_COINS_MSG).append(Coin.getCoinsCount());
+		.append(TOTAL_COINS_MSG).append(Coin.getCoinsCount()).append(StringUtils.LINE_SEPARATOR);
+		
+		if(game.isSuperCoinPresent()) {
+			buffer.append(SUPERCOIN_IS_PRESENT_MSG).append(StringUtils.LINE_SEPARATOR);
+		}
 		/* @formatter:on */
 		
 		if (!game.isTestMode()) {

@@ -12,6 +12,7 @@ public class Wall extends GameObject {
 	
 	public void onEnter() {
 		numWalls++;
+		showLife();
 		this.health = 3;
 	}
 	public void showLife() {
@@ -35,6 +36,7 @@ public class Wall extends GameObject {
 	
 	public void onDelete() {
 		numWalls--;
+		showLife();
 	}
 	
 	public boolean isAlive() {
@@ -52,6 +54,12 @@ public class Wall extends GameObject {
 	public boolean receiveCollision(Player player) {
 		player.onDelete();
 		//añadir 5 coins al player;
+		return true;
+	}
+
+	@Override
+	public boolean receiveShoot() {
+		this.health--;
 		return true;
 	}
 	

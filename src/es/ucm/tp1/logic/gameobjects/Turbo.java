@@ -11,12 +11,20 @@ public class Turbo extends GameObject {
 	}
 	
 	public void onEnter() {
-		numObstacles++;
+		showLife();
 		this.symbol = ">>>";
 	}
 	
 	public static int getObstaclesCount(){
 		return numObstacles;
+	}
+
+	@Override
+	public void showLife() {
+		if (isAlive()) {
+			this.symbol = ">>>";
+		}
+		else this.symbol = "";
 	}
 	
 	public void update() {
@@ -31,18 +39,6 @@ public class Turbo extends GameObject {
 		return true;
 	}
 	
-	public static void increaseNumObstacles() {
-		numObstacles++;
-	}
-	
-	public static void decreaseNumObstacles() {
-		numObstacles--;
-	}
-	
-	public static void reset() {
-		numObstacles = 0;
-	}
-	
 	public boolean doCollision() {
 		return false;
 	}
@@ -50,6 +46,11 @@ public class Turbo extends GameObject {
 	public boolean receiveCollision(Player player) {
 		player.onDelete();
 		return true;
+	}
+
+	@Override
+	public boolean receiveShoot() {
+		return false;
 	}
 	
 }

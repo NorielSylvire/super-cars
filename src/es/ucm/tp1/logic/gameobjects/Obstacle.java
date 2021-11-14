@@ -58,5 +58,11 @@ public class Obstacle extends GameObject {
 		player.onDelete();
 		return true;
 	}
+
+	@Override
+	public boolean receiveShoot() {
+		this.health--;
+		return true;
+	}
 	
 }

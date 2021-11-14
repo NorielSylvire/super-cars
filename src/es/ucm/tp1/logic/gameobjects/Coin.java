@@ -63,4 +63,9 @@ public class Coin extends GameObject{
 		onDelete();
 		return true;
 	}
+
+	@Override
+	public boolean receiveShoot() {
+		return false;
+	}
 }

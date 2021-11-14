@@ -16,14 +16,14 @@ public class ShootCommand extends Command implements InstantAction{
 
 	@Override
 	public boolean execute(Game game) {
+		executeIA(game);
+		return true;
+	}
+	
+	@Override
+	public void executeIA(Game game) {
 		game.shoot();
 		game.nextCycle();
-		return false;
-	}
-
-	@Override
-	public void execute(Game game) {
-		
 	}
 	
 }

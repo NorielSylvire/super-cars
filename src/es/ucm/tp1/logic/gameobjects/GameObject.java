@@ -13,6 +13,7 @@ public abstract class GameObject implements Collider {
 		this.y = y;
 		this.game = game;
 		this.health = 1;
+		this.alive = true;
 	}
 	
 	protected String getSymbol() {
