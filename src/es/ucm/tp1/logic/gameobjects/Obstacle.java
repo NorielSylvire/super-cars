@@ -11,6 +11,7 @@ public class Obstacle extends GameObject {
 	}
 	
 	public void onEnter() {
+		this.alive = true;
 		numObstacles++;
 		this.symbol = "░";
 		this.health = 1;
@@ -24,10 +25,11 @@ public class Obstacle extends GameObject {
 		if(isAlive()) {
 			this.symbol = "░";
 		}
+		else this.symbol = "";
 	}
 	
 	public void update() {
-		
+		showLife();
 	}
 	
 	public void onDelete() {
@@ -35,7 +37,8 @@ public class Obstacle extends GameObject {
 	}
 	
 	public boolean isAlive() {
-		return true;
+		if(health <= 0) this.alive = false;
+		return alive;
 	}
 	
 	public static void increaseNumObstacles() {
@@ -62,6 +65,8 @@ public class Obstacle extends GameObject {
 	@Override
 	public boolean receiveShoot() {
 		this.health--;
+		System.out.println("AUUU ME HAS DISPARADO");
+		update();
 		return true;
 	}
 	

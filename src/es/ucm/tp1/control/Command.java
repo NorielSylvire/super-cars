@@ -17,7 +17,10 @@ public abstract class Command {
 		new ResetCommand(),
 		new MoveUpCommand(),
 		new MoveDownCommand(),
-		new UpdateCommand()
+		new UpdateCommand(),
+		new ShootCommand(),
+		new WaveCommand(),
+		new ClearCommand()
 	};
 	protected Game game;
 
@@ -30,7 +33,7 @@ public abstract class Command {
 
 	
 	public static Command getCommand(String[] commandWords) {
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 10; i++) {
 			if (AVAILABLE_COMMANDS[i].parse(commandWords) != null) return AVAILABLE_COMMANDS[i].parse(commandWords);
 		}
 		System.out.println(UNKNOWN_COMMAND_MSG);

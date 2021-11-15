@@ -24,6 +24,11 @@ public class GameObjectContainer {
 	public GameObject getObjectInList(int x, int y) {
 		for(int i= 0; i<gameobjects.size();i++) {
 			if(gameobjects.get(i).isInPosition(x, y)) {
+
+				/*System.out.print("HOLA, estoy en ");
+				System.out.print(gameobjects.get(i).getX());
+				System.out.print(" ");
+				System.out.println(gameobjects.get(i).getY());*/
 				return gameobjects.get(i);
 			}
 		}
@@ -34,6 +39,15 @@ public class GameObjectContainer {
 		for(int i= 0; i<gameobjects.size();i++) {
 			if(!gameobjects.get(i).isAlive()) {
 				gameobjects.remove(i);
+			}
+		}
+	}
+
+	public void moveVisibleForward(int x, int visibility) {
+		for(int i = gameobjects.size() - 1; i >= 0; i--) {
+			GameObject thisGO = gameobjects.get(i);
+			if(thisGO.getX() >= x && thisGO.getX() <= x + visibility) {
+				thisGO.tryToMoveForward(getObjectInList(thisGO.getX()+1, thisGO.getY()));
 			}
 		}
 	}

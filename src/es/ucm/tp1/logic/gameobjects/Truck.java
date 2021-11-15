@@ -51,5 +51,17 @@ public class Truck extends GameObject {
 		player.onDelete();
 		return true;
 	}
+
+	@Override
+	public boolean receiveShoot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void showLife() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -33,7 +33,7 @@ public class Player extends GameObject{
 	}
 	
 	public void update() {
-		this.x++;
+		moveForward();
 		if(!this.immune) doCollision();
 		else this.immune = false;
 	}
@@ -43,6 +43,7 @@ public class Player extends GameObject{
 	}
 	
 	public void onEnter() {
+		showLife();
 		this.immune = true;
 	}
 	
@@ -68,7 +69,7 @@ public class Player extends GameObject{
 	
 	public void shoot() {
 		Collider other;
-		for (int i = 0; i < game.getVisibility(); i++) {
+		for (int i = 1; i < game.getVisibility() + 1; i++) {
 			other = game.getObjectInPosition(x+i, y);
 			if (other != null) {
 				if(other.receiveShoot()) {

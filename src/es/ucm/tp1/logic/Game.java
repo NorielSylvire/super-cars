@@ -27,6 +27,7 @@ public class Game {
 		this.record = 0;
 		this.gamePrinter = new GamePrinter(this);
 		this.superCoinIsPresent = false;
+		this.record = Integer.MAX_VALUE;
 	}
 	
 	public void initialiseGame() {
@@ -109,6 +110,10 @@ public class Game {
 		container.reset();
 	}
 	
+	public void moveVisibleForward() {
+		container.moveVisibleForward(player.getX(), level.getVisibility());
+	}
+	
 	public long seed() {
 		return this.seed;
 	}
@@ -160,8 +165,10 @@ public class Game {
 	}
 
 	public void shoot() {
-		player.shoot();
-		coins--;
+		if (coins > 0) {
+			player.shoot();
+			coins--;
+		}
 	}
 
 	public void toggleSCoinIsPresent() {

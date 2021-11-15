@@ -55,7 +55,7 @@ public class Coin extends GameObject{
 	}
 
 	private void addCoins(Game game) {
-		game.addCoins();
+		game.addCoins(1);
 	}
 	
 	public boolean receiveCollision(Player player) {

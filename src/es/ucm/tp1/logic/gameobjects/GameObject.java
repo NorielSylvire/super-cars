@@ -20,6 +20,14 @@ public abstract class GameObject implements Collider {
 		return symbol;
 	}
 	
+	public void moveForward() {
+		this.x++;
+	}
+	
+	public void tryToMoveForward(GameObject nextGO) {
+		if(nextGO == null) moveForward();
+	}
+	
 	public int getX() {
 		return x;
 	}
