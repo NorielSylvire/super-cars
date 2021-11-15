@@ -1,10 +1,8 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.logic.gameobjects.Collider;
-import es.ucm.tp1.logic.gameobjects.Player;
 
-public class ShootCommand extends Command implements InstantAction{
+public class ShootCommand extends Command implements InstantAction, Buyable{
 	private static final String NAME = "shoot";
 	private static final String DETAILS = "[s]hoot";
 	private static final String SHORTCUT = "s";
@@ -16,14 +14,19 @@ public class ShootCommand extends Command implements InstantAction{
 
 	@Override
 	public boolean execute(Game game) {
-		executeIA(game);
+		if(buy(game)) executeIA(game);
 		return true;
 	}
 	
 	@Override
 	public void executeIA(Game game) {
 		game.shoot();
-		game.nextCycle();
+		game.update();
+	}
+
+	@Override
+	public int cost() {
+		return 1;
 	}
 	
 }

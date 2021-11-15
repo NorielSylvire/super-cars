@@ -44,10 +44,11 @@ public class Controller {
 			String[] parameters = s.toLowerCase().trim().split(" ");
 			System.out.format(DEBUG_MSG, s);
 			Command command = Command.getCommand(parameters);
-			game.removeDead();
+			
 			if (command != null) {
 				refreshDisplay = command.execute(game);
 			}
+			game.removeDead();
 		}
 		if (refreshDisplay) {
 			printGame();

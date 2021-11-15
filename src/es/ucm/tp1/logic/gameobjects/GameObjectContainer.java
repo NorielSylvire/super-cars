@@ -7,45 +7,40 @@ import es.ucm.tp1.logic.gameobjects.GameObject;
 
 public class GameObjectContainer {
 	
-	private List<GameObject> gameobjects;
+	private List<GameObject> gameObjects;
 	public GameObjectContainer() {
-		gameobjects = new ArrayList<>();
+		gameObjects = new ArrayList<>();
 	}
 	
 	public void addObject(GameObject go) {
 		go.onEnter();
-		gameobjects.add(go);
+		gameObjects.add(go);
 	}
 	
 	public void deleteObject(GameObject go) {
-		gameobjects.remove(go);
+		gameObjects.remove(go);
 	}
 	
 	public GameObject getObjectInList(int x, int y) {
-		for(int i= 0; i<gameobjects.size();i++) {
-			if(gameobjects.get(i).isInPosition(x, y)) {
-
-				/*System.out.print("HOLA, estoy en ");
-				System.out.print(gameobjects.get(i).getX());
-				System.out.print(" ");
-				System.out.println(gameobjects.get(i).getY());*/
-				return gameobjects.get(i);
+		for(int i= 0; i<gameObjects.size();i++) {
+			if(gameObjects.get(i).isInPosition(x, y)) {
+				return gameObjects.get(i);
 			}
 		}
 		return null;
 	}
 
 	public void removeDead() {
-		for(int i= 0; i<gameobjects.size();i++) {
-			if(!gameobjects.get(i).isAlive()) {
-				gameobjects.remove(i);
+		for(int i= 0; i<gameObjects.size();i++) {
+			if(!gameObjects.get(i).isAlive()) {
+				gameObjects.remove(i);
 			}
 		}
 	}
 
 	public void moveVisibleForward(int x, int visibility) {
-		for(int i = gameobjects.size() - 1; i >= 0; i--) {
-			GameObject thisGO = gameobjects.get(i);
+		for(int i = gameObjects.size() - 1; i >= 0; i--) {
+			GameObject thisGO = gameObjects.get(i);
 			if(thisGO.getX() >= x && thisGO.getX() <= x + visibility) {
 				thisGO.tryToMoveForward(getObjectInList(thisGO.getX()+1, thisGO.getY()));
 			}
@@ -53,7 +48,13 @@ public class GameObjectContainer {
 	}
 	
 	public void reset() {
-		gameobjects.removeAll(gameobjects);
+		gameObjects.removeAll(gameObjects);
+	}
+
+	public void update() {
+		for(int i = 0; i < gameObjects.size(); i++) {
+			gameObjects.get(i).update();
+		}
 	}
 	
 }

@@ -13,7 +13,7 @@ public class GameObjectGenerator {
 		rnd.setSeed(game.seed());
 		
 		for(int x = game.getVisibility() / 2; x < game.getRoadLength() - game.getVisibility(); x++) {
-			tryToAddObject(new Obstacle(game, x, getRandomLane(level)), level.getObstacleFrequency(), game);
+			tryToAddObject(new Turbo(game, x, getRandomLane(level)), level.getObstacleFrequency(), game);
 			tryToAddObject(new Coin(game, x, getRandomLane(level)), level.getCoinFrequency(), game);
 		}
 	}

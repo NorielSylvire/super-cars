@@ -32,6 +32,7 @@ public class GamePrinter {
 	public static final String ELAPSED_TIME_MSG = "Elapsed time: ";
 	public static final String GAME_OVER_MSG = "GAME OVER ";
 	public static final String SUPERCOIN_IS_PRESENT_MSG = "Super coin is present.";
+	public static final String NOT_ENOUGH_COINS_MSG = "Not enough coins!";
 
 
 
@@ -184,5 +185,10 @@ public class GamePrinter {
 		.append(StringUtils.LINE_SEPARATOR).append(Obstacle.INFO);
 		/* @formatter:on */
 		return buffer.toString();
+	}
+
+
+	public static String notEnoughCoins() {
+		return NOT_ENOUGH_COINS_MSG;
 	}
 }

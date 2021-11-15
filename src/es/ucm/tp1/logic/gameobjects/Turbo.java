@@ -44,7 +44,6 @@ public class Turbo extends GameObject {
 	
 	public boolean receiveCollision(Player player) {
 		player.turboAdvance();
-		player.onDelete();
 		return true;
 	}
 

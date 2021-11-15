@@ -34,6 +34,10 @@ public class Player extends GameObject{
 	
 	public void update() {
 		moveForward();
+		updateCollision();
+	}
+	
+	public void updateCollision() {
 		if(!this.immune) doCollision();
 		else this.immune = false;
 	}
@@ -49,6 +53,7 @@ public class Player extends GameObject{
 	
 	public void onDelete() {
 		this.alive = false;	
+		showLife();
 	}
 	
 	public boolean doCollision() {
@@ -62,6 +67,7 @@ public class Player extends GameObject{
 	public boolean receiveCollision(Player player) {
 		return false;
 	}
+	
 	@Override
 	public String toString() {
 		return getSymbol();

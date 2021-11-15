@@ -19,11 +19,11 @@ public class Coin extends GameObject{
 	public void onEnter() {
 		this.alive = true;
 		increaseNumCoins();
-		this.symbol = "O";
+		this.symbol = "¢";
 	}
 	
 	public void showLife() {
-		if(isAlive()) this.symbol = "O";
+		if(isAlive()) this.symbol = "¢";
 		else this.symbol = "";
 	}
 	

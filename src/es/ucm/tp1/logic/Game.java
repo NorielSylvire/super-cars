@@ -66,12 +66,14 @@ public class Game {
 	public void update() {
 		nextCycle();
 		this.player.update();
+		this.container.update();
+		this.player.updateCollision();
 	}
 	
 	public void movePlayer(boolean up) {
 		if(up) player.playerUp();
 		else player.playerDown();
-		player.update();
+		update();
 	}
 	
 	public int getPlayerY() {
@@ -103,15 +105,15 @@ public class Game {
 	}
 	
 	public void addGameObject(GameObject gameObject) {
-		container.addObject(gameObject);
+		this.container.addObject(gameObject);
 	}
 	
 	public void removeAllObjects() {
-		container.reset();
+		this.container.reset();
 	}
 	
 	public void moveVisibleForward() {
-		container.moveVisibleForward(player.getX(), level.getVisibility());
+		this.container.moveVisibleForward(player.getX(), level.getVisibility());
 	}
 	
 	public long seed() {
@@ -163,12 +165,13 @@ public class Game {
 	public void printInfo() {
 		System.out.println(GamePrinter.description(level));
 	}
+	
+	public void printNotEnoughCoins() {
+		System.out.println(GamePrinter.notEnoughCoins());
+	}
 
 	public void shoot() {
-		if (coins > 0) {
-			player.shoot();
-			coins--;
-		}
+		player.shoot();
 	}
 
 	public void toggleSCoinIsPresent() {
