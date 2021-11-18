@@ -187,4 +187,8 @@ public class Game {
 	public void deleteCoins() {
 		this.coins = 0;
 	}
+
+	public void updateCollision() {
+		player.updateCollision();
+	}
 }

@@ -49,6 +49,7 @@ public class Controller {
 				refreshDisplay = command.execute(game);
 			}
 			game.removeDead();
+			game.updateCollision();
 		}
 		if (refreshDisplay) {
 			printGame();
