@@ -173,6 +173,8 @@ public class Game {
 	public void shoot() {
 		player.shoot();
 	}
+	
+	
 
 	public void toggleSCoinIsPresent() {
 		this.superCoinIsPresent = !this.superCoinIsPresent;
@@ -180,5 +182,9 @@ public class Game {
 	
 	public boolean isSuperCoinPresent() {
 		return superCoinIsPresent;
+	}
+
+	public void deleteCoins() {
+		this.coins = 0;
 	}
 }

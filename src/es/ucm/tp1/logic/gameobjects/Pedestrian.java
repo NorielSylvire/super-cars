@@ -5,6 +5,7 @@ import es.ucm.tp1.logic.Game;
 public class Pedestrian extends GameObject {
 	private static int numObstacles;
 	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
+	public boolean bordearriba = true;
 	
 	public Pedestrian (Game game, int x, int y) {
 		super(game, x, y);
@@ -15,12 +16,19 @@ public class Pedestrian extends GameObject {
 		this.symbol = "☺";
 	}
 	
+	public void checkBorde() {
+		if(this.y == 0) this.bordearriba = true ;
+		if(this.y == (game.getRoadWidth()-1)) this.bordearriba = false;
+	}
+	
 	public static int getObstaclesCount(){
 		return numObstacles;
 	}
 	
 	public void update() {
-		//Dos ifs para el tope de arriba  y el tope de abajo
+		checkBorde();
+		if(this.bordearriba == true) this.y++;
+		if(this.bordearriba == false) this.y--;
 	}
 	
 	public void onDelete() {
@@ -54,13 +62,20 @@ public class Pedestrian extends GameObject {
 
 	@Override
 	public boolean receiveShoot() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("AUUU ME HAS DISPARADO");
+		this.health --;
+		showLife();
+		game.deleteCoins();
+		return true;// TODO Auto-generated method stub
 	}
 
+	
 	@Override
 	public void showLife() {
-		
+		if(isAlive()) {
+			this.symbol = "☺";
+		}
+		else this.symbol = "";
 	}
 	
 }

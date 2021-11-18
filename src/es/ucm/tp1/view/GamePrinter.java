@@ -95,20 +95,34 @@ public class GamePrinter {
 		str.append(indentedRoadBorder);
 
 		String verticalDelimiter = SPACE;
+		String nextSlot = "";
+		Boolean alreadyOccupied = false;
 
 		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < game.getVisibility(); x++) {
 				if (game.getPlayerY() == y && x == 0) {
-					str.append(StringUtils.centre(game.getPlayerSymbol(), CELL_SIZE)).append(verticalDelimiter);
+					nextSlot+=game.getPlayerSymbol();
+					alreadyOccupied = true;
+					
 				}
 				else if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
-					str.append(StringUtils.centre(game.getObjectInPosition(x + game.getPlayerX(), y).toString(), CELL_SIZE)).append(verticalDelimiter);
+					if(alreadyOccupied) nextSlot+=",";
+					alreadyOccupied = true;
+					nextSlot+=game.getObjectInPosition(x + game.getPlayerX(), y).toString();
+					
 				}
 				else if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
-						str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
+					str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
 				}
-				else str.append(StringUtils.centre("", CELL_SIZE)).append(verticalDelimiter);
+				
+				else {
+					nextSlot+= verticalDelimiter;
+				}
+				alreadyOccupied = false;
+				
+				str.append(StringUtils.centre(nextSlot, CELL_SIZE)).append(verticalDelimiter);
+				nextSlot = "";
 			}
 			if (y < game.getRoadWidth() - 1) {
 				str.append(this.indentedLanesSeparator);
