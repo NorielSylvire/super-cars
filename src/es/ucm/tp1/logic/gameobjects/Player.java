@@ -73,17 +73,7 @@ public class Player extends GameObject{
 		return getSymbol();
 	}
 	
-	public void shoot() {
-		Collider other;
-		for (int i = 1; i < game.getVisibility() + 1; i++) {
-			other = game.getObjectInPosition(x+i, y);
-			if (other != null) {
-				if(other.receiveShoot()) {
-					break;
-				}
-			}
-		}
-	}
+	
 	
 	@Override
 	public boolean receiveShoot() {

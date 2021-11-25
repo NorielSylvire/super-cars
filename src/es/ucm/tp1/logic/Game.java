@@ -5,6 +5,7 @@ import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.*;
 import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.view.GamePrinter;
+import es.ucm.tp1.control.InstantAction;
 
 public class Game {
 	private Long seed;
@@ -169,10 +170,6 @@ public class Game {
 	public void printNotEnoughCoins() {
 		System.out.println(GamePrinter.notEnoughCoins());
 	}
-
-	public void shoot() {
-		player.shoot();
-	}
 	
 	
 
@@ -190,5 +187,9 @@ public class Game {
 
 	public void updateCollision() {
 		player.updateCollision();
+	}
+	
+	public void execute(InstantAction IA) {
+		IA.executeIA(this);
 	}
 }

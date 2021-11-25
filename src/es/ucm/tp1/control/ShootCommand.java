@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.control.ShootAction;
 
 public class ShootCommand extends Command implements InstantAction, Buyable{
 	private static final String NAME = "shoot";
@@ -14,15 +15,11 @@ public class ShootCommand extends Command implements InstantAction, Buyable{
 
 	@Override
 	public boolean execute(Game game) {
-		if(buy(game)) executeIA(game);
+		if(buy(game)) game.execute(new(ShootAction));;
 		return true;
 	}
 	
-	@Override
-	public void executeIA(Game game) {
-		game.shoot();
-		game.update();
-	}
+	
 
 	@Override
 	public int cost() {

@@ -1,8 +1,9 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.control.WaveAction;
 
-public class WaveCommand extends Command implements InstantAction, Buyable {
+public class WaveCommand extends Command implements  Buyable {
 	private static final String NAME = "wave";
 	private static final String DETAILS = "[w]ave";
 	private static final String SHORTCUT = "w";
@@ -14,15 +15,15 @@ public class WaveCommand extends Command implements InstantAction, Buyable {
 
 	@Override
 	public boolean execute(Game game) {
-		if(buy(game)) executeIA(game);
+		if(buy(game))  {
+		game.execute(new WaveAction());
+		game.update();
+		game.removeDead();
 		return true;
+		}
+		else false;
 	}
 
-	@Override
-	public void executeIA(Game game) {
-		game.moveVisibleForward();
-		game.update();
-	}
 
 	@Override
 	public int cost() {

@@ -38,14 +38,6 @@ public class GameObjectContainer {
 		}
 	}
 
-	public void moveVisibleForward(int x, int visibility) {
-		for(int i = gameObjects.size() - 1; i >= 0; i--) {
-			GameObject thisGO = gameObjects.get(i);
-			if(thisGO.getX() >= x && thisGO.getX() <= x + visibility) {
-				thisGO.tryToMoveForward(getObjectInList(thisGO.getX()+1, thisGO.getY()));
-			}
-		}
-	}
 	
 	public void reset() {
 		gameObjects.removeAll(gameObjects);
