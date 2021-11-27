@@ -1,24 +1,25 @@
 package es.ucm.tp1.logic;
 
-import java.util.Scanner;
 import es.ucm.tp1.control.Level;
-import es.ucm.tp1.logic.gameobjects.*;
+import es.ucm.tp1.logic.gameobjects.GameObject;
+import es.ucm.tp1.logic.gameobjects.Player;
 import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
-import es.ucm.tp1.view.GamePrinter;
 import es.ucm.tp1.control.InstantAction;
+import es.ucm.tp1.view.GamePrinter;
+import es.ucm.tp1.utils.Vector2;
 
 public class Game {
 	private Long seed;
 	private int cycles;
 	private Level level;
 	private int coins;
-	private boolean superCoinIsPresent;
+	private static boolean superCoinIsPresent;
 	private Player player;
 	private long start;
 	private long record;
 	private boolean isExit;
-	private GamePrinter gamePrinter;
 	private GameObjectContainer container;
+	private int thunderX, thunderY;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
@@ -26,13 +27,14 @@ public class Game {
 		this.coins = 0;
 		this.isExit = false;
 		this.record = 0;
-		this.gamePrinter = new GamePrinter(this);
 		this.superCoinIsPresent = false;
 		this.record = Integer.MAX_VALUE;
+		this.thunderX = -1;
+		this.thunderY = this.thunderX;
 	}
 	
 	public void initialiseGame() {
-		this.coins = 0;
+		this.coins = 100000000;
 		this.cycles = 0;
 		this.player = new Player(this, 0, getRoadWidth()/2);
 		this.container = new GameObjectContainer();
@@ -40,16 +42,9 @@ public class Game {
 		this.start = System.currentTimeMillis();
 	}
 	
-	public void changeLevel() {
-		String inputString;
-		System.out.print("Choose a difficulty: ");
-		Scanner s;
-		s = new Scanner(System.in);
-		inputString = s.nextLine();
-		level = level.valueOfIgnoreCase(inputString);
-		System.out.print("Choose a seed: ");
-		seed = s.nextLong();
-		System.out.println();
+	public void changeLevel(Level level, long seed) {;
+		this.level = level;
+		this.seed = seed;
 	}
 	
 	public void addCoins(int num) {
@@ -113,10 +108,6 @@ public class Game {
 		this.container.reset();
 	}
 	
-	public void moveVisibleForward() {
-		this.container.moveVisibleForward(player.getX(), level.getVisibility());
-	}
-	
 	public long seed() {
 		return this.seed;
 	}
@@ -173,8 +164,8 @@ public class Game {
 	
 	
 
-	public void toggleSCoinIsPresent() {
-		this.superCoinIsPresent = !this.superCoinIsPresent;
+	public static void toggleSCoinIsPresent() {
+		superCoinIsPresent = !superCoinIsPresent;
 	}
 	
 	public boolean isSuperCoinPresent() {
@@ -184,6 +175,15 @@ public class Game {
 	public void deleteCoins() {
 		this.coins = 0;
 	}
+	
+	public void updateThunder(Vector2 thunderPos) {
+		this.thunderX = thunderPos.x;
+		this.thunderY = thunderPos.y;
+	}
+	
+	public Vector2 getThunderPos() {
+		return new Vector2(this.thunderX, this.thunderY);
+	}
 
 	public void updateCollision() {
 		player.updateCollision();
@@ -191,5 +191,13 @@ public class Game {
 	
 	public void execute(InstantAction IA) {
 		IA.executeIA(this);
+	}
+
+	public void generateCheatObjects(int objectID) {
+		GameObjectGenerator.generateCheatObjects(this, getPlayerX() + getVisibility() - 1, objectID);
+	}
+
+	public void removeGameObject(GameObject gameObject) {
+		container.deleteObject(gameObject);
 	}
 }

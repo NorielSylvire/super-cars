@@ -18,7 +18,7 @@ public class Coin extends GameObject{
 	
 	public void onEnter() {
 		this.alive = true;
-		increaseNumCoins();
+		numCoins++;
 		this.symbol = "¢";
 	}
 	
@@ -30,20 +30,13 @@ public class Coin extends GameObject{
 	public void update() {}
 	
 	public void onDelete() {
-		decreaseNumCoins();
+		numCoins--;
+		health--;
 		this.alive = false;
 	}
 	
 	public boolean isAlive() {
 		return this.alive;
-	}
-	
-	public static void increaseNumCoins() {
-		numCoins++;
-	}
-	
-	public static void decreaseNumCoins() {
-		numCoins--;
 	}
 	
 	public static void reset() {
@@ -59,13 +52,24 @@ public class Coin extends GameObject{
 	}
 	
 	public boolean receiveCollision(Player player) {
-		addCoins(game);
 		onDelete();
+		addCoins(game);
 		return true;
 	}
 
 	@Override
 	public boolean receiveShoot() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 }

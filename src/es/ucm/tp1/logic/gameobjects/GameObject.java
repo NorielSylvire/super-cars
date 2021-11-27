@@ -9,6 +9,7 @@ public abstract class GameObject implements Collider {
 	protected int health;
 	
 	public GameObject(Game game, int x, int y) {
+		onEnter();
 		this.x = x;
 		this.y = y;
 		this.game = game;
@@ -49,7 +50,7 @@ public abstract class GameObject implements Collider {
 	public abstract void showLife();
 	
 	public boolean isAlive() {
-		if(health == 0) this.alive = false;
+		if(health <= 0) this.alive = false;
 		return this.alive;
 	}
 	

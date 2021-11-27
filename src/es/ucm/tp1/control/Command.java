@@ -8,6 +8,7 @@ public abstract class Command {
 	private final String shortcut;
 	private final String details ;
 	private final String help;
+	protected static final String WRONG_USAGE_MSG = "This is not how to use this command. Type \"help YOURCOMMAND\" to know more. ";
 	protected static final String UNKNOWN_COMMAND_MSG = "Unknown command.";
 	protected static final String INCORRECT_NUMBER_OF_ARGS_MSG = " Incorrect number of parameters.";
 	protected static final Command[] AVAILABLE_COMMANDS = {
@@ -20,7 +21,9 @@ public abstract class Command {
 		new UpdateCommand(),
 		new ShootCommand(),
 		new WaveCommand(),
-		new ClearCommand()
+		new ClearCommand(),
+		new GrenadeCommand(),
+		new CheatCommand()
 	};
 	protected Game game;
 
@@ -33,7 +36,7 @@ public abstract class Command {
 
 	
 	public static Command getCommand(String[] commandWords) {
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < AVAILABLE_COMMANDS.length; i++) {
 			if (AVAILABLE_COMMANDS[i].parse(commandWords) != null) return AVAILABLE_COMMANDS[i].parse(commandWords);
 		}
 		System.out.println(UNKNOWN_COMMAND_MSG);
@@ -47,8 +50,7 @@ public abstract class Command {
 	protected Command parse(String[] words) {
 		if (matchCommandName(words[0])) {
 			if (words.length != 1) {
-				System.out.format("[ERROR]: Command %s: %s %n %n", name,
-									INCORRECT_NUMBER_OF_ARGS_MSG);
+				System.out.println("[ERROR]: Command " + name + ":" + INCORRECT_NUMBER_OF_ARGS_MSG);
 				return null;
 			} else {
 				return this;

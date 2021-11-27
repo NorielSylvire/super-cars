@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public enum Level {
 
-	TEST(10, 3, 8, 0.5, 0), EASY(30, 3, 8, 0.5, 0.5), HARD(100, 5, 6, 0.7, 0.3);
+	TEST(10, 3, 8, 0.5, 0, 0), EASY(30, 3, 8, 0.5, 0.5, 0), HARD(100, 5, 6, 0.7, 0.3, 0), ADVANCED(100, 3, 8, 0.3, 0.3, 0.1);
 
 	private int length;
 
@@ -15,16 +15,17 @@ public enum Level {
 	private double coinFrequency;
 
 	private double obstacleFrequency;
+	
+	private double advancedFrequency;
 
-	private Level(int length, int width, int visibility, double obstacleFrequency, double coinFrequency) {
+	private Level(int length, int width, int visibility, double obstacleFrequency, double coinFrequency, double advancedFrequency) {
 		this.length = length;
 		this.width = width;
 		this.visibility = visibility;
 		this.obstacleFrequency = obstacleFrequency;
 		this.coinFrequency = coinFrequency;
+		this.advancedFrequency = advancedFrequency;
 	}
-
-	// TODO fill your code
 
 	public static Level valueOfIgnoreCase(String inputString) {
 		for (Level level : Level.values()) {

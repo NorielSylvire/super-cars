@@ -34,7 +34,6 @@ public class Player extends GameObject{
 	
 	public void update() {
 		moveForward();
-		updateCollision();
 	}
 	
 	public void updateCollision() {
@@ -73,10 +72,19 @@ public class Player extends GameObject{
 		return getSymbol();
 	}
 	
-	
-	
 	@Override
 	public boolean receiveShoot() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 }

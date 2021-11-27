@@ -32,10 +32,7 @@ public class Turbo extends GameObject {
 	
 	public void onDelete() {
 		showLife();
-	}
-	
-	public boolean isAlive() {
-		return true;
+		this.alive = false;
 	}
 	
 	public boolean doCollision() {
@@ -49,6 +46,17 @@ public class Turbo extends GameObject {
 
 	@Override
 	public boolean receiveShoot() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 	

@@ -5,5 +5,8 @@ import es.ucm.tp1.logic.Game;
 public interface InstantAction {
 	
 	void executeIA(Game game);
+	public static void staticExecuteIA(Game game) {
+		
+	}
 
 }

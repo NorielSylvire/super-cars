@@ -90,13 +90,14 @@ public class GamePrinter {
 
 		str.append(getInfo());
 
-		// Paint game
+		// Print Game
 
 		str.append(indentedRoadBorder);
 
 		String verticalDelimiter = SPACE;
 		String nextSlot = "";
 		Boolean alreadyOccupied = false;
+		Boolean thereIsNothing = true;
 
 		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
@@ -104,25 +105,32 @@ public class GamePrinter {
 				if (game.getPlayerY() == y && x == 0) {
 					nextSlot+=game.getPlayerSymbol();
 					alreadyOccupied = true;
-					
+					thereIsNothing = false;
 				}
-				else if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
-					if(alreadyOccupied) nextSlot+=",";
+				if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
+					if(alreadyOccupied) nextSlot+=" ";
 					alreadyOccupied = true;
+					thereIsNothing = false;
 					nextSlot+=game.getObjectInPosition(x + game.getPlayerX(), y).toString();
-					
 				}
-				else if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
+				if(x == game.getThunderPos().x - game.getPlayerX() && y == game.getThunderPos().y) {
+					nextSlot = "🗲";
+					thereIsNothing = false;
+				}
+				if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
 					str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
-				}
-				
-				else {
+					thereIsNothing = false;
+				} 
+				if(thereIsNothing) {
 					nextSlot+= verticalDelimiter;
 				}
-				alreadyOccupied = false;
+
+				
 				
 				str.append(StringUtils.centre(nextSlot, CELL_SIZE)).append(verticalDelimiter);
 				nextSlot = "";
+				alreadyOccupied = false;
+				thereIsNothing = true;
 			}
 			if (y < game.getRoadWidth() - 1) {
 				str.append(this.indentedLanesSeparator);

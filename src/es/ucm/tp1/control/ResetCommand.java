@@ -2,6 +2,8 @@ package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.GameObjectGenerator;
+import java.util.Scanner;
+import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.gameobjects.Coin;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
 
@@ -17,7 +19,16 @@ public class ResetCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		game.changeLevel();
+		String inputString;
+		System.out.print("Choose a difficulty: ");
+		Scanner s;
+		s = new Scanner(System.in);
+		inputString = s.nextLine();
+		Level level = Level.valueOfIgnoreCase(inputString);
+		System.out.print("Choose a seed: ");
+		long seed = s.nextLong();
+		System.out.println();
+		game.changeLevel(level, seed);
 		GameObjectGenerator.reset();
 		game.initialiseGame();
 		return true;

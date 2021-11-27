@@ -13,11 +13,13 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private GamePrinter printer;
+	private ThunderAction thunder;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
 		this.scanner = scanner;
 		this.printer = new GamePrinter(game);
+		this.thunder = new ThunderAction();
 	}
 
 	public void printGame() {
@@ -33,6 +35,7 @@ public class Controller {
 		game.initialiseGame();
 
 		while (!game.isFinished()) {
+			thunder.staticExecuteIA(game);
 			if (refreshDisplay) {
 				printGame();
 			}

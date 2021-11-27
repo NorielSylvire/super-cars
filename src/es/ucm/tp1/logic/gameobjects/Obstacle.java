@@ -33,19 +33,8 @@ public class Obstacle extends GameObject {
 	}
 	
 	public void onDelete() {
-		numObstacles--;
-	}
-	
-	public boolean isAlive() {
-		if(health <= 0) this.alive = false;
-		return alive;
-	}
-	
-	public static void increaseNumObstacles() {
-		numObstacles++;
-	}
-	
-	public static void decreaseNumObstacles() {
+		this.health--;
+		this.alive = false;
 		numObstacles--;
 	}
 	
@@ -64,9 +53,22 @@ public class Obstacle extends GameObject {
 
 	@Override
 	public boolean receiveShoot() {
-		this.health--;
-		System.out.println("AUUU ME HAS DISPARADO");
+		onDelete();
 		update();
+		return true;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		System.out.println("oof");
+		this.onDelete();
+		return true;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		this.onDelete();
+		System.out.println(" -> Obstacle hit.");
 		return true;
 	}
 	

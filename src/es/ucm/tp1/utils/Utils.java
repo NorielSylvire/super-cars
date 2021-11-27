@@ -14,5 +14,10 @@ public class Utils {
 		if (n > max) n = max;
 		return n;
 	}
+	
+	public static int abs(int num) {
+		if (num < 0) return -num;
+		else return num;
+	}
 
 }

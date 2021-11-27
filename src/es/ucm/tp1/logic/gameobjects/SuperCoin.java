@@ -12,7 +12,7 @@ public class SuperCoin extends GameObject{
 	}
 	
 	public void onEnter() {
-		game.toggleSCoinIsPresent();
+		Game.toggleSCoinIsPresent();
 		this.alive = true;
 		this.symbol = "$";
 	}
@@ -46,6 +46,17 @@ public class SuperCoin extends GameObject{
 
 	@Override
 	public boolean receiveShoot() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		return false;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 }

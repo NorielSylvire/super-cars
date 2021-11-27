@@ -19,10 +19,8 @@ public class Truck extends GameObject {
 	}
 	
 	public void onDelete() {
-	}
-	
-	public boolean isAlive() {
-		return true;
+		this.health--;
+		this.alive = false;
 	}
 	
 	public boolean doCollision() {
@@ -44,6 +42,19 @@ public class Truck extends GameObject {
 	public void showLife() {
 		if(this.alive) this.symbol = "←";
 		else this.symbol = "";
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		this.onDelete();
+		return true;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		this.onDelete();
+		System.out.println(" -> Thunder hit.");
+		return true;
 	}
 	
 }

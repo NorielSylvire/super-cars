@@ -11,11 +11,13 @@ public class Wall extends GameObject {
 	}
 	
 	public void onEnter() {
-		numWalls++;
-		showLife();
 		this.health = 3;
+		this.symbol = "█";
+		showLife();
 	}
+	
 	public void showLife() {
+		System.out.println(this.symbol + "<---- HERE");
 		if(health == 3) {
 			this.symbol = "█";
 		}
@@ -27,6 +29,7 @@ public class Wall extends GameObject {
 		}
 		else this.symbol = "";
 	}
+	
 	public static int getObstaclesCount(){
 		return numWalls;
 	}
@@ -39,10 +42,8 @@ public class Wall extends GameObject {
 		numWalls--;
 		showLife();
 		game.addCoins(5);
-	}
-	
-	public boolean isAlive() {
-		return true;
+		this.health = 0;
+		this.alive = false;
 	}
 	
 	public static void reset() {
@@ -55,13 +56,25 @@ public class Wall extends GameObject {
 	
 	public boolean receiveCollision(Player player) {
 		player.onDelete();
-		//añadir 5 coins al player;
 		return true;
 	}
 
 	@Override
 	public boolean receiveShoot() {
 		this.health--;
+		return true;
+	}
+
+	@Override
+	public boolean receiveExplosion() {
+		this.onDelete();
+		return true;
+	}
+
+	@Override
+	public boolean receiveThunder() {
+		this.onDelete();
+		System.out.println(" -> Wall hit.");
 		return true;
 	}
 	
