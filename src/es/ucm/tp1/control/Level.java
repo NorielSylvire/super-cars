@@ -16,15 +16,15 @@ public enum Level {
 
 	private double obstacleFrequency;
 	
-	private double advancedFrequency;
+	private double advancedObjectFrequency;
 
-	private Level(int length, int width, int visibility, double obstacleFrequency, double coinFrequency, double advancedFrequency) {
+	private Level(int length, int width, int visibility, double obstacleFrequency, double coinFrequency, double advancedObjectFrequency) {
 		this.length = length;
 		this.width = width;
 		this.visibility = visibility;
 		this.obstacleFrequency = obstacleFrequency;
 		this.coinFrequency = coinFrequency;
-		this.advancedFrequency = advancedFrequency;
+		this.advancedObjectFrequency = advancedObjectFrequency;
 	}
 
 	public static Level valueOfIgnoreCase(String inputString) {
@@ -73,5 +73,9 @@ public enum Level {
 		boolean isTest = false;
 		if (length == 10) isTest = true;
 		return isTest;
+	}
+
+	public double advancedObjectsFrequency() {
+		return advancedObjectFrequency;
 	}
 }

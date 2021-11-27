@@ -8,7 +8,7 @@ public class Grenade extends GameObject implements Collider {
 	
 	
 	public Grenade(Game game, int x, int y) {
-			super(game,x,y);
+		super(game,x,y);
 	}
 
 	public void onEnter() {

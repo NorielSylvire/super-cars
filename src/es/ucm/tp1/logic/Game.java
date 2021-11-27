@@ -14,6 +14,7 @@ public class Game {
 	private Level level;
 	private int coins;
 	private static boolean superCoinIsPresent;
+	private static boolean advancedObjects;
 	private Player player;
 	private long start;
 	private long record;
@@ -28,6 +29,7 @@ public class Game {
 		this.isExit = false;
 		this.record = 0;
 		this.superCoinIsPresent = false;
+		this.advancedObjects = (level.advancedObjectsFrequency() != 0);
 		this.record = Integer.MAX_VALUE;
 		this.thunderX = -1;
 		this.thunderY = this.thunderX;
@@ -199,5 +201,9 @@ public class Game {
 
 	public void removeGameObject(GameObject gameObject) {
 		container.deleteObject(gameObject);
+	}
+
+	public boolean hasAdvancedObjects() {
+		return advancedObjects;
 	}
 }

@@ -11,6 +11,8 @@ public class Pedestrian extends GameObject {
 	}
 	
 	public void onEnter() {
+		this.alive = true;
+		this.health = 1;
 		this.symbol = "☺";
 	}
 	

@@ -14,11 +14,27 @@ public class GameObjectGenerator {
 		rnd = new Random();
 		rnd.setSeed(game.seed());
 		
-		for(int x = game.getVisibility() / 2; x < game.getRoadLength() - game.getVisibility(); x++) {
+		for(int x = game.getVisibility() / 2; x < game.getRoadLength() - game.getVisibility() / 2; x++) {
 			tryToAddObject(new Obstacle(game, x, getRandomLane(game.getRoadWidth())), level.getObstacleFrequency(), game);
 			tryToAddObject(new Coin(game, x, getRandomLane(game.getRoadWidth())), level.getCoinFrequency(), game);
+			
+			if (game.hasAdvancedObjects()) {
+				tryToAddObject(new Wall(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+				
+				tryToAddObject(new Turbo(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+				
+				if (!game.isSuperCoinPresent()) {
+					tryToAddObject(new SuperCoin(game, x, getRandomLane(game.getRoadWidth())),level.advancedObjectsFrequency(), game);
+				}
+				
+				tryToAddObject(new Truck(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+				
+				tryToAddObject(new Pedestrian(game, x, 0), level.advancedObjectsFrequency(), game);
+				
+			}
 		}
 	}
+	
 	public static void reset() {
 		Obstacle.reset();
 		Coin.reset();
