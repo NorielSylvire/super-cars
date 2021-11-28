@@ -4,21 +4,17 @@ import es.ucm.tp1.utils.StringUtils;
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.Coin;
+import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Obstacle;
 import es.ucm.tp1.logic.gameobjects.SuperCoin;
 
 public class GamePrinter {
 
 	private static final String SPACE = " ";
-	
 	private static final String ROAD_BORDER_PATTERN = "═";
-	
 	private static final String LANE_DELIMITER_PATTERN = "—";
-	
 	private static final int CELL_SIZE = 7;
-	
 	private static final int MARGIN_SIZE = 2;
-	
 	public static final String DO_EXIT_MSG = "You have exited the game correctly.";
 	public static final String CRASH_MSG =  "The player has crashed!";
 	public static final String NEW_RECORD_MSG =  "You made a new record! Time: ";
@@ -33,8 +29,10 @@ public class GamePrinter {
 	public static final String GAME_OVER_MSG = "GAME OVER ";
 	public static final String SUPERCOIN_IS_PRESENT_MSG = "Super coin is present.";
 	public static final String NOT_ENOUGH_COINS_MSG = "Not enough coins!";
-
-
+	public static final String THUNDER_HIT_MSG = "Thunder hit position: ";
+	
+	public static boolean thunderHitThisTurn;
+	public static String objectHitByThunder;
 
 	private Game game;
 	private String indentedRoadBorder;
@@ -43,7 +41,10 @@ public class GamePrinter {
 
 	public GamePrinter(Game game) {
 		this.game = game;
-
+		
+		thunderHitThisTurn = false;
+		objectHitByThunder = "";
+		
 		margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
 	
 		String roadBorder = ROAD_BORDER_PATTERN
@@ -62,8 +63,11 @@ public class GamePrinter {
 	protected String getInfo() {
 		StringBuilder buffer = new StringBuilder();
 		/* @formatter:off */
-		buffer.append(DISTANCE_MSG).append(game.distanceToGoal()).append(StringUtils.LINE_SEPARATOR)
-		.append(COINS_MSG).append(game.playerCoins()).append(StringUtils.LINE_SEPARATOR)
+		String formattedThunderPosition = "(" + (game.getThunderPosition().x - game.getPlayerX()) + " , " + game.getThunderPosition().y + ")";
+		buffer.append(THUNDER_HIT_MSG).append(formattedThunderPosition)
+		.append(thunderVictim()).append(StringUtils.LINE_SEPARATOR)
+		.append(DISTANCE_MSG).append(game.distanceToGoal()).append(StringUtils.LINE_SEPARATOR)
+		.append(COINS_MSG).append(game.getPlayerCoins()).append(StringUtils.LINE_SEPARATOR)
 		.append(CYCLE_MSG).append(game.getCycle()).append(StringUtils.LINE_SEPARATOR)
 		.append(TOTAL_OBSTACLES_MSG).append(Obstacle.getObstaclesCount()).append(StringUtils.LINE_SEPARATOR)
 		.append(TOTAL_COINS_MSG).append(Coin.getCoinsCount()).append(StringUtils.LINE_SEPARATOR);
@@ -79,9 +83,12 @@ public class GamePrinter {
 			.append(ELAPSED_TIME_MSG).append(formatTime(game.elapsedTime()));
 			/* @formatter:on */
 		}
+		
+		thunderHitThisTurn = false;
 
 		return buffer.toString();
 	}
+	
 	@Override
     public String toString() {
 		StringBuilder str = new StringBuilder();
@@ -104,16 +111,15 @@ public class GamePrinter {
 			for (int x = 0; x < game.getVisibility(); x++) {
 				if (game.getPlayerY() == y && x == 0) {
 					nextSlot+=game.getPlayerSymbol();
-					alreadyOccupied = true;
 					thereIsNothing = false;
 				}
-				if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
-					if(alreadyOccupied) nextSlot+=" ";
-					alreadyOccupied = true;
+				GameObject gameObject = game.getObjectInPositionLoop(x + game.getPlayerX(), y);
+				while(gameObject != null) {
 					thereIsNothing = false;
-					nextSlot+=game.getObjectInPosition(x + game.getPlayerX(), y).toString();
+					nextSlot+=gameObject.toString();
+					gameObject = game.getObjectInPositionLoop(x + game.getPlayerX(), y);
 				}
-				if(x == game.getThunderPos().x - game.getPlayerX() && y == game.getThunderPos().y) {
+				if(x == game.getThunderPosition().x - game.getPlayerX() && y == game.getThunderPosition().y) {
 					nextSlot = "🗲";
 					thereIsNothing = false;
 				}
@@ -129,7 +135,6 @@ public class GamePrinter {
 				
 				str.append(StringUtils.centre(nextSlot, CELL_SIZE)).append(verticalDelimiter);
 				nextSlot = "";
-				alreadyOccupied = false;
 				thereIsNothing = true;
 			}
 			if (y < game.getRoadWidth() - 1) {
@@ -213,4 +218,19 @@ public class GamePrinter {
 	public static String notEnoughCoins() {
 		return NOT_ENOUGH_COINS_MSG;
 	}
+	
+	public static void thunderHitThisTurn() {
+		thunderHitThisTurn = true;
+	}
+	
+	public static void thunderHitAnObject(String name) {
+		thunderHitThisTurn();
+		objectHitByThunder = name;
+	}
+	
+	private String thunderVictim() {
+		if(thunderHitThisTurn) return " -> " + objectHitByThunder + " hit.";
+		else return "";
+	}
+	
 }

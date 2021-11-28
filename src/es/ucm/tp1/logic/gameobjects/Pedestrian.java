@@ -16,25 +16,25 @@ public class Pedestrian extends GameObject {
 		this.symbol = "☺";
 	}
 	
-	public void checkBorde() {
-		if(this.y == 0) this.bordearriba = true ;
-		if(this.y == (game.getRoadWidth()-1)) this.bordearriba = false;
-	}
-	
-	public void update() {
-		checkBorde();
-		if(this.bordearriba == true) this.y++;
-		if(this.bordearriba == false) this.y--;
-	}
-	
 	public void onDelete() {
 		this.health --;
 		this.alive = false;
 		showLife();
 	}
 	
-	public boolean isAlive() {
-		return this.alive;
+	@Override
+	public void update() {
+		super.update();
+		checkBorde();
+		if(this.bordearriba == true) this.y++;
+		if(this.bordearriba == false) this.y--;
+	}
+	
+	public void showLife() {
+		if(isAlive()) {
+			this.symbol = "☺";
+		}
+		else this.symbol = "";
 	}
 	
 	public boolean doCollision() {
@@ -46,31 +46,23 @@ public class Pedestrian extends GameObject {
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		onDelete();
 		game.deleteCoins();
 		return true;
 	}
 
-	
-	@Override
-	public void showLife() {
-		if(isAlive()) {
-			this.symbol = "☺";
-		}
-		else this.symbol = "";
-	}
-
-	@Override
 	public boolean receiveExplosion() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveThunder() {
-		System.out.println();
 		return false;
+	}
+	
+	public void checkBorde() {
+		if(this.y == 0) this.bordearriba = true ;
+		if(this.y == (game.getRoadWidth()-1)) this.bordearriba = false;
 	}
 	
 }

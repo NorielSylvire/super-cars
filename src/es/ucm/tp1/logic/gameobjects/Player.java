@@ -8,10 +8,61 @@ import es.ucm.tp1.view.GamePrinter;
 public class Player extends GameObject{
 	
 	private boolean immune;
+	private int coins;
 	
 	public Player (Game game, int x, int y) {
 		super(game, x, y);
-		onEnter();
+		this.onEnter();
+	}
+	
+	public void onEnter() {
+		this.coins = 0;
+		showLife();
+		this.immune = true;
+	}
+	
+	public void onDelete() {
+		this.alive = false;	
+		showLife();
+	}
+	
+	public void showLife() {
+		if(isAlive()) this.symbol = ">";
+		else this.symbol = "@";
+	}
+	
+	@Override
+	public void update() {
+		moveForward();
+	}
+	
+	public void updateCollision() {
+		if(!this.immune) doCollision();
+		else this.immune = false;
+	}
+	
+	public boolean doCollision() {
+		Collider other = game.getObjectInPosition(x, y);
+		if (other != null) {
+		return other.receiveCollision(this);
+		}
+		return false;
+	}
+
+	public boolean receiveCollision(Player player) {
+		return false;
+	}
+	
+	public boolean receiveShoot() {
+		return false;
+	}
+
+	public boolean receiveExplosion() {
+		return false;
+	}
+
+	public boolean receiveThunder() {
+		return false;
 	}
 	
 	public void playerUp() {
@@ -27,64 +78,19 @@ public class Player extends GameObject{
 		this.immune = true;
 	}
 	
-	public void showLife() {
-		if(isAlive()) this.symbol = ">";
-		else this.symbol = "@";
+	public void addCoins(int amount) {
+		this.coins += amount;
 	}
 	
-	public void update() {
-		moveForward();
+	public int getPlayerCoins() {
+		return this.coins;
 	}
-	
-	public void updateCollision() {
-		if(!this.immune) doCollision();
-		else this.immune = false;
+
+	public void deleteCoins() {
+		this.coins = 0;
 	}
 
 	public boolean hasArrived(Level level) {
 		return x == level.getLength();
-	}
-	
-	public void onEnter() {
-		showLife();
-		this.immune = true;
-	}
-	
-	public void onDelete() {
-		this.alive = false;	
-		showLife();
-	}
-	
-	public boolean doCollision() {
-		Collider other = game.getObjectInPosition(x, y);
-		if (other != null) {
-		return other.receiveCollision(this);
-		}
-		return false;
-	}
-
-	public boolean receiveCollision(Player player) {
-		return false;
-	}
-	
-	@Override
-	public String toString() {
-		return getSymbol();
-	}
-	
-	@Override
-	public boolean receiveShoot() {
-		return false;
-	}
-
-	@Override
-	public boolean receiveExplosion() {
-		return false;
-	}
-
-	@Override
-	public boolean receiveThunder() {
-		System.out.println();
-		return false;
 	}
 }

@@ -4,6 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class SuperCoin extends GameObject{
 	
+	public static boolean isPresent;
 	public static final String INFO = "[S]upercoin, objects to collect that give you 1000 coins.";
 
 	
@@ -12,26 +13,18 @@ public class SuperCoin extends GameObject{
 	}
 	
 	public void onEnter() {
-		Game.toggleSCoinIsPresent();
+		isPresent = true;
 		this.alive = true;
 		this.symbol = "$";
 	}
-
-	@Override
-	public void showLife() {
-		if(isAlive()) this.symbol = "$";
-	}
-	
-	public void update() {
-	}
 	
 	public void onDelete() {
-		game.toggleSCoinIsPresent();
+		isPresent = false;
 		this.alive = false;
 	}
-	
-	public boolean isAlive() {
-		return this.alive;
+
+	public void showLife() {
+		if(isAlive()) this.symbol = "$";
 	}
 	
 	public boolean doCollision() {
@@ -44,19 +37,19 @@ public class SuperCoin extends GameObject{
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveExplosion() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveThunder() {
-		System.out.println();
 		return false;
+	}
+	
+	public static boolean isPresent() {
+		return isPresent;
 	}
 }

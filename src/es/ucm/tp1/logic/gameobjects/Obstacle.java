@@ -1,6 +1,7 @@
 package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.view.GamePrinter;
 
 public class Obstacle extends GameObject {
 	private static int numObstacles;
@@ -11,14 +12,16 @@ public class Obstacle extends GameObject {
 	}
 	
 	public void onEnter() {
-		this.alive = true;
 		numObstacles++;
+		this.alive = true;
 		this.symbol = "░";
 		this.health = 1;
 	}
 	
-	public static int getObstaclesCount(){
-		return numObstacles;
+	public void onDelete() {
+		this.health--;
+		this.alive = false;
+		numObstacles--;
 	}
 	
 	public void showLife() {
@@ -28,18 +31,8 @@ public class Obstacle extends GameObject {
 		else this.symbol = "";
 	}
 	
-	public void update() {
-		showLife();
-	}
-	
-	public void onDelete() {
-		this.health--;
-		this.alive = false;
-		numObstacles--;
-	}
-	
-	public static void reset() {
-		numObstacles = 0;
+	public static int getObstaclesCount(){
+		return numObstacles;
 	}
 	
 	public boolean doCollision() {
@@ -51,25 +44,26 @@ public class Obstacle extends GameObject {
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		onDelete();
 		update();
 		return true;
 	}
 
-	@Override
 	public boolean receiveExplosion() {
 		System.out.println("oof");
 		this.onDelete();
 		return true;
 	}
 
-	@Override
 	public boolean receiveThunder() {
 		this.onDelete();
-		System.out.println(" -> Obstacle hit.");
+		GamePrinter.thunderHitAnObject("Obstacle");
 		return true;
+	}
+	
+	public static void reset() {
+		numObstacles = 0;
 	}
 	
 }

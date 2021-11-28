@@ -20,15 +20,13 @@ public class ThunderAction implements InstantAction {
 		
 		position.x = Utils.abs(rnd.nextInt()%game.getVisibility()) + game.getPlayerX();
 		position.y = Utils.abs(rnd.nextInt()%game.getRoadWidth());
-		game.updateThunder(position);
-		
-		String formattedPosition = "(" + (position.x - game.getPlayerX()) + " , " + position.y + ")";
-		System.out.print("Thunder hit position: ");
-		System.out.print(formattedPosition);
 		
 		GameObject gameObject = game.getObjectInPosition(position.x, position.y);
 		if (gameObject != null) gameObject.receiveThunder();
-		else System.out.println();
 		
+	}
+	
+	public static Vector2 getPosition() {
+		return position;
 	}
 }

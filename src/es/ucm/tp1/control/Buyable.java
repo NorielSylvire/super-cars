@@ -7,7 +7,7 @@ public interface Buyable {
 	public int cost();
 	
 	public default boolean buy(Game game) {
-		if(game.playerCoins() >= cost()) {
+		if(game.getPlayerCoins() >= cost()) {
 			game.addCoins(-cost());
 			return true;
 		}

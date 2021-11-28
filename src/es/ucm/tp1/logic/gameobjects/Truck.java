@@ -1,6 +1,7 @@
 package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.view.GamePrinter;
 
 public class Truck extends GameObject {
 	public static final String INFO = "[T]ruck, if the car collides with it the Game ENDS.";
@@ -13,14 +14,20 @@ public class Truck extends GameObject {
 		showLife();
 	}
 	
-	@Override
-	public void update() {
-		this.x--;
-	}
-	
 	public void onDelete() {
 		this.health--;
 		this.alive = false;
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		this.x--;
+	}
+
+	public void showLife() {
+		if(this.alive) this.symbol = "←";
+		else this.symbol = "";
 	}
 	
 	public boolean doCollision() {
@@ -32,28 +39,18 @@ public class Truck extends GameObject {
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public void showLife() {
-		if(this.alive) this.symbol = "←";
-		else this.symbol = "";
-	}
-
-	@Override
 	public boolean receiveExplosion() {
 		this.onDelete();
 		return true;
 	}
 
-	@Override
 	public boolean receiveThunder() {
 		this.onDelete();
-		System.out.println(" -> Thunder hit.");
+		GamePrinter.thunderHitAnObject("Truck");
 		return true;
 	}
 	

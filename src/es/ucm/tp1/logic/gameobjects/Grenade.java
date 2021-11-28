@@ -18,17 +18,23 @@ public class Grenade extends GameObject implements Collider {
 		showLife();
 	}
 	
-	@Override
-	public void update() {
-		this.health--;
-		System.out.println("Estoy en " + this.x + " , " + this.y + " y tengo " + this.health + " puntos de vida.");
-		this.showLife();
-		if (this.health == 0) onDelete();
-	}
-	
 	public void onDelete() {
 		game.execute(new ExplosionAction(this.x,this.y));
 		this.alive = false;
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		this.health--;
+		if (this.health == 0) onDelete();
+	}
+
+	public void showLife() {
+		if(this.health > 0){
+			this.symbol = "ð [" + this.health + "]";
+		}
+		else this.symbol = "";
 	}
 	
 	public boolean isAlive() {
@@ -43,26 +49,16 @@ public class Grenade extends GameObject implements Collider {
 		return false;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		return false;
 	}
-
-	@Override
-	public void showLife() {
-		if(this.health > 0){
-			this.symbol = "ð [" + this.health + "]";
-		}
-		else this.symbol = "";
-	}
+	
 	public boolean receiveExplosion() {
 		this.health = 0;
 		return false;
 	}
 
-	@Override
 	public boolean receiveThunder() {
-		System.out.println();
 		return false;
 	}
 

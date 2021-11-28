@@ -6,27 +6,51 @@ public abstract class GameObject implements Collider {
 	protected Game game;
 	protected String symbol;
 	protected boolean alive;
+	protected boolean alreadyPrinted;
 	protected int health;
 	
 	public GameObject(Game game, int x, int y) {
-		onEnter();
 		this.x = x;
 		this.y = y;
 		this.game = game;
 		this.health = 1;
 		this.alive = true;
+		this.alreadyPrinted = false;
+	}
+	
+	public abstract void onEnter();
+	
+	public abstract void onDelete();
+	
+	public abstract void showLife();
+	
+	public void update() {
+		this.alreadyPrinted = false;
+		showLife();
+	}
+	
+	public boolean getAlreadyPrinted() {
+		return this.alreadyPrinted;
+	}
+	
+	public void printedThisTurn() {
+		this.alreadyPrinted = true;
 	}
 	
 	protected String getSymbol() {
 		return symbol;
 	}
 	
-	public void moveForward() {
-		this.x++;
+	public String toString() {
+		if(isAlive()) {
+			return getSymbol();
+		}
+		return "";
 	}
 	
-	public void tryToMoveForward(GameObject nextGO) {
-		if(nextGO == null) moveForward();
+	public boolean isAlive() {
+		if(health <= 0) this.alive = false;
+		return this.alive;
 	}
 	
 	public int getX() {
@@ -37,28 +61,16 @@ public abstract class GameObject implements Collider {
 		return y;
 	}
 	
+	public void moveForward() {
+		this.x++;
+	}
+	
+	public void tryToMoveForward(GameObject nextGO) {
+		if(nextGO == null) moveForward();
+	}
+	
 	public boolean isInPosition(int x, int y){
 		return this.x == x && this.y == y;
-	}
-	
-	public abstract void onEnter();
-	
-	public abstract void update();
-	
-	public abstract void onDelete();
-	
-	public abstract void showLife();
-	
-	public boolean isAlive() {
-		if(health <= 0) this.alive = false;
-		return this.alive;
-	}
-	
-	public String toString() {
-		if(isAlive()) {
-			return getSymbol();
-		}
-		return "";
 	}
 }
  	

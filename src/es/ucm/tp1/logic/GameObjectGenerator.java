@@ -13,28 +13,36 @@ public class GameObjectGenerator {
 	public static void generateGameObjects(Game game, Level level) {		
 		rnd = new Random();
 		rnd.setSeed(game.seed());
+		Coin.reset();
+		Obstacle.reset();
 		
 		for(int x = game.getVisibility() / 2; x < game.getRoadLength() - game.getVisibility() / 2; x++) {
 			tryToAddObject(new Obstacle(game, x, getRandomLane(game.getRoadWidth())), level.getObstacleFrequency(), game);
 			tryToAddObject(new Coin(game, x, getRandomLane(game.getRoadWidth())), level.getCoinFrequency(), game);
 			
-			if (game.hasAdvancedObjects()) {
-				tryToAddObject(new Wall(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+			if(game.hasAdvancedObjects()) {
+				tryToAddObject(new Wall(game, x, getRandomLane(game.getRoadWidth())), level.getAdvancedObjectsFrequency(), game);
 				
-				tryToAddObject(new Turbo(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+				tryToAddObject(new Turbo(game, x, getRandomLane(game.getRoadWidth())), level.getAdvancedObjectsFrequency(), game);
 				
-				if (!game.isSuperCoinPresent()) {
-					tryToAddObject(new SuperCoin(game, x, getRandomLane(game.getRoadWidth())),level.advancedObjectsFrequency(), game);
-				}
+				tryToAddObject(new Truck(game, x, getRandomLane(game.getRoadWidth())), level.getAdvancedObjectsFrequency(), game);
 				
-				tryToAddObject(new Truck(game, x, getRandomLane(game.getRoadWidth())), level.advancedObjectsFrequency(), game);
+				tryToAddObject(new Pedestrian(game, x, 0), level.getAdvancedObjectsFrequency(), game);
 				
-				tryToAddObject(new Pedestrian(game, x, 0), level.advancedObjectsFrequency(), game);
-				
+			}
+		}
+		
+		if(game.hasAdvancedObjects()) {
+			while(!game.isSuperCoinPresent()) {
+				tryToAddObject(new SuperCoin(game, rndSuperCoinPos(game), getRandomLane(game.getRoadWidth())),level.getAdvancedObjectsFrequency(), game);
 			}
 		}
 	}
 	
+	private static int rndSuperCoinPos(Game game) {
+		return rnd.nextInt()%(game.getRoadLength()-3) + 2;
+	}
+
 	public static void reset() {
 		Obstacle.reset();
 		Coin.reset();

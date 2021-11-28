@@ -1,8 +1,10 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.control.ThunderAction;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Player;
+import es.ucm.tp1.logic.gameobjects.SuperCoin;
 import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.control.InstantAction;
 import es.ucm.tp1.view.GamePrinter;
@@ -12,31 +14,21 @@ public class Game {
 	private Long seed;
 	private int cycles;
 	private Level level;
-	private int coins;
-	private static boolean superCoinIsPresent;
-	private static boolean advancedObjects;
 	private Player player;
 	private long start;
 	private long record;
 	private boolean isExit;
 	private GameObjectContainer container;
-	private int thunderX, thunderY;
 	
 	public Game(Long seed, Level level) {
 		this.seed = seed;
 		this.level = level;
-		this.coins = 0;
 		this.isExit = false;
 		this.record = 0;
-		this.superCoinIsPresent = false;
-		this.advancedObjects = (level.advancedObjectsFrequency() != 0);
 		this.record = Integer.MAX_VALUE;
-		this.thunderX = -1;
-		this.thunderY = this.thunderX;
 	}
 	
 	public void initialiseGame() {
-		this.coins = 100000000;
 		this.cycles = 0;
 		this.player = new Player(this, 0, getRoadWidth()/2);
 		this.container = new GameObjectContainer();
@@ -49,8 +41,16 @@ public class Game {
 		this.seed = seed;
 	}
 	
-	public void addCoins(int num) {
-		this.coins+= num;
+	public void addCoins(int amount) {
+		player.addCoins(amount);
+	}
+	
+	public int getPlayerCoins() {
+		return player.getPlayerCoins();
+	}
+
+	public void deleteCoins() {
+		player.deleteCoins();
 	}
 	
 	public void removeDead() {
@@ -101,6 +101,10 @@ public class Game {
 	public GameObject getObjectInPosition(int x, int y) {
 		return container.getObjectInList(x, y);
 	}
+
+	public GameObject getObjectInPositionLoop(int x, int y) {
+		return container.getObjectInListLoop(x, y);
+	}
 	
 	public void addGameObject(GameObject gameObject) {
 		this.container.addObject(gameObject);
@@ -146,9 +150,7 @@ public class Game {
 	public int distanceToGoal() {
 		return level.getLength() - player.getX();
 	}
-	public int playerCoins() {
-		return coins;
-	}
+	
 	public int getCycle() {
 		return cycles;
 	}
@@ -164,27 +166,12 @@ public class Game {
 		System.out.println(GamePrinter.notEnoughCoins());
 	}
 	
-	
-
-	public static void toggleSCoinIsPresent() {
-		superCoinIsPresent = !superCoinIsPresent;
-	}
-	
 	public boolean isSuperCoinPresent() {
-		return superCoinIsPresent;
-	}
-
-	public void deleteCoins() {
-		this.coins = 0;
+		return SuperCoin.isPresent();
 	}
 	
-	public void updateThunder(Vector2 thunderPos) {
-		this.thunderX = thunderPos.x;
-		this.thunderY = thunderPos.y;
-	}
-	
-	public Vector2 getThunderPos() {
-		return new Vector2(this.thunderX, this.thunderY);
+	public Vector2 getThunderPosition() {
+		return ThunderAction.getPosition();
 	}
 
 	public void updateCollision() {
@@ -204,6 +191,6 @@ public class Game {
 	}
 
 	public boolean hasAdvancedObjects() {
-		return advancedObjects;
+		return level.isAdvanced();
 	}
 }

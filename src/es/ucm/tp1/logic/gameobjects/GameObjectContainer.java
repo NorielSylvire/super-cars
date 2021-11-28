@@ -29,6 +29,16 @@ public class GameObjectContainer {
 		}
 		return null;
 	}
+	
+	public GameObject getObjectInListLoop(int x, int y) {
+		for(int i= 0; i<gameObjects.size();i++) {
+			if(gameObjects.get(i).isInPosition(x, y) && !gameObjects.get(i).getAlreadyPrinted()) {
+				gameObjects.get(i).printedThisTurn();
+				return gameObjects.get(i);
+			}
+		}
+		return null;
+	}
 
 	public void removeDead() {
 		for(int i= 0; i<gameObjects.size();i++) {

@@ -13,21 +13,17 @@ public class Turbo extends GameObject {
 		this.alive = true;
 		showLife();
 	}
-	@Override
+	
+	public void onDelete() {
+		showLife();
+		this.alive = false;
+	}
+	
 	public void showLife() {
 		if (isAlive()) {
 			this.symbol = ">>>";
 		}
 		else this.symbol = "";
-	}
-	
-	public void update() {
-		
-	}
-	
-	public void onDelete() {
-		showLife();
-		this.alive = false;
 	}
 	
 	public boolean doCollision() {
@@ -40,19 +36,15 @@ public class Turbo extends GameObject {
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveExplosion() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveThunder() {
-		System.out.println();
 		return false;
 	}
 	

@@ -12,22 +12,11 @@ public class Coin extends GameObject{
 		super(game, x, y);
 	}
 	
-	public static int getCoinsCount() {
-		return numCoins;
-	}
-	
 	public void onEnter() {
 		this.alive = true;
 		numCoins++;
 		this.symbol = "¢";
 	}
-	
-	public void showLife() {
-		if(isAlive()) this.symbol = "¢";
-		else this.symbol = "";
-	}
-	
-	public void update() {}
 	
 	public void onDelete() {
 		numCoins--;
@@ -35,20 +24,13 @@ public class Coin extends GameObject{
 		this.alive = false;
 	}
 	
-	public boolean isAlive() {
-		return this.alive;
-	}
-	
-	public static void reset() {
-		numCoins = 0;
+	public void showLife() {
+		if(isAlive()) this.symbol = "¢";
+		else this.symbol = "";
 	}
 	
 	public boolean doCollision() {
 		return false;
-	}
-
-	private void addCoins(Game game) {
-		game.addCoins(1);
 	}
 	
 	public boolean receiveCollision(Player player) {
@@ -57,19 +39,27 @@ public class Coin extends GameObject{
 		return true;
 	}
 
-	@Override
 	public boolean receiveShoot() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveExplosion() {
 		return false;
 	}
 
-	@Override
 	public boolean receiveThunder() {
-		System.out.println();
 		return false;
+	}
+	
+	public static int getCoinsCount() {
+		return numCoins;
+	}
+	
+	public static void reset() {
+		numCoins = 0;
+	}
+
+	private void addCoins(Game game) {
+		game.addCoins(1);
 	}
 }
