@@ -5,7 +5,7 @@ import es.ucm.tp1.logic.gameobjects.Grenade;
 
 public class GrenadeCommand extends Command implements Buyable {
 	private static final String NAME = "grenade";
-	private static final String DETAILS = "[g]renade";
+	private static final String DETAILS = "[g]renade <x> <y>: add a grenade in position x, y.";
 	private static final String SHORTCUT = "g";
 	private static final String HELP = "Launches a grenade that explodes after four cycles.";
 	private int posX, posY;
@@ -44,6 +44,7 @@ public class GrenadeCommand extends Command implements Buyable {
 	public boolean execute(Game game) {
 		Grenade grenade = new Grenade(game, posX + game.getPlayerX(), posY);
 		game.addGameObject(grenade);
+		game.updateCycles();
 		return true;
 	}
 

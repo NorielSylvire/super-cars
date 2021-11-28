@@ -3,7 +3,7 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 
 public class Turbo extends GameObject {
-	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
+	public static final String INFO = "[TURBO] pushes the car 3 columns.";
 	
 	public Turbo (Game game, int x, int y) {
 		super(game, x, y);
@@ -45,6 +45,7 @@ public class Turbo extends GameObject {
 	}
 
 	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 	

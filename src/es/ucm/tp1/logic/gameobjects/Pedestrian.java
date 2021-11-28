@@ -3,7 +3,7 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 
 public class Pedestrian extends GameObject {
-	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
+	public static final String INFO = "[PEDESTRIAN] person crossing the road up and down.";
 	public boolean bordearriba = true;
 	
 	public Pedestrian (Game game, int x, int y) {
@@ -18,7 +18,7 @@ public class Pedestrian extends GameObject {
 	
 	public void onDelete() {
 		this.health --;
-		this.alive = false;
+		game.deleteCoins();
 		showLife();
 	}
 	
@@ -43,20 +43,22 @@ public class Pedestrian extends GameObject {
 	
 	public boolean receiveCollision(Player player) {
 		player.onDelete();
+		this.onDelete();
 		return true;
 	}
 
 	public boolean receiveShoot() {
-		onDelete();
-		game.deleteCoins();
+		this.onDelete();
 		return true;
 	}
 
 	public boolean receiveExplosion() {
+		this.onDelete();
 		return false;
 	}
 
 	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 	

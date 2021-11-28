@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class MoveDownCommand extends Command {
 	private static final String NAME = "movedown";
-	private static final String DETAILS = "[a]";
+	private static final String DETAILS = "[a]: go down.";
 	private static final String SHORTCUT = "a";
 	private static final String HELP = "Makes the player move down if possible.";
 
@@ -20,6 +20,8 @@ public class MoveDownCommand extends Command {
 	}
 	@Override
 	public boolean execute(Game game) {
+		game.updatePlayer();
+		game.updateCollision();
 		game.movePlayer(false);
 		return true;
 	}

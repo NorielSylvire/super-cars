@@ -1,4 +1,4 @@
-package es.ucm.tp1.logic.gameobjects;
+package es.ucm.tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;

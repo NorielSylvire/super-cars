@@ -5,7 +5,8 @@ import es.ucm.tp1.logic.Game;
 public class Coin extends GameObject{
 	
 	private static int numCoins = 0;
-	public static final String INFO = "[C]oins, objects to collect";
+	public static final String INFO = "[Coin] gives 1 coin to the player.";
+	protected int reward = 1;
 
 	
 	public Coin (Game game, int x, int y) {
@@ -21,7 +22,6 @@ public class Coin extends GameObject{
 	public void onDelete() {
 		numCoins--;
 		health--;
-		this.alive = false;
 	}
 	
 	public void showLife() {
@@ -35,7 +35,7 @@ public class Coin extends GameObject{
 	
 	public boolean receiveCollision(Player player) {
 		onDelete();
-		addCoins(game);
+		addCoins();
 		return true;
 	}
 
@@ -48,6 +48,7 @@ public class Coin extends GameObject{
 	}
 
 	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 	
@@ -59,7 +60,7 @@ public class Coin extends GameObject{
 		numCoins = 0;
 	}
 
-	private void addCoins(Game game) {
-		game.addCoins(1);
+	protected void addCoins() {
+		game.addCoins(reward);
 	}
 }

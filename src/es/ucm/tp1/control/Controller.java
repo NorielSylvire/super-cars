@@ -19,7 +19,6 @@ public class Controller {
 		this.game = game;
 		this.scanner = scanner;
 		this.printer = new GamePrinter(game);
-		this.thunder = new ThunderAction();
 	}
 
 	public void printGame() {
@@ -35,7 +34,6 @@ public class Controller {
 		game.initialiseGame();
 
 		while (!game.isFinished()) {
-			thunder.staticExecuteIA(game);
 			if (refreshDisplay) {
 				printGame();
 			}
@@ -52,7 +50,6 @@ public class Controller {
 				refreshDisplay = command.execute(game);
 			}
 			game.removeDead();
-			game.updateCollision();
 		}
 		if (refreshDisplay) {
 			printGame();

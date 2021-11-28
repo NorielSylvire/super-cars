@@ -2,11 +2,9 @@ package es.ucm.tp1.view;
 
 import es.ucm.tp1.utils.StringUtils;
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.control.ThunderAction;
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.logic.gameobjects.Coin;
-import es.ucm.tp1.logic.gameobjects.GameObject;
-import es.ucm.tp1.logic.gameobjects.Obstacle;
-import es.ucm.tp1.logic.gameobjects.SuperCoin;
+import es.ucm.tp1.logic.gameobjects.*;
 
 public class GamePrinter {
 
@@ -29,7 +27,6 @@ public class GamePrinter {
 	public static final String GAME_OVER_MSG = "GAME OVER ";
 	public static final String SUPERCOIN_IS_PRESENT_MSG = "Super coin is present.";
 	public static final String NOT_ENOUGH_COINS_MSG = "Not enough coins!";
-	public static final String THUNDER_HIT_MSG = "Thunder hit position: ";
 	
 	public static boolean thunderHitThisTurn;
 	public static String objectHitByThunder;
@@ -63,16 +60,13 @@ public class GamePrinter {
 	protected String getInfo() {
 		StringBuilder buffer = new StringBuilder();
 		/* @formatter:off */
-		String formattedThunderPosition = "(" + (game.getThunderPosition().x - game.getPlayerX()) + " , " + game.getThunderPosition().y + ")";
-		buffer.append(THUNDER_HIT_MSG).append(formattedThunderPosition)
-		.append(thunderVictim()).append(StringUtils.LINE_SEPARATOR)
-		.append(DISTANCE_MSG).append(game.distanceToGoal()).append(StringUtils.LINE_SEPARATOR)
+		buffer.append(DISTANCE_MSG).append(game.distanceToGoal()).append(StringUtils.LINE_SEPARATOR)
 		.append(COINS_MSG).append(game.getPlayerCoins()).append(StringUtils.LINE_SEPARATOR)
 		.append(CYCLE_MSG).append(game.getCycle()).append(StringUtils.LINE_SEPARATOR)
 		.append(TOTAL_OBSTACLES_MSG).append(Obstacle.getObstaclesCount()).append(StringUtils.LINE_SEPARATOR)
 		.append(TOTAL_COINS_MSG).append(Coin.getCoinsCount()).append(StringUtils.LINE_SEPARATOR);
 		
-		if(game.isSuperCoinPresent()) {
+		if(SuperCoin.isPresent()) {
 			buffer.append(SUPERCOIN_IS_PRESENT_MSG).append(StringUtils.LINE_SEPARATOR);
 		}
 		/* @formatter:on */
@@ -103,7 +97,6 @@ public class GamePrinter {
 
 		String verticalDelimiter = SPACE;
 		String nextSlot = "";
-		Boolean alreadyOccupied = false;
 		Boolean thereIsNothing = true;
 
 		for (int y = 0; y < game.getRoadWidth(); y++) {
@@ -118,10 +111,6 @@ public class GamePrinter {
 					thereIsNothing = false;
 					nextSlot+=gameObject.toString();
 					gameObject = game.getObjectInPositionLoop(x + game.getPlayerX(), y);
-				}
-				if(x == game.getThunderPosition().x - game.getPlayerX() && y == game.getThunderPosition().y) {
-					nextSlot = "🗲";
-					thereIsNothing = false;
 				}
 				if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
 					str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
@@ -209,7 +198,13 @@ public class GamePrinter {
 		StringBuilder buffer = new StringBuilder("[Car] the racing car");
 		/* @formatter:off */
 		buffer.append(StringUtils.LINE_SEPARATOR).append(Coin.INFO)
-		.append(StringUtils.LINE_SEPARATOR).append(Obstacle.INFO);
+		.append(StringUtils.LINE_SEPARATOR).append(Obstacle.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(Grenade.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(Wall.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(Turbo.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(SuperCoin.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(Truck.INFO)
+		.append(StringUtils.LINE_SEPARATOR).append(Pedestrian.INFO);
 		/* @formatter:on */
 		return buffer.toString();
 	}
@@ -217,20 +212,6 @@ public class GamePrinter {
 
 	public static String notEnoughCoins() {
 		return NOT_ENOUGH_COINS_MSG;
-	}
-	
-	public static void thunderHitThisTurn() {
-		thunderHitThisTurn = true;
-	}
-	
-	public static void thunderHitAnObject(String name) {
-		thunderHitThisTurn();
-		objectHitByThunder = name;
-	}
-	
-	private String thunderVictim() {
-		if(thunderHitThisTurn) return " -> " + objectHitByThunder + " hit.";
-		else return "";
 	}
 	
 }

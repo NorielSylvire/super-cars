@@ -2,6 +2,7 @@ package es.ucm.tp1.logic;
 
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.control.ThunderAction;
 import es.ucm.tp1.logic.gameobjects.*;
 import es.ucm.tp1.utils.Vector2;
 
@@ -33,7 +34,7 @@ public class GameObjectGenerator {
 		}
 		
 		if(game.hasAdvancedObjects()) {
-			while(!game.isSuperCoinPresent()) {
+			while(!SuperCoin.isPresent()) {
 				tryToAddObject(new SuperCoin(game, rndSuperCoinPos(game), getRandomLane(game.getRoadWidth())),level.getAdvancedObjectsFrequency(), game);
 			}
 		}
@@ -59,6 +60,7 @@ public class GameObjectGenerator {
 		if (ret < 0) ret = - ret;
 		return ret;
 	}
+	
 	public static void generateCheatObjects(Game game, int x, int objectID) {
 		GameObject o = null;
 		Vector2 pos = new Vector2(x, getRandomLane(game.getRoadWidth()));
@@ -89,5 +91,12 @@ public class GameObjectGenerator {
 		}
 		
 		game.addGameObject(o);
+	}
+	
+	public static void generateRuntimeObjects(Game game) {
+		// Note we use this method to create and inject new objects or actions on runtime.
+		if (game.hasAdvancedObjects()) {
+			game.execute(new ThunderAction());
+		}
 	}
 }

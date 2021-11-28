@@ -7,7 +7,6 @@ import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
 	
-	private boolean immune;
 	private int coins;
 	
 	public Player (Game game, int x, int y) {
@@ -18,7 +17,6 @@ public class Player extends GameObject{
 	public void onEnter() {
 		this.coins = 0;
 		showLife();
-		this.immune = true;
 	}
 	
 	public void onDelete() {
@@ -32,13 +30,13 @@ public class Player extends GameObject{
 	}
 	
 	@Override
-	public void update() {
-		moveForward();
+	public String toString() {
+		return getSymbol();
 	}
 	
-	public void updateCollision() {
-		if(!this.immune) doCollision();
-		else this.immune = false;
+	@Override
+	public void update() {
+		if(this.isAlive()) moveForward();
 	}
 	
 	public boolean doCollision() {
@@ -62,6 +60,7 @@ public class Player extends GameObject{
 	}
 
 	public boolean receiveThunder() {
+		System.out.println();
 		return false;
 	}
 	
@@ -75,7 +74,6 @@ public class Player extends GameObject{
 
 	public void turboAdvance() {
 		this.x += 3;
-		this.immune = true;
 	}
 	
 	public void addCoins(int amount) {

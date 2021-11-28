@@ -5,7 +5,7 @@ import es.ucm.tp1.control.ShootAction;
 
 public class ShootCommand extends Command implements  Buyable{
 	private static final String NAME = "shoot";
-	private static final String DETAILS = "[s]hoot";
+	private static final String DETAILS = "[s]hoot: shoot bullet.";
 	private static final String SHORTCUT = "s";
 	private static final String HELP = "Shoots a laser beam that fires instantly and costs one coin.";
 
@@ -15,8 +15,12 @@ public class ShootCommand extends Command implements  Buyable{
 
 	@Override
 	public boolean execute(Game game) {
-		if(buy(game)) game.execute(new ShootAction());
-		return true;
+		boolean shot = buy(game);
+		if(shot) {
+			game.execute(new ShootAction());
+			game.updateCycles();
+		}
+		return shot;
 	}
 	
 	

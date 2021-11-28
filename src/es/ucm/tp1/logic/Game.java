@@ -1,14 +1,9 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
-import es.ucm.tp1.control.ThunderAction;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Player;
-import es.ucm.tp1.logic.gameobjects.SuperCoin;
-import es.ucm.tp1.logic.gameobjects.GameObjectContainer;
 import es.ucm.tp1.control.InstantAction;
-import es.ucm.tp1.view.GamePrinter;
-import es.ucm.tp1.utils.Vector2;
 
 public class Game {
 	private Long seed;
@@ -36,6 +31,39 @@ public class Game {
 		this.start = System.currentTimeMillis();
 	}
 	
+	public void updateCycles() {
+		nextCycle();
+		GameObjectGenerator.generateRuntimeObjects(this);
+		player.doCollision();
+		container.update();
+	}
+	
+	public void updatePlayer() {
+		player.update();
+	}
+	
+	public void updateCollision() {
+		player.doCollision();
+	}
+	
+	public void movePlayer(boolean up) {
+		if(up) player.playerUp();
+		else player.playerDown();
+		updateCycles();
+	}
+	
+	public int getPlayerY() {
+		return player.getY();
+	}
+	
+	public int getPlayerX() {
+		return player.getX();
+	}
+	
+	public String getPlayerSymbol() {
+		return player.toString();
+	}
+	
 	public void changeLevel(Level level, long seed) {;
 		this.level = level;
 		this.seed = seed;
@@ -59,31 +87,6 @@ public class Game {
 	
 	public void nextCycle() {
 		this.cycles++;
-	}
-	
-	public void update() {
-		nextCycle();
-		this.player.update();
-		this.container.update();
-		this.player.updateCollision();
-	}
-	
-	public void movePlayer(boolean up) {
-		if(up) player.playerUp();
-		else player.playerDown();
-		update();
-	}
-	
-	public int getPlayerY() {
-		return player.getY();
-	}
-	
-	public int getPlayerX() {
-		return player.getX();
-	}
-	
-	public String getPlayerSymbol() {
-		return player.toString();
 	}
 	
 	public int getVisibility() {
@@ -158,24 +161,8 @@ public class Game {
 		return (isUserExit() || hasArrived() || hasCrashed());
 	}
 
-	public void printInfo() {
-		System.out.println(GamePrinter.description(level));
-	}
-	
-	public void printNotEnoughCoins() {
-		System.out.println(GamePrinter.notEnoughCoins());
-	}
-	
-	public boolean isSuperCoinPresent() {
-		return SuperCoin.isPresent();
-	}
-	
-	public Vector2 getThunderPosition() {
-		return ThunderAction.getPosition();
-	}
-
-	public void updateCollision() {
-		player.updateCollision();
+	public Level getLevel() {
+		return this.level;
 	}
 	
 	public void execute(InstantAction IA) {

@@ -5,7 +5,7 @@ import es.ucm.tp1.logic.GameObjectGenerator;
 
 public class ClearCommand extends Command {
 	private static final String NAME = "clear";
-	private static final String DETAILS = "[c]lear";
+	private static final String DETAILS = "Clear [0]: Clears the road.";
 	private static final String SHORTCUT = "c";
 	private static final String HELP = "Clears the game of any objects other than the player.";
 

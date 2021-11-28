@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.control.ExplosionAction;
 
 public class Grenade extends GameObject implements Collider {
-	public static final String INFO = "[G]ruck, if the car collides with it the Game ENDS.";
+	public static final String INFO = "[GRENADE] Explodes in 3 cycles, harming everyone around.";
 	
 	
 	public Grenade(Game game, int x, int y) {

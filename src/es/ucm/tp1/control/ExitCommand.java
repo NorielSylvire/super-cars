@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class ExitCommand extends Command {
 	private static final String NAME = "exit";
-	private static final String DETAILS = "[e]xit";
+	private static final String DETAILS = "[e]xit: exit game.";
 	private static final String SHORTCUT = "e";
 	private static final String HELP = "Closes the game.";
 

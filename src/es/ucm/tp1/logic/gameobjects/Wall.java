@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
 public class Wall extends GameObject {	
-	public static final String INFO = "[W]all, if the car crush with him the Game ENDS";
+	public static final String INFO = "[WALL] hard obstacle.";
 	
 	public Wall (Game game, int x, int y) {
 		super(game, x, y);
@@ -56,7 +56,7 @@ public class Wall extends GameObject {
 
 	public boolean receiveThunder() {
 		this.onDelete();
-		GamePrinter.thunderHitAnObject("Wall");
+		System.out.println(" -> " + this.getSymbol());
 		return true;
 	}
 	

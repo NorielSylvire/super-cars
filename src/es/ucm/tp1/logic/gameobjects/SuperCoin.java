@@ -2,51 +2,32 @@ package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
 
-public class SuperCoin extends GameObject{
+public class SuperCoin extends Coin{
 	
 	public static boolean isPresent;
-	public static final String INFO = "[S]upercoin, objects to collect that give you 1000 coins.";
-
+	public static final String INFO = "[SUPERCOIN] gives 1000 coins.";
 	
 	public SuperCoin (Game game, int x, int y) {
 		super(game, x, y);
 	}
 	
+	@Override
 	public void onEnter() {
 		isPresent = true;
+		this.reward = 1000;
 		this.alive = true;
 		this.symbol = "$";
 	}
 	
+	@Override
 	public void onDelete() {
 		isPresent = false;
 		this.alive = false;
 	}
 
+	@Override
 	public void showLife() {
 		if(isAlive()) this.symbol = "$";
-	}
-	
-	public boolean doCollision() {
-		return false;
-	}
-	
-	public boolean receiveCollision(Player player) {
-		game.addCoins(1000);
-		onDelete();
-		return true;
-	}
-
-	public boolean receiveShoot() {
-		return false;
-	}
-
-	public boolean receiveExplosion() {
-		return false;
-	}
-
-	public boolean receiveThunder() {
-		return false;
 	}
 	
 	public static boolean isPresent() {

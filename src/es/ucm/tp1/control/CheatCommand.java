@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 
 public class CheatCommand extends Command {
 	private static final String NAME = "cheat";
-	private static final String DETAILS = "[h] de cheatr";
+	private static final String DETAILS = "Cheat [1..5]: Removes all elements of last visible column, and adds an Advanced Object.";
 	private static final String SHORTCUT = "12345";
 	private static final String HELP = "Cheezy boi.";
 	private static final String UNKNOWN_NUMBER = "The number you introduced isn't a valid input.";

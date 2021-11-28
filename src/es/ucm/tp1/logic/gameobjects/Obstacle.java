@@ -5,7 +5,7 @@ import es.ucm.tp1.view.GamePrinter;
 
 public class Obstacle extends GameObject {
 	private static int numObstacles;
-	public static final String INFO = "[O]bstacle, if the car crush with him the Game ENDS";
+	public static final String INFO = "[Obstacle] hits car.";
 	
 	public Obstacle (Game game, int x, int y) {
 		super(game, x, y);
@@ -31,10 +31,6 @@ public class Obstacle extends GameObject {
 		else this.symbol = "";
 	}
 	
-	public static int getObstaclesCount(){
-		return numObstacles;
-	}
-	
 	public boolean doCollision() {
 		return false;
 	}
@@ -51,19 +47,21 @@ public class Obstacle extends GameObject {
 	}
 
 	public boolean receiveExplosion() {
-		System.out.println("oof");
 		this.onDelete();
 		return true;
 	}
 
 	public boolean receiveThunder() {
-		this.onDelete();
-		GamePrinter.thunderHitAnObject("Obstacle");
-		return true;
+		System.out.println(" -> " + this.getSymbol());
+		return receiveExplosion();
 	}
 	
 	public static void reset() {
 		numObstacles = 0;
+	}
+	
+	public static int getObstaclesCount(){
+		return numObstacles;
 	}
 	
 }

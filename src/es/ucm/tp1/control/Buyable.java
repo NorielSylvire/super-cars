@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.view.GamePrinter;
 
 public interface Buyable {
 	
@@ -12,7 +13,7 @@ public interface Buyable {
 			return true;
 		}
 		else {
-			game.printNotEnoughCoins();
+			System.out.println(GamePrinter.notEnoughCoins());
 			return false;
 		}
 	}

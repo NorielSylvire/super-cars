@@ -4,7 +4,7 @@ import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
 public class Truck extends GameObject {
-	public static final String INFO = "[T]ruck, if the car collides with it the Game ENDS.";
+	public static final String INFO = "[TRUCK] moves towards the player.";
 	
 	public Truck (Game game, int x, int y) {
 		super(game, x, y);
@@ -50,7 +50,7 @@ public class Truck extends GameObject {
 
 	public boolean receiveThunder() {
 		this.onDelete();
-		GamePrinter.thunderHitAnObject("Truck");
+		System.out.println(" -> " + this.getSymbol());
 		return true;
 	}
 	
