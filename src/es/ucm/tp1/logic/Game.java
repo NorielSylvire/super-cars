@@ -64,7 +64,7 @@ public class Game {
 		return player.toString();
 	}
 	
-	public void changeLevel(Level level, long seed) {;
+	public void changeLevel(Level level, long seed) {
 		this.level = level;
 		this.seed = seed;
 	}

@@ -6,7 +6,7 @@ public abstract class Command {
 	
 	private final String name;
 	private final String shortcut;
-	private final String details ;
+	private final String details;
 	private final String help;
 	protected static final String WRONG_USAGE_MSG = "This is not how to use this command. Type \"help YOURCOMMAND\" to know more. ";
 	protected static final String UNKNOWN_COMMAND_MSG = "Unknown command.";

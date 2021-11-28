@@ -3,7 +3,6 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.utils.Utils;
-import es.ucm.tp1.view.GamePrinter;
 
 public class Player extends GameObject{
 	

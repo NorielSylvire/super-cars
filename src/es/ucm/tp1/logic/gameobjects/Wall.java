@@ -1,7 +1,6 @@
 package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.view.GamePrinter;
 
 public class Wall extends GameObject {	
 	public static final String INFO = "[WALL] hard obstacle.";

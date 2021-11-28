@@ -1,7 +1,6 @@
 package es.ucm.tp1.control;
 
 import java.util.Scanner;
-
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -13,7 +12,6 @@ public class Controller {
 	private Game game;
 	private Scanner scanner;
 	private GamePrinter printer;
-	private ThunderAction thunder;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;

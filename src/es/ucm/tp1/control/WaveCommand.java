@@ -1,7 +1,6 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.control.WaveAction;
 
 public class WaveCommand extends Command implements  Buyable {
 	private static final String NAME = "wave";

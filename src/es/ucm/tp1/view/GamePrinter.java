@@ -2,7 +2,6 @@ package es.ucm.tp1.view;
 
 import es.ucm.tp1.utils.StringUtils;
 import es.ucm.tp1.control.Level;
-import es.ucm.tp1.control.ThunderAction;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.*;
 

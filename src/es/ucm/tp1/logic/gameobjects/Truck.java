@@ -1,7 +1,6 @@
 package es.ucm.tp1.logic.gameobjects;
 
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.view.GamePrinter;
 
 public class Truck extends GameObject {
 	public static final String INFO = "[TRUCK] moves towards the player.";
