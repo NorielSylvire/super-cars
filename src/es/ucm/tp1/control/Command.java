@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.control.exceptions.*;
 
 public abstract class Command {
 	
@@ -35,23 +36,24 @@ public abstract class Command {
 	}
 
 	
-	public static Command getCommand(String[] commandWords) {
+	public static Command getCommand(String[] commandWords) throws CommandParseException {
 		for(int i = 0; i < AVAILABLE_COMMANDS.length; i++) {
 			if (AVAILABLE_COMMANDS[i].parse(commandWords) != null) return AVAILABLE_COMMANDS[i].parse(commandWords);
 		}
 		System.out.println(UNKNOWN_COMMAND_MSG);
-		return null;
+		throw new CommandParseException(String.format("[ERROR]: %s", UNKNOWN_COMMAND_MSG));
 	}
 	
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) || this.name.equalsIgnoreCase(name);
 	}
 	
-	protected Command parse(String[] words) {
+	protected Command parse(String[] words) throws CommandParseException {
 		if (matchCommandName(words[0])) {
 			if (words.length != 1) {
-				System.out.println("[ERROR]: Command " + name + ":" + INCORRECT_NUMBER_OF_ARGS_MSG);
-				return null;
+				throw new CommandParseException(String.format("[ERROR]:Command %s: %s",
+						name,
+						INCORRECT_NUMBER_OF_ARGS_MSG));
 			} else {
 				return this;
 			}
@@ -60,7 +62,7 @@ public abstract class Command {
 	}
 
 	
-	public abstract boolean execute(Game game);
+	public abstract boolean execute(Game game) throws CommandExecuteException;
 
 	
 }

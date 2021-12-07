@@ -1,6 +1,8 @@
 package es.ucm.tp1.control;
 
 import java.util.Scanner;
+
+import es.ucm.tp1.control.exceptions.GameException;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -42,10 +44,12 @@ public class Controller {
 
 			String[] parameters = s.toLowerCase().trim().split(" ");
 			System.out.format(DEBUG_MSG, s);
-			Command command = Command.getCommand(parameters);
-			
-			if (command != null) {
+			try {
+				Command command = Command.getCommand(parameters);
 				refreshDisplay = command.execute(game);
+			}
+			catch (GameException ex) {
+				System.out.format(ex.getMessage() + " %n %n");
 			}
 			game.removeDead();
 		}

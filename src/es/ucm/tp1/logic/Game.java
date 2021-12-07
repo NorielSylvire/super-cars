@@ -72,10 +72,6 @@ public class Game {
 	public void addCoins(int amount) {
 		player.addCoins(amount);
 	}
-	
-	public int getPlayerCoins() {
-		return player.getPlayerCoins();
-	}
 
 	public void deleteCoins() {
 		player.deleteCoins();
@@ -87,6 +83,22 @@ public class Game {
 	
 	public void nextCycle() {
 		this.cycles++;
+	}
+	
+	public long getSeed() {
+		return this.seed;
+	}
+
+	public Level getLevel() {
+		return this.level;
+	}
+	
+	public int getPlayerCoins() {
+		return player.getPlayerCoins();
+	}
+
+	public int getCycle() {
+		return cycles;
 	}
 	
 	public int getVisibility() {
@@ -109,6 +121,13 @@ public class Game {
 		return container.getObjectInListLoop(x, y);
 	}
 	
+	public long getRecord() {
+		return this.record;
+	}
+	public long getElapsedTime() {
+		return System.currentTimeMillis()-start;
+	}
+	
 	public void addGameObject(GameObject gameObject) {
 		this.container.addObject(gameObject);
 	}
@@ -117,16 +136,6 @@ public class Game {
 		this.container.reset();
 	}
 	
-	public long seed() {
-		return this.seed;
-	}
-	
-	public long getRecord() {
-		return this.record;
-	}
-	public long elapsedTime() {
-		return System.currentTimeMillis()-start;
-	}
 	public boolean isNewRecord(long timeElapsed) {
 		boolean isRecord = false;
 		if(timeElapsed < this.record) {
@@ -154,15 +163,8 @@ public class Game {
 		return level.getLength() - player.getX();
 	}
 	
-	public int getCycle() {
-		return cycles;
-	}
 	public boolean isFinished() {
 		return (isUserExit() || hasArrived() || hasCrashed());
-	}
-
-	public Level getLevel() {
-		return this.level;
 	}
 	
 	public void execute(InstantAction IA) {

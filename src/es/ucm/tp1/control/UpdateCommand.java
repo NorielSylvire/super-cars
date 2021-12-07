@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.control.exceptions.*;
 
 public class UpdateCommand extends Command {
 	private static final String NAME = "none";
@@ -12,7 +13,7 @@ public class UpdateCommand extends Command {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 	@Override
-	protected Command parse(String[] commandWords) {
+	protected Command parse(String[] commandWords) throws CommandParseException{
 		if ("".equalsIgnoreCase(commandWords[0])) {
 			commandWords[0] = SHORTCUT;
 		}

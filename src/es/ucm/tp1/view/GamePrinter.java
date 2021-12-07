@@ -73,7 +73,7 @@ public class GamePrinter {
 		if (!game.isTestMode()) {
 			/* @formatter:off */
 			buffer.append(StringUtils.LINE_SEPARATOR)
-			.append(ELAPSED_TIME_MSG).append(formatTime(game.elapsedTime()));
+			.append(ELAPSED_TIME_MSG).append(formatTime(game.getElapsedTime()));
 			/* @formatter:on */
 		}
 		
@@ -144,8 +144,8 @@ public class GamePrinter {
 		if (game.hasArrived()) {
 			buffer.append(WIN_MSG);
 			if (!game.isTestMode()) {
-				if (game.isNewRecord(game.elapsedTime())) {
-					buffer.append(NEW_RECORD_MSG).append(formatTime(game.elapsedTime()));
+				if (game.isNewRecord(game.getElapsedTime())) {
+					buffer.append(NEW_RECORD_MSG).append(formatTime(game.getElapsedTime()));
 				} 
 				else {
 					buffer.append(RECORD_MSG).append(formatTime(game.getRecord()));

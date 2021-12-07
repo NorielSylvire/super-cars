@@ -12,7 +12,7 @@ public class GameObjectGenerator {
 	
 	public static void generateGameObjects(Game game, Level level) {		
 		rnd = new Random();
-		rnd.setSeed(game.seed());
+		rnd.setSeed(game.getSeed());
 		Coin.reset();
 		Obstacle.reset();
 		
