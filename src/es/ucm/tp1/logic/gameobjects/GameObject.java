@@ -41,6 +41,10 @@ public abstract class GameObject implements Collider {
 		return symbol;
 	}
 	
+	public String toStringSerialize() {
+		return this.toString() + " (" + this.x + ", " + this.y + ")";
+	}
+	
 	public String toString() {
 		if(isAlive()) {
 			return getSymbol();

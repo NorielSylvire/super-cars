@@ -1,0 +1,10 @@
+---- ROAD FIGHTER SERIALIZED ----
+Level: ADVANCED
+3
+17045
+Game Objects:
+← (48, 0)
+← (70, 0)
+☺ (19, 1) up
+☺ (59, 1) up
+

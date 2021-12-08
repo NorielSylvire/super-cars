@@ -37,6 +37,11 @@ public class Grenade extends GameObject implements Collider {
 		else this.symbol = "";
 	}
 	
+	@Override
+	public String toStringSerialize() {
+		return this.toString() + " (" + this.x + ", " + this.y + ") " + this.health;
+	}
+	
 	public boolean isAlive() {
 		return this.alive;
 	}

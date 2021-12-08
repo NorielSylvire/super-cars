@@ -24,6 +24,8 @@ public abstract class Command {
 		new WaveCommand(),
 		new ClearCommand(),
 		new GrenadeCommand(),
+		new SerializeCommand(),
+		new SaveCommand(),
 		new CheatCommand()
 	};
 	protected Game game;

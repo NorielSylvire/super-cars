@@ -78,4 +78,11 @@ public enum Level {
 	public boolean isAdvanced() {
 		return (advancedObjectsFrequency != 0);
 	}
+	
+	public String getLevelName() {
+		if(isTestMode()) return "TEST";
+		else if(isAdvanced()) return "ADVANCED";
+		else if(this.getLength() == 30) return "EASY";
+		else return "HARD";
+	}
 }

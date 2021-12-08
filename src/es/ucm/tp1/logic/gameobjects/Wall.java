@@ -33,6 +33,11 @@ public class Wall extends GameObject {
 		}
 	}
 	
+	@Override
+	public String toStringSerialize() {
+		return this.toString() + " (" + this.x + ", " + this.y + ") " + this.health;
+	}
+	
 	public boolean doCollision() {
 		return false;
 	}

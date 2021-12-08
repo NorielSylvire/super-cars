@@ -37,6 +37,14 @@ public class Pedestrian extends GameObject {
 		else this.symbol = "";
 	}
 	
+	@Override
+	public String toStringSerialize() {
+		String ret = this.toString() + " (" + this.x + ", " + this.y + ")";
+		if(this.bordearriba == true) ret += " down";
+		else ret += " up";
+		return ret;
+	}
+	
 	public boolean doCollision() {
 		return false;
 	}
