@@ -24,6 +24,8 @@ public abstract class Command {
 		new WaveCommand(),
 		new ClearCommand(),
 		new GrenadeCommand(),
+		new ShowRecordCommand(),
+		new DumpCommand(),
 		new SerializeCommand(),
 		new SaveCommand(),
 		new CheatCommand()

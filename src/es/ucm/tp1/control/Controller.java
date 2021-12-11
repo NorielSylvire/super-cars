@@ -3,6 +3,7 @@ package es.ucm.tp1.control;
 import java.util.Scanner;
 
 import es.ucm.tp1.control.exceptions.GameException;
+import es.ucm.tp1.control.exceptions.InputOutputRecordException;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -32,6 +33,12 @@ public class Controller {
 	public void run() {
 		boolean refreshDisplay = true;
 		game.initialiseGame();
+		try {
+			Record.readRecord();
+		}
+		catch(InputOutputRecordException ex) {
+			System.out.print("Error");
+		}
 
 		while (!game.isFinished()) {
 			if (refreshDisplay) {

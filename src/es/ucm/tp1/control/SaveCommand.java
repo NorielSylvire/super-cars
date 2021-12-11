@@ -14,7 +14,7 @@ import es.ucm.tp1.view.GameSerializer;
 
 public class SaveCommand extends Command {
 	private static final String NAME = "save";
-	private static final String DETAILS = "Save [s]: Saves the game.";
+	private static final String DETAILS = "Save [x]: Saves the game.";
 	private static final String SHORTCUT = "x";
 	private static final String HELP = "Saves the game to a file.";
 	private static String fileName = "";
