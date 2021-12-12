@@ -33,12 +33,7 @@ public class Controller {
 	public void run() {
 		boolean refreshDisplay = true;
 		game.initialiseGame();
-		try {
-			Record.readRecord();
-		}
-		catch(InputOutputRecordException ex) {
-			System.out.print("Error");
-		}
+		
 
 		while (!game.isFinished()) {
 			if (refreshDisplay) {

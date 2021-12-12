@@ -1,6 +1,9 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.control.Record;
+import es.ucm.tp1.control.exceptions.InputOutputRecordException;
+import es.ucm.tp1.logic.gameobjects.Collider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Player;
 import es.ucm.tp1.control.InstantAction;
@@ -29,6 +32,12 @@ public class Game {
 		this.container = new GameObjectContainer();
 		GameObjectGenerator.generateGameObjects(this, level);
 		this.start = System.currentTimeMillis();
+		try {
+			Record.readRecord();
+		} catch (InputOutputRecordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateCycles() {
@@ -113,7 +122,7 @@ public class Game {
 		return level.getWidth();
 	}
 	
-	public GameObject getObjectInPosition(int x, int y) {
+	public Collider getObjectInPosition(int x, int y) {
 		return container.getObjectInList(x, y);
 	}
 
@@ -175,7 +184,7 @@ public class Game {
 		GameObjectGenerator.generateCheatObjects(this, getPlayerX() + getVisibility() - 1, objectID);
 	}
 
-	public void removeGameObject(GameObject gameObject) {
+	public void removeGameObject(Collider gameObject) {
 		container.deleteObject(gameObject);
 	}
 

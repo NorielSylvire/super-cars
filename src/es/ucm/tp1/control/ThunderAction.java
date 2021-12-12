@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.gameobjects.Collider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.utils.Utils;
 import es.ucm.tp1.utils.Vector2;
@@ -19,7 +20,7 @@ public class ThunderAction implements InstantAction {
 		
 		String formattedPosition = "(" + (this.getPosition().x - game.getPlayerX()) + " , " + this.getPosition().y + ")";
 		System.out.print("Thunder hit position: " + formattedPosition);
-		GameObject gameObject = game.getObjectInPosition(position.x, position.y);
+		Collider gameObject = game.getObjectInPosition(position.x, position.y);
 		if (gameObject != null) gameObject.receiveThunder();
 		else System.out.println();
 	}

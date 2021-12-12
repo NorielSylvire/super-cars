@@ -2,6 +2,8 @@ package es.ucm.tp1.view;
 
 import es.ucm.tp1.utils.StringUtils;
 import es.ucm.tp1.control.Level;
+import es.ucm.tp1.control.Record;
+import es.ucm.tp1.control.exceptions.InputOutputRecordException;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.*;
 
@@ -142,6 +144,11 @@ public class GamePrinter {
 		}
 
 		if (game.hasArrived()) {
+			try {
+				Record.writeRecord(game);
+			} catch (InputOutputRecordException e) {
+				e.printStackTrace();
+			}
 			buffer.append(WIN_MSG);
 			if (!game.isTestMode()) {
 				if (game.isNewRecord(game.getElapsedTime())) {

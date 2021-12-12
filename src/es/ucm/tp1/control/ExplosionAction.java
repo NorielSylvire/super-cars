@@ -1,6 +1,7 @@
 package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.gameobjects.Collider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.utils.Vector2;
 
@@ -19,7 +20,7 @@ public class ExplosionAction implements InstantAction {
 	public void executeIA(Game game) {
 		for (int i = 0; i < 8; i++) {
 			if(isPositionInBounds(game.getRoadLength(), game.getRoadWidth(), this.x + positions[i].x, this.y + positions[i].y)) {
-				GameObject gameObject = game.getObjectInPosition(this.x + positions[i].x, this.y + positions[i].y);
+				Collider gameObject = game.getObjectInPosition(this.x + positions[i].x, this.y + positions[i].y);
 				if(gameObject != null) gameObject.receiveExplosion();
 			}
 		}

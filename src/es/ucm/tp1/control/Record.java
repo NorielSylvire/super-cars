@@ -29,10 +29,18 @@ public class Record {
 		}
 		int i = 0;
 		while(i<lines.length) {
-			if(lines[i].charAt(0) == 'H') hard = Long.valueOf(lines[i].substring(4, lines[i].length()));
-			else if(lines[i].charAt(0) == 'E') easy = Long.valueOf(lines[i].substring(4, lines[i].length()));
-			else if(lines[i].charAt(0) == 'T') test = Long.valueOf(lines[i].substring(4, lines[i].length()));
-			else if(lines[i].charAt(0) == 'A') advanced = Long.valueOf(lines[i].substring(8, lines[i].length()));
+			if(lines[i].charAt(0) == 'H') {
+				hard = Long.parseLong(lines[i].substring(5, lines[i].length()));
+			}
+			else if(lines[i].charAt(0) == 'E') {
+				easy = Long.parseLong(lines[i].substring(5, lines[i].length()));
+			}
+			else if(lines[i].charAt(0) == 'T') {
+				test = Long.parseLong(lines[i].substring(5, lines[i].length()));
+			}
+			else if(lines[i].charAt(0) == 'A') {
+				advanced = Long.parseLong(lines[i].substring(9, lines[i].length()));
+			}
 			i++;
 		}
 	}
@@ -46,6 +54,20 @@ public class Record {
 		}
 		
 		String difficultyLevel = game.getLevel().getLevelName();
+		
+		if(difficultyLevel.equalsIgnoreCase("HARD") && game.getElapsedTime() < hard) {
+			hard = game.getElapsedTime();
+		}
+		else if(difficultyLevel.equalsIgnoreCase("EASY") && game.getElapsedTime() < easy) {
+			easy = game.getElapsedTime();
+		}
+		else if(difficultyLevel.equalsIgnoreCase("TEST") && game.getElapsedTime() < test) {
+			test = game.getElapsedTime();
+		}
+		else if(difficultyLevel.equalsIgnoreCase("ADVANCED") && game.getElapsedTime() < advanced) {
+			advanced = game.getElapsedTime();
+		}
+		
 	    try(BufferedWriter writer = new BufferedWriter(new FileWriter("record.txt"))) {
 	    	int i = 0;
 	    	while(i<lines.length) {

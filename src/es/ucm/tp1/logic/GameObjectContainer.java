@@ -2,6 +2,8 @@ package es.ucm.tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.ucm.tp1.logic.gameobjects.Collider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 
 public class GameObjectContainer {
@@ -16,12 +18,11 @@ public class GameObjectContainer {
 		gameObjects.add(go);
 	}
 	
-	public void deleteObject(GameObject go) {
-		go.onDelete();
+	public void deleteObject(Collider go) {
 		gameObjects.remove(go);
 	}
 	
-	public GameObject getObjectInList(int x, int y) {
+	public Collider getObjectInList(int x, int y) {
 		for(int i= 0; i<gameObjects.size();i++) {
 			if(gameObjects.get(i).isInPosition(x, y)) {
 				return gameObjects.get(i);

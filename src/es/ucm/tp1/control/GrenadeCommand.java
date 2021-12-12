@@ -26,12 +26,15 @@ public class GrenadeCommand extends Command implements Buyable {
 			else {
 				try {
 					posX = Integer.valueOf(words[1]);
+					if(posX < 0 || posX >= game.getVisibility()) throw new InvalidPositionException(String.format("[ERROR]: %s", FAILED_MSG));
 					posY = Integer.valueOf(words[2]);
 					return this;
 				}
 				catch(NumberFormatException ex) {
 					System.out.println(ex.getMessage());
 					throw new CommandParseException("");
+				} catch (InvalidPositionException e) {
+					e.printStackTrace();
 				}
 			}
 		}

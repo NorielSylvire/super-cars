@@ -22,8 +22,8 @@ public class MoveDownCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		game.updatePlayer();
-		game.updateCollision();
 		game.movePlayer(false);
+		game.updateCollision();
 		return true;
 	}
 
