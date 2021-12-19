@@ -10,10 +10,10 @@ import es.ucm.tp1.control.exceptions.InputOutputRecordException;
 import es.ucm.tp1.logic.Game;
 
 public class Record {
-	private static long hard = 0;
-	private static long easy = 0;
-	private static long test = 0;
-	private static long advanced = 0;
+	private static long hard = Long.MAX_VALUE;
+	private static long easy = Long.MAX_VALUE;
+	private static long test = Long.MAX_VALUE;
+	private static long advanced = Long.MAX_VALUE;
 	private static String[] lines = new String[4];
 	
 	public static void readRecord() throws InputOutputRecordException{

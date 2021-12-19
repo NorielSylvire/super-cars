@@ -15,5 +15,4 @@ public interface Buyable {
 		}
 		else throw new NotEnoughCoinsException("Not enough coins.");
 	}
-
 }
