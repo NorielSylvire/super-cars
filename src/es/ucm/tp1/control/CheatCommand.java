@@ -1,5 +1,7 @@
 package es.ucm.tp1.control;
 
+import es.ucm.tp1.control.exceptions.CommandExecuteException;
+import es.ucm.tp1.control.exceptions.CommandParseException;
 import es.ucm.tp1.logic.Game;
 
 public class CheatCommand extends Command {
@@ -15,25 +17,23 @@ public class CheatCommand extends Command {
 	}
 	
 	@Override
-	public Command parse(String[] words) {
+	public Command parse(String[] words) throws CommandParseException {
 		if (matchCommandName(words[0])) {
-			System.out.println(WRONG_USAGE_MSG);
-			return null;
+			throw new CommandParseException("[ERROR]" + WRONG_USAGE_MSG);
 		}
 		else if(words[0].length() > 1) {
-			return null;
+			throw new CommandParseException("[ERROR] The number you introduced is invalid.\n");
 		}
 		else if(words[0].length() == 1) {
 			int num = -1;
 			try {
 				  num = Integer.valueOf(words[0]);
 				}
-			catch (NumberFormatException nfe) {
-					
-					System.out.println(words[0] + " is not a number.");
+			catch (NumberFormatException nfe) {	
+					throw new CommandParseException("[ERROR] " + words[0] + " is not a number.\n");
 				}
 			if(num <= 0 || num > 5) {
-				System.out.println(UNKNOWN_NUMBER);
+				throw new CommandParseException("[ERROR] " + UNKNOWN_NUMBER + "\n");
 			}
 			objectID = num;
 			return this;
@@ -42,7 +42,7 @@ public class CheatCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException{
 		game.generateCheatObjects(objectID);
 		return true;
 	}

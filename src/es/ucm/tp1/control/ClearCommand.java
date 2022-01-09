@@ -1,5 +1,6 @@
 package es.ucm.tp1.control;
 
+import es.ucm.tp1.control.exceptions.CommandExecuteException;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.GameObjectGenerator;
 
@@ -14,7 +15,7 @@ public class ClearCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException{
 		GameObjectGenerator.reset();
 		game.removeAllObjects();
 		return false;

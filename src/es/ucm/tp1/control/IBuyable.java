@@ -8,11 +8,10 @@ public interface IBuyable {
 	
 	public int cost();
 	
-	public default boolean buy(Game game) throws NotEnoughCoinsException{
+	public default void buy(Game game) throws NotEnoughCoinsException{
 		if(game.getPlayerCoins() >= cost()) {
 			game.addCoins(-cost());
-			return true;
 		}
-		else throw new NotEnoughCoinsException("Not enough coins.");
+		else throw new NotEnoughCoinsException("[ERROR] Not enough coins.\n");
 	}
 }

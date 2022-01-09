@@ -2,7 +2,6 @@ package es.ucm.tp1.control;
 
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.ICollider;
-import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.utils.Utils;
 import es.ucm.tp1.utils.Vector2;
 

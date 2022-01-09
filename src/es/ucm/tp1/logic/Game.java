@@ -3,6 +3,7 @@ package es.ucm.tp1.logic;
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.control.Record;
 import es.ucm.tp1.control.exceptions.InputOutputRecordException;
+import es.ucm.tp1.control.exceptions.InvalidPositionException;
 import es.ucm.tp1.logic.gameobjects.ICollider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 import es.ucm.tp1.logic.gameobjects.Player;
@@ -26,7 +27,7 @@ public class Game {
 		this.record = Integer.MAX_VALUE;
 	}
 	
-	public void initialiseGame() {
+	public boolean initialiseGame() throws InputOutputRecordException {
 		this.cycles = 0;
 		this.player = new Player(this, 0, getRoadWidth()/2);
 		this.container = new GameObjectContainer();
@@ -36,14 +37,11 @@ public class Game {
 			Record.readRecord();
 		} catch (InputOutputRecordException e) {
 			e.printStackTrace();
-			try {
-				Record.writeRecord(this);
-			} catch (InputOutputRecordException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Record.writeRecord(this);
 			toggleExit();
+			return false;
 		}
+		return true;
 	}
 	
 	public void updateCycles() {
@@ -147,7 +145,9 @@ public class Game {
 		return System.currentTimeMillis()-start;
 	}
 	
-	public void addGameObject(GameObject gameObject) {
+	public void addGameObject(GameObject gameObject) throws InvalidPositionException {
+		if(gameObject.getX() < 0 || gameObject.getX() > getRoadLength() || gameObject.getY() < 0 || gameObject.getY() > getRoadWidth())
+			throw new InvalidPositionException("[ERROR] The position you have entered is invalid. \n");
 		this.container.addObject(gameObject);
 	}
 	

@@ -38,7 +38,6 @@ public class DumpCommand extends Command {
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
 		try(FileReader fileReader = new FileReader(fileName + ".txt")){
-
 			    int data = fileReader.read();
 			    while(data != -1) {
 			        System.out.print((char) data);

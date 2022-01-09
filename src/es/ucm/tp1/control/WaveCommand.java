@@ -17,19 +17,16 @@ public class WaveCommand extends Command implements  IBuyable {
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException{
 		try {
-			if(buy(game))  {
-				game.execute(new WaveAction());
-				game.updateCycles();
-				return true;
-			}
+			buy(game);
+			game.execute(new WaveAction());
+			game.updateCycles();
+			return true;
 		}
 		catch(NotEnoughCoinsException ex) {
 			System.out.println(ex.getMessage());
 			throw new CommandExecuteException(String.format("[ERROR]: %s", FAILED_MSG));
 		}
-		return false;
 	}
-
 
 	@Override
 	public int cost() {

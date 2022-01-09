@@ -85,4 +85,10 @@ public enum Level {
 		else if(this.getLength() == 30) return "EASY";
 		else return "HARD";
 	}
+	
+	public boolean levelExists(String level) {
+		if (level.equalsIgnoreCase("HARD") || level.equalsIgnoreCase("EASY") || level.equalsIgnoreCase("TEST") || level.equalsIgnoreCase("ADVANCED"))
+			return true;
+		else return false;
+	}
 }

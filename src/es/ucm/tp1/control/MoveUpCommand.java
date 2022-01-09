@@ -20,7 +20,7 @@ public class MoveUpCommand extends Command {
 		return super.parse(commandWords);
 	}
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException{
 		game.updatePlayer();
 		game.movePlayer(true);
 		game.updateCollision();

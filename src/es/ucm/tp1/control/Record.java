@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.File;
 import es.ucm.tp1.control.exceptions.InputOutputRecordException;
 import es.ucm.tp1.logic.Game;
 
@@ -24,21 +24,20 @@ public class Record {
 		    lines[3] = br.readLine();
 		}
 		catch(IOException ex) {
-			ex.printStackTrace();
 			throw new InputOutputRecordException("[ERROR]: File not found or corrupted.");
 		}
 		int i = 0;
 		while(i<lines.length) {
-			if(lines[i].charAt(0) == 'H') {
+			if(lines[i].substring(0, 4).equalsIgnoreCase("HARD")) {
 				hard = Long.parseLong(lines[i].substring(5, lines[i].length()));
 			}
-			else if(lines[i].charAt(0) == 'E') {
+			else if(lines[i].substring(0, 4).equalsIgnoreCase("EASY")) {
 				easy = Long.parseLong(lines[i].substring(5, lines[i].length()));
 			}
-			else if(lines[i].charAt(0) == 'T') {
+			else if(lines[i].substring(0, 4).equalsIgnoreCase("TEST")) {
 				test = Long.parseLong(lines[i].substring(5, lines[i].length()));
 			}
-			else if(lines[i].charAt(0) == 'A') {
+			else if(lines[i].substring(0, 8).equalsIgnoreCase("ADVANCED")) {
 				advanced = Long.parseLong(lines[i].substring(9, lines[i].length()));
 			}
 			i++;
@@ -50,37 +49,36 @@ public class Record {
 			readRecord();
 		}
 		catch(InputOutputRecordException ex) {
-			
+			lines[0] = "HARD:" + hard + "\n";
+			lines[1] = "EASY:" + easy + "\n";
+			lines[2] = "TEST:" + test + "\n";
+			lines[3] = "ADVANCED:" + advanced + "\n";
 		}
 		
 		String difficultyLevel = game.getLevel().getLevelName();
 		
-		if(difficultyLevel.equalsIgnoreCase("HARD") && game.getElapsedTime() < hard) {
-			hard = game.getElapsedTime();
-		}
-		else if(difficultyLevel.equalsIgnoreCase("EASY") && game.getElapsedTime() < easy) {
-			easy = game.getElapsedTime();
-		}
-		else if(difficultyLevel.equalsIgnoreCase("TEST") && game.getElapsedTime() < test) {
-			test = game.getElapsedTime();
-		}
-		else if(difficultyLevel.equalsIgnoreCase("ADVANCED") && game.getElapsedTime() < advanced) {
-			advanced = game.getElapsedTime();
-		}
+		if(difficultyLevel.equalsIgnoreCase("HARD") && game.getElapsedTime() < hard && exists()) hard = game.getElapsedTime();
+		else if(difficultyLevel.equalsIgnoreCase("EASY") && game.getElapsedTime() < easy && exists()) easy = game.getElapsedTime();
+		else if(difficultyLevel.equalsIgnoreCase("TEST") && game.getElapsedTime() < test && exists()) test = game.getElapsedTime();
+		else if(difficultyLevel.equalsIgnoreCase("ADVANCED") && game.getElapsedTime() < advanced && exists()) advanced = game.getElapsedTime();
 		
 	    try(BufferedWriter writer = new BufferedWriter(new FileWriter("record.txt"))) {
 	    	int i = 0;
 	    	while(i<lines.length) {
-				if(lines[i].charAt(0) == 'H') writer.write("HARD:" + hard + "\n");
-				else if(lines[i].charAt(0) == 'E') writer.write("EASY:" + easy + "\n");
-				else if(lines[i].charAt(0) == 'T') writer.write("TEST:" + test + "\n");
-				else if(lines[i].charAt(0) == 'A') writer.write("ADVANCED:" + advanced + "\n");
+	    		if(lines[i].substring(0, 4).equalsIgnoreCase("HARD")) writer.write("HARD:" + hard + "\n");
+				else if(lines[i].substring(0, 4).equalsIgnoreCase("EASY")) writer.write("EASY:" + easy + "\n");
+				else if(lines[i].substring(0, 4).equalsIgnoreCase("TEST")) writer.write("TEST:" + test + "\n");
+				else if(lines[i].substring(0, 8).equalsIgnoreCase("ADVANCED")) writer.write("ADVANCED:" + advanced + "\n");
 				i++;
 			}
 	    }
 	    catch(IOException ex) {
-			ex.printStackTrace();
 			throw new InputOutputRecordException("[ERROR]: File not found or corrupted.");
 	    }
+	}
+
+	private static boolean exists() {
+		File recordFile = new File("record.txt");
+		return recordFile.exists();
 	}
 }

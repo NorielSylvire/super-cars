@@ -1,5 +1,6 @@
 package es.ucm.tp1.control;
 
+import es.ucm.tp1.control.exceptions.CommandExecuteException;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
@@ -17,7 +18,7 @@ public class InfoCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException{
 		System.out.println(GamePrinter.description(game.getLevel()));
 		return false;
 	}

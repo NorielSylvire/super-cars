@@ -33,10 +33,10 @@ public abstract class Command {
 	protected Game game;
 
 	public Command(String name, String shortcut, String details, String help) {
-	this. name = name;
-	this. shortcut = shortcut;
-	this. details = details;
-	this. help = help;
+	this.name = name;
+	this.shortcut = shortcut;
+	this.details = details;
+	this.help = help;
 	}
 
 	

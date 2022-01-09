@@ -17,12 +17,10 @@ public class ShootCommand extends Command implements  IBuyable{
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException{
 		try {
-			boolean shot = buy(game);
-			if(shot) {
-				game.execute(new ShootAction());
-				game.updateCycles();
-			}
-			return shot;
+			buy(game);
+			game.execute(new ShootAction());
+			game.updateCycles();
+			return true;
 		}
 		catch (NotEnoughCoinsException ex) {
 			System.out.println(ex.getMessage());

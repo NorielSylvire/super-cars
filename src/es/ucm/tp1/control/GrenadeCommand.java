@@ -9,7 +9,7 @@ public class GrenadeCommand extends Command implements IBuyable {
 	private static final String DETAILS = "[g]renade <x> <y>: add a grenade in position x, y.";
 	private static final String SHORTCUT = "g";
 	private static final String HELP = "Launches a grenade that explodes after four cycles.";
-	private static final String FAILED_MSG = "Failed to add granade.";
+	private static final String FAILED_MSG = "Failed to add grenade.";
 	private int posX, posY;
 
 	public GrenadeCommand() {
@@ -49,18 +49,20 @@ public class GrenadeCommand extends Command implements IBuyable {
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException{
 		try {
-			if (buy(game)) {
-				Grenade grenade = new Grenade(game, posX + game.getPlayerX(), posY);
+			buy(game);
+			Grenade grenade = new Grenade(game, posX + game.getPlayerX(), posY);
+			try {
 				game.addGameObject(grenade);
-				game.updateCycles();
-				return true;
+			} catch(InvalidPositionException ex) {
+				throw new CommandExecuteException("[ERROR] Unable to execute command.\n");
 			}
+			game.updateCycles();
+			return true;
 		}
 		catch (NotEnoughCoinsException e) {
 			System.out.println(e.getMessage());
 			throw new CommandExecuteException(String.format("[ERROR]: %s", FAILED_MSG));
 		}
-		return false;
 	}
 
 }

@@ -2,6 +2,7 @@ package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.control.ThunderAction;
+import es.ucm.tp1.control.exceptions.InvalidPositionException;
 import es.ucm.tp1.logic.gameobjects.*;
 import es.ucm.tp1.utils.Vector2;
 
@@ -50,7 +51,10 @@ public class GameObjectGenerator {
 	
 	private static void tryToAddObject(GameObject gameobject,  double frequency, Game game) {
 		if (rnd.nextDouble() <= frequency && game.getObjectInPosition(gameobject.getX(), gameobject.getY()) == null) {
-			game.addGameObject(gameobject);
+			try {
+				game.addGameObject(gameobject);
+			} catch (InvalidPositionException e) {
+			}
 		}
 	}
 	
@@ -89,7 +93,10 @@ public class GameObjectGenerator {
 				break;
 		}
 		
-		game.addGameObject(o);
+		try {
+			game.addGameObject(o);
+		} catch (InvalidPositionException e) {
+		}
 	}
 	
 	public static void generateRuntimeObjects(Game game) {
