@@ -1,7 +1,7 @@
 package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 
-public abstract class GameObject implements Collider {
+public abstract class GameObject implements ICollider {
 	protected int x, y;
 	protected Game game;
 	protected String symbol;
@@ -65,12 +65,13 @@ public abstract class GameObject implements Collider {
 		return y;
 	}
 	
-	public void moveForward() {
+	public boolean receiveWave() {
 		this.x++;
+		return true;
 	}
 	
 	public void tryToMoveForward(GameObject nextGO) {
-		if(nextGO == null) moveForward();
+		if(nextGO == null) receiveWave();
 	}
 	
 	public boolean isInPosition(int x, int y){

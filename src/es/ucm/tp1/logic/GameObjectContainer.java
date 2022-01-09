@@ -3,7 +3,7 @@ package es.ucm.tp1.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ucm.tp1.logic.gameobjects.Collider;
+import es.ucm.tp1.logic.gameobjects.ICollider;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 
 public class GameObjectContainer {
@@ -18,11 +18,11 @@ public class GameObjectContainer {
 		gameObjects.add(go);
 	}
 	
-	public void deleteObject(Collider go) {
+	public void deleteObject(ICollider go) {
 		gameObjects.remove(go);
 	}
 	
-	public Collider getObjectInList(int x, int y) {
+	public ICollider getObjectInList(int x, int y) {
 		for(int i= 0; i<gameObjects.size();i++) {
 			if(gameObjects.get(i).isInPosition(x, y)) {
 				return gameObjects.get(i);
@@ -31,14 +31,28 @@ public class GameObjectContainer {
 		return null;
 	}
 	
-	public GameObject getObjectInListLoop(int x, int y) {
+	public StringBuilder getAllSymbolsInPosition(int x, int y) {
+		StringBuilder symbols = new StringBuilder();
 		for(int i= 0; i<gameObjects.size();i++) {
 			if(gameObjects.get(i).isInPosition(x, y) && !gameObjects.get(i).getAlreadyPrinted()) {
 				gameObjects.get(i).printedThisTurn();
-				return gameObjects.get(i);
+				symbols.append(gameObjects.get(i).toString());
+				
 			}
 		}
-		return null;
+		return symbols;
+	}
+	
+	public StringBuilder getAllSymbolsInPositionSerialize(int x, int y) {
+		StringBuilder symbols = new StringBuilder();
+		for(int i= 0; i<gameObjects.size();i++) {
+			if(gameObjects.get(i).isInPosition(x, y) && !gameObjects.get(i).getAlreadyPrinted()) {
+				gameObjects.get(i).printedThisTurn();
+				symbols.append(gameObjects.get(i).toStringSerialize());
+				symbols.append("\n");
+			}
+		}
+		return symbols;
 	}
 
 	public void removeDead() {

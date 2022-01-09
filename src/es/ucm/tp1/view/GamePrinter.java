@@ -107,12 +107,12 @@ public class GamePrinter {
 					nextSlot+=game.getPlayerSymbol();
 					thereIsNothing = false;
 				}
-				GameObject gameObject = game.getObjectInPositionLoop(x + game.getPlayerX(), y);
-				while(gameObject != null) {
-					thereIsNothing = false;
-					nextSlot+=gameObject.toString();
-					gameObject = game.getObjectInPositionLoop(x + game.getPlayerX(), y);
+				
+				if(game.getObjectInPosition(x + game.getPlayerX(), y) != null) {
+					StringBuilder symbols = game.getAllSymbolsInPosition(x + game.getPlayerX(), y);
+					nextSlot+= symbols;
 				}
+				
 				if (game.distanceToGoal() <= game.getVisibility() && game.distanceToGoal() == x) {
 					str.append(StringUtils.centre("|", CELL_SIZE)).append(verticalDelimiter);
 					thereIsNothing = false;

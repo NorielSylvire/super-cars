@@ -21,8 +21,8 @@ public class GameSerializer {
 		StringBuilder buffer = new StringBuilder();
 		for(int i = 0; i < game.getRoadWidth(); i++) {
 			for(int j = 0; j < game.getRoadLength(); j++)  {
-				GameObject go = game.getObjectInPositionLoop(j, i);
-				if(go != null) buffer.append(go.toStringSerialize()).append(StringUtils.LINE_SEPARATOR);
+				StringBuilder symbols = game.getAllSymbolsInPositionSerialize(j, i);
+				if(game.getObjectInPosition(j, i) != null) buffer.append(symbols);
 			}
 		}
 		return buffer;

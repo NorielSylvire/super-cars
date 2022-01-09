@@ -3,7 +3,7 @@ package es.ucm.tp1.logic.gameobjects;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.control.ExplosionAction;
 
-public class Grenade extends GameObject implements Collider {
+public class Grenade extends GameObject implements ICollider {
 	public static final String INFO = "[GRENADE] Explodes in 3 cycles, harming everyone around.";
 	
 	

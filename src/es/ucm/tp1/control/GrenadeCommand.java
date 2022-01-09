@@ -4,7 +4,7 @@ import es.ucm.tp1.control.exceptions.*;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.Grenade;
 
-public class GrenadeCommand extends Command implements Buyable {
+public class GrenadeCommand extends Command implements IBuyable {
 	private static final String NAME = "grenade";
 	private static final String DETAILS = "[g]renade <x> <y>: add a grenade in position x, y.";
 	private static final String SHORTCUT = "g";

@@ -35,11 +35,11 @@ public class Player extends GameObject{
 	
 	@Override
 	public void update() {
-		if(this.isAlive()) moveForward();
+		if(this.isAlive()) receiveWave();
 	}
 	
 	public boolean doCollision() {
-		Collider other = game.getObjectInPosition(x, y);
+		ICollider other = game.getObjectInPosition(x, y);
 		if (other != null) {
 		return other.receiveCollision(this);
 		}

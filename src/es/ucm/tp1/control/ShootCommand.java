@@ -3,7 +3,7 @@ package es.ucm.tp1.control;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.control.exceptions.*;
 
-public class ShootCommand extends Command implements  Buyable{
+public class ShootCommand extends Command implements  IBuyable{
 	private static final String NAME = "shoot";
 	private static final String DETAILS = "[s]hoot: shoot bullet.";
 	private static final String SHORTCUT = "s";

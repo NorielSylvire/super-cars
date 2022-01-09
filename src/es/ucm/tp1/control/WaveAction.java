@@ -3,7 +3,7 @@ package es.ucm.tp1.control;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.logic.gameobjects.GameObject;
 
-public class WaveAction implements InstantAction {
+public class WaveAction implements IInstantAction {
 
 	@Override
 	public void executeIA(Game game) {

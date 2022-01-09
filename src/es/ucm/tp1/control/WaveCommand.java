@@ -3,7 +3,7 @@ package es.ucm.tp1.control;
 import es.ucm.tp1.control.exceptions.*;
 import es.ucm.tp1.logic.Game;
 
-public class WaveCommand extends Command implements  Buyable {
+public class WaveCommand extends Command implements  IBuyable {
 	private static final String NAME = "wave";
 	private static final String DETAILS = "[w]ave: do wave";
 	private static final String SHORTCUT = "w";

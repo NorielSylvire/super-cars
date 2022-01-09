@@ -21,6 +21,9 @@ public class HelpCommand extends Command {
 		"\n[s]hoot: shoot bullet." +
 		"\n[g]renade <x> <y>: add a grenade in position x, y." +
 		"\n[w]ave: do wave." +
+		"\n[d]ump: dumps a file to the terminal." +
+		"\n[z]serialize: serializes the game and then prints it." +
+		"\n[x]save <filename>: saves the game to a file with name \"filename.txt\" or uses current time and date as a name if no filename is given." +
 		"\nClear [0]: Clears the road." +
 		"\nCheat [1..5]: Removes all elements of last visible column, and adds an Advanced Object."
 		);

@@ -4,7 +4,7 @@ import es.ucm.tp1.control.exceptions.*;
 import es.ucm.tp1.logic.Game;
 import es.ucm.tp1.view.GamePrinter;
 
-public interface Buyable {
+public interface IBuyable {
 	
 	public int cost();
 	
