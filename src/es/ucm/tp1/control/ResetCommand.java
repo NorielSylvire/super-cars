@@ -39,7 +39,7 @@ public class ResetCommand extends Command {
 	}
 	
 	private boolean difficultyExists(String difficultyLevel) {
-		return game.getLevel().levelExists(difficultyLevel);
+		return Level.levelExists(difficultyLevel);
 	}
 
 	@Override

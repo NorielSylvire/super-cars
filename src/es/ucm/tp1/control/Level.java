@@ -86,7 +86,7 @@ public enum Level {
 		else return "HARD";
 	}
 	
-	public boolean levelExists(String level) {
+	public static boolean levelExists(String level) {
 		if (level.equalsIgnoreCase("HARD") || level.equalsIgnoreCase("EASY") || level.equalsIgnoreCase("TEST") || level.equalsIgnoreCase("ADVANCED"))
 			return true;
 		else return false;
